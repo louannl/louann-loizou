@@ -1,6 +1,13 @@
+import { NavLink } from 'react-router-dom';
+
 const NavItem = (props) => {
   return (
-    <li className="text-xl text-white hover:text-yellow">{props.children}</li>
+    <NavLink
+      className="block px-2 py-1 text-white font-semibold rounded sm:ml-2"
+      to={props.link}
+    >
+      {props.children}
+    </NavLink>
   );
 };
 

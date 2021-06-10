@@ -18,6 +18,11 @@ module.exports = {
         DEFAULT: '#FF6392',
       },
     },
+    extend: {
+      fontFamily: {
+        Monoton: ['Monoton', 'cursive'],
+      },
+    },
   },
   variants: {
     extend: {},
