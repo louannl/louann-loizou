@@ -35,10 +35,10 @@ const MainNavigation = () => {
           isOpen ? 'block' : 'hidden'
         } sm:flex sm:p-0`}
       >
-        <NavItem link="/projects">Projects</NavItem>
-        <NavItem link="/skills">Skills</NavItem>
-        <NavItem link="/contact-me">Contact me!</NavItem>
-        <NavItem link="/cv">CV</NavItem>
+        <NavItem link="#projects">Projects</NavItem>
+        <NavItem link="#skills">Skills</NavItem>
+        <NavItem link="#contact-me">Contact me!</NavItem>
+        <NavItem link="#cv">CV</NavItem>
       </div>
     </header>
   );
