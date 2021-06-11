@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import Hero from '../../pages/Hero';
 import Projects from '../../pages/Projects';
+import Skills from '../../pages/Skills';
 
 import MainNavigation from './MainNavigation';
 
@@ -11,6 +12,7 @@ const Layout = () => {
       <main>
         <Hero />
         <Projects />
+        <Skills />
       </main>
     </Fragment>
   );

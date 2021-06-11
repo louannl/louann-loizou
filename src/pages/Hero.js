@@ -7,7 +7,7 @@ import { Content, Section } from '../components/UI/Section';
 const Hero = () => {
   return (
     <Section className="bg-white">
-      <Content className="lg:text-left sm:text-center pt-16">
+      <Content className="lg:text-left sm:text-center pt-24">
         <AttributeHeader className="text-pink">Louann Loizou</AttributeHeader>
         <AttributeHeader>Software Developer</AttributeHeader>
         <SubHeader>

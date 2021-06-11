@@ -1,3 +1,4 @@
+import { CodeSlash, Link as WebLink } from 'react-ionicons';
 import tw from '../../../helpers/tailwind';
 
 export const Link = (props) => {
@@ -50,5 +51,41 @@ export const MainLink = (props) => {
     <div className="rounded-md shadow mt-3 sm:mt-0 sm:mr-3">
       {props.children}
     </div>
+  );
+};
+
+const iconClasses =
+  'cursor-pointer hover:fill-current hover:text-pink mr-1 mt-2';
+
+export const CodeLink = (props) => {
+  return (
+    <CodeSlash
+      height="2rem"
+      width="2rem"
+      cssClasses={iconClasses}
+      onClick={() => window.open(props.link)}
+    />
+  );
+};
+
+export const WebsiteLink = (props) => {
+  if (props.link) {
+    return (
+      <WebLink
+        height="2rem"
+        width="2rem"
+        cssClasses={iconClasses}
+        onClick={() => window.open(props.link)}
+      />
+    );
+  }
+
+  return (
+    <WebLink
+      color={'#5a5858'}
+      height="2rem"
+      width="2rem"
+      cssClasses="cursor-not-allowed mr-1 mt-2"
+    />
   );
 };

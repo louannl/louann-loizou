@@ -12,6 +12,7 @@ export const Content = (props) => {
         'max-w-screen-lg',
         'xl:max-w-screen-xl',
         'mx-auto',
+        'pt-16',
         props.className
       )}
     >
