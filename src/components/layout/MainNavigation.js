@@ -11,7 +11,7 @@ const MainNavigation = () => {
   };
 
   return (
-    <header className="bg-blue sm:flex sm:justify-between sm:px-4 sm:py-3 sm:items-center">
+    <header className="bg-blue sm:flex sm:justify-between fixed top-0 inset-x-0 z-100 sm:px-4 sm:py-3 sm:items-center">
       <div className="flex items-center justify-between px-4 py-3 sm:p-0">
         <div className="h-8 text-white text-2xl font-Monoton font-thin">
           Louann Loizou

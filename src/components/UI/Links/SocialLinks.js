@@ -1,10 +1,10 @@
 import { LogoGithub, LogoLinkedin } from 'react-ionicons';
 
 const SocialLinks = () => {
-  const classes = 'cursor-pointer hover:fill-current hover:text-pink';
+  const classes = 'cursor-pointer hover:fill-current hover:text-pink mr-1 mt-2';
 
   return (
-    <span className="block flex">
+    <span className="flex">
       <LogoGithub
         color={'#211F1F'}
         height="2rem"
