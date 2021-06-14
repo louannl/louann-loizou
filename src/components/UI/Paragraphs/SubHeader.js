@@ -9,7 +9,8 @@ export const SubHeader = (props) => {
         'sm:mx-auto, lg:mx-0',
         'text-base',
         'text-gray-600',
-        'font-medium'
+        'font-medium',
+        props.className
       )}
     >
       {props.children}
