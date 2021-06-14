@@ -9,6 +9,8 @@ const AttributeHeader = (props) => {
         'font-extrabold',
         'sm:text-5xl',
         'md:text-6xl',
+        'text-center',
+        'lg:text-left',
         props.className
       )}
     >

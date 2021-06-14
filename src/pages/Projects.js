@@ -18,7 +18,7 @@ const Projects = () => {
           some of my coding choices, please check out the projects ReadMe on
           Github. Links to the repos are included in all listed projects.
         </SubHeader>
-        <div className="flex flex-wrap -mx-4 justify-around">
+        <div className="container mx-auto flex flex-wrap justify-around">
           <Card
             name="Meal Planner"
             text="Designed to help organise the weekly shop, it not only renders the meals you input, but also a shopping list."
