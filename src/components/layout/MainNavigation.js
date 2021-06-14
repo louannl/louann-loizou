@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MenuOutline, CloseOutline } from 'react-ionicons';
 
+import tw from '../../helpers/tailwind';
 import NavItem from './NavItem';
 
 const MainNavigation = () => {
@@ -11,7 +12,20 @@ const MainNavigation = () => {
   };
 
   return (
-    <header className="bg-blue sm:flex sm:justify-between fixed top-0 inset-x-0 z-100 sm:px-4 sm:py-3 sm:items-center">
+    <header
+      className={tw(
+        'fixed',
+        'bg-blue',
+        'sm:flex',
+        'sm:justify-between',
+        'top-0',
+        'inset-x-0',
+        'z-50',
+        'sm:px-4',
+        'sm:py-3',
+        'sm:items-center'
+      )}
+    >
       <div className="flex items-center justify-between px-4 py-3 sm:p-0">
         <div className="h-8 text-white text-2xl font-Monoton font-thin">
           Louann Loizou
@@ -35,10 +49,10 @@ const MainNavigation = () => {
           isOpen ? 'block' : 'hidden'
         } sm:flex sm:p-0`}
       >
-        <NavItem link="#projects">Projects</NavItem>
-        <NavItem link="#skills">Skills</NavItem>
-        <NavItem link="#contact-me">Contact me!</NavItem>
-        <NavItem link="#cv">CV</NavItem>
+        <NavItem link="projects">Projects</NavItem>
+        <NavItem link="skills">Skills</NavItem>
+        <NavItem link="contact-me">Contact me!</NavItem>
+        <NavItem link="cv">CV</NavItem>
       </div>
     </header>
   );

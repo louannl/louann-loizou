@@ -6,7 +6,7 @@ import AttributeHeader from '../components/UI/Headers/AttributeHeader';
 
 const Projects = () => {
   return (
-    <Section className={tw('bg-pink', 'h-100')}>
+    <Section className={tw('bg-pink', 'h-100')} name="projects">
       <Content>
         <AttributeHeader className="text-white">Projects</AttributeHeader>
         <div className="flex flex-wrap justify-around">
@@ -20,6 +20,12 @@ const Projects = () => {
             name="Meal Planner API"
             text="An api using postgresql to store and manage data on weekly meals"
             image={mealPlanner}
+            github="https://github.com/louannl/meal-planner"
+          />
+          <Card
+            name="DogHouseKustoms"
+            text="A website created with vanilla css and javascript"
+            image=""
             github="https://github.com/louannl/meal-planner"
           />
         </div>

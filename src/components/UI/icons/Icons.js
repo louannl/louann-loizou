@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   LogoCss3,
-  LogoGoogle,
   LogoHtml5,
   LogoJavascript,
   LogoNodejs,
@@ -9,13 +8,12 @@ import {
   LogoReact,
   LogoSass,
   LogoTux,
-  LogoWindows,
 } from 'react-ionicons';
 
 export const SkillIcons = () => {
   const iconSize = '100px';
   return (
-    <div className="flex justify-center">
+    <div className="flex flex-wrap justify-center">
       <LogoHtml5
         title="HTML"
         color={'#FF5733'}
@@ -59,12 +57,6 @@ export const SkillIcons = () => {
         width={iconSize}
       />
       <LogoTux title="Linux" height={iconSize} width={iconSize} />
-      <LogoGoogle
-        title="Google"
-        color={'#4285F4'}
-        height={iconSize}
-        width={iconSize}
-      />
     </div>
   );
 };

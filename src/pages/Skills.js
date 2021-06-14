@@ -4,7 +4,7 @@ import { Content, Section } from '../components/UI/Section';
 
 const Skills = () => {
   return (
-    <Section className="bg-white">
+    <Section className="bg-white" name="skills">
       <Content className="pt-16">
         <AttributeHeader>Skills</AttributeHeader>
         <SkillIcons />
