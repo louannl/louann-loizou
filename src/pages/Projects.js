@@ -12,7 +12,7 @@ const Projects = () => {
         <AttributeHeader className="text-white">Projects</AttributeHeader>
         <SubHeader className="text-white">
           I learnt a lot from the projects I created. I am still working on
-          adding more functionality and also refactoring my code too.
+          adding more functionality and also refactoring my code too!
           <br />
           For a more detailed list of the problems I faced or the logic behind
           some of my coding choices, please check out the projects ReadMe on
@@ -31,14 +31,14 @@ const Projects = () => {
             text="An API created to be used with the Meal Planner site, it currently doesn't use an ORM, check out the readme on GitHub for more info on why."
             image={mealPlanner}
             github="https://github.com/louannl/meal-planner"
-            tags={['NodeJs', 'PostgreSQL']}
+            tags={['NodeJs', 'PostgreSQL', 'Postman']}
           />
           <Card
             name="DogHouseKustoms"
             text="A website I created for my brother's *cough* imaginery *cough* business, I originally coded this in vanilla JS and html to help solidify what I had learnt."
             image=""
-            github="https://github.com/louannl/meal-planner"
-            tags={['HTML', 'Vanilla JS']}
+            github="https://github.com/louannl/JobProjects"
+            tags={['HTML', 'Vanilla JS', 'CSS']}
           />
         </div>
       </Content>

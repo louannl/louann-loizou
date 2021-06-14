@@ -1,4 +1,4 @@
-import { CodeSlash, Link as WebLink } from 'react-ionicons';
+import { LogoGithub, Link as WebLink } from 'react-ionicons';
 import tw from '../../../helpers/tailwind';
 
 export const Link = (props) => {
@@ -59,9 +59,10 @@ const iconClasses =
 
 export const CodeLink = (props) => {
   return (
-    <CodeSlash
+    <LogoGithub
       height="2rem"
       width="2rem"
+      color={'#333'}
       cssClasses={iconClasses}
       onClick={() => window.open(props.link)}
     />

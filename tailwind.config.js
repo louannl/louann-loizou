@@ -32,7 +32,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        Monoton: ['Monoton', 'cursive'],
+        Monoton: ['Major Mono Display', 'cursive'],
       },
     },
   },
