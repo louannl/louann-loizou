@@ -24,7 +24,19 @@ export const Tags = (props) => {
 
 export const Card = (props) => {
   return (
-    <div className="bg-white w-full sm:w-1/2 md:w-1/3 xl:w-1/4 m-4 rounded overflow-hidden shadow-lg">
+    <div
+      className={tw(
+        'bg-white',
+        'w-full sm:w-1/2 md:w-1/3 xl:w-1/4',
+        'm-4',
+        'rounded',
+        'overflow-hidden',
+        'shadow-lg',
+        'transform duration-500',
+        'hover:scale-110',
+        'hover: shadow-none'
+      )}
+    >
       <img className="w-full" src={props.image} alt="Project" />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{props.name}</div>
