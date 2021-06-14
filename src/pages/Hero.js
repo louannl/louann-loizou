@@ -17,10 +17,10 @@ const Hero = () => {
         <SocialLinks />
         <div className="pt-5 pb-5 sm:pt-8 sm:pb-8 sm:flex sm:justify-center lg:justify-start">
           <MainLink>
-            <BlueLink link="#projects">Projects</BlueLink>
+            <BlueLink link="projects">Projects</BlueLink>
           </MainLink>
           <MainLink>
-            <YellowLink link="#contact-me">Contact me!</YellowLink>
+            <YellowLink link="contact-me">Contact me!</YellowLink>
           </MainLink>
         </div>
       </Content>

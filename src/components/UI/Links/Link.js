@@ -1,11 +1,13 @@
+import { Link } from 'react-scroll';
 import { LogoGithub, Link as WebLink } from 'react-ionicons';
 import tw from '../../../helpers/tailwind';
 
-export const Link = (props) => {
+export const ButtonLink = (props) => {
   return (
     <div className="rounded-md shadow">
-      <a
-        href={props.link}
+      <Link
+        to={props.link}
+        smooth={true}
         className={tw(
           'w-full',
           'flex',
@@ -22,27 +24,27 @@ export const Link = (props) => {
         )}
       >
         {props.children}
-      </a>
+      </Link>
     </div>
   );
 };
 
 export const BlueLink = (props) => {
   return (
-    <Link
+    <ButtonLink
       className={tw('bg-blue', 'text-white', props.className)}
       link={props.link}
     >
       {props.children}
-    </Link>
+    </ButtonLink>
   );
 };
 
 export const YellowLink = (props) => {
   return (
-    <Link className={tw('bg-yellow', props.className)} link={props.link}>
+    <ButtonLink className={tw('bg-yellow', props.className)} link={props.link}>
       {props.children}
-    </Link>
+    </ButtonLink>
   );
 };
 

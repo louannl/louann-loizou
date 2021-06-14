@@ -1,9 +1,11 @@
 import { Content, Section } from '../components/UI/Section';
 import { Card } from '../components/UI/Cards/Card';
-import tw from '../helpers/tailwind';
-import mealPlanner from '../assets/images/mealplanner.png';
 import AttributeHeader from '../components/UI/Headers/AttributeHeader';
 import { SubHeader } from '../components/UI/Paragraphs/SubHeader';
+import tw from '../helpers/tailwind';
+
+import mealPlanner from '../assets/images/mealplanner.png';
+import dawghaus from '../assets/images/dawghaus.png';
 
 const Projects = () => {
   return (
@@ -36,7 +38,7 @@ const Projects = () => {
           <Card
             name="DogHouseKustoms"
             text="A website I created for my brother's *cough* imaginery *cough* business, I originally coded this in vanilla JS and html to help solidify what I had learnt."
-            image=""
+            image={dawghaus}
             github="https://github.com/louannl/JobProjects"
             tags={['HTML', 'Vanilla JS', 'CSS']}
           />
