@@ -10,7 +10,6 @@ const NavItem = (props) => {
         'font-semibold',
         'cursor-pointer',
         'px-2 py-1',
-        'rounded',
         'sm:ml-2',
         'border-b-2',
         'border-transparent',

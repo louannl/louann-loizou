@@ -49,6 +49,7 @@ const MainNavigation = () => {
           isOpen ? 'block' : 'hidden'
         } sm:flex sm:p-0`}
       >
+        <NavItem link="home">Home</NavItem>
         <NavItem link="projects">Projects</NavItem>
         <NavItem link="skills">Skills</NavItem>
         <NavItem link="contact-me">Contact me!</NavItem>

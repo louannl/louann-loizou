@@ -6,7 +6,7 @@ import { Content, Section } from '../components/UI/Section';
 
 const Hero = () => {
   return (
-    <Section className="bg-white" name="hero">
+    <Section className="bg-white" name="home">
       <Content className="pt-24">
         <AttributeHeader className="text-pink">Louann Loizou</AttributeHeader>
         <AttributeHeader>Software Developer</AttributeHeader>

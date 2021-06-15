@@ -3,6 +3,33 @@ import { LogoGithub, Link as WebLink } from 'react-ionicons';
 import tw from '../../../helpers/tailwind';
 
 export const ButtonLink = (props) => {
+  if (props.website) {
+    return (
+      <div className="rounded-md shadow">
+        <Link
+          onClick={() => window.open(props.website)}
+          className={tw(
+            'w-full',
+            'flex',
+            'items-center',
+            'justify-center',
+            'px-8 py-3',
+            'border border-transparent',
+            'text-base font-medium',
+            'rounded-md',
+            'hover:bg-pink hover:text-white',
+            'md:py-4 md:text-lg md:px-10',
+            'filter drop-shadow-md md:drop-shadow-xl',
+            'cursor-pointer',
+            props.className
+          )}
+        >
+          {props.children}
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="rounded-md shadow">
       <Link
@@ -20,6 +47,7 @@ export const ButtonLink = (props) => {
           'hover:bg-pink hover:text-white',
           'md:py-4 md:text-lg md:px-10',
           'filter drop-shadow-md md:drop-shadow-xl',
+          'cursor-pointer',
           props.className
         )}
       >
@@ -34,6 +62,7 @@ export const BlueLink = (props) => {
     <ButtonLink
       className={tw('bg-blue', 'text-white', props.className)}
       link={props.link}
+      website={props.website}
     >
       {props.children}
     </ButtonLink>
@@ -42,18 +71,18 @@ export const BlueLink = (props) => {
 
 export const YellowLink = (props) => {
   return (
-    <ButtonLink className={tw('bg-yellow', props.className)} link={props.link}>
+    <ButtonLink
+      className={tw('bg-yellow', props.className)}
+      website={props.website}
+      link={props.link}
+    >
       {props.children}
     </ButtonLink>
   );
 };
 
 export const MainLink = (props) => {
-  return (
-    <div className="rounded-md shadow mt-3 sm:mt-0 sm:mr-3">
-      {props.children}
-    </div>
-  );
+  return <div className="rounded-md m-4">{props.children}</div>;
 };
 
 const iconClasses =

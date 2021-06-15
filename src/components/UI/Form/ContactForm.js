@@ -1,3 +1,5 @@
+import { send } from 'emailjs-com';
+
 import { useState } from 'react';
 import tw from '../../../helpers/tailwind';
 
@@ -36,13 +38,35 @@ const ContactForm = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    //TODO: send info
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    const emailParams = {
+      name,
+      email,
+      message,
+    };
+
+    send(
+      process.env.REACT_APP_SERVICE_ID,
+      process.env.REACT_APP_TEMPLATE_ID,
+      emailParams,
+      process.env.REACT_APP_USER_ID
+    )
+      .then((response) => {
+        //TODO: Handle response (clearform etc.)
+        console.log('SUCCESS!', response.status, response.text);
+      })
+      .catch((err) => {
+        console.log('FAILED...', err);
+      });
   };
 
   return (
-    <form className="grid shadow-lg rounded-md sm:overflow-hidden m-4 bg-white mt-8">
+    <form
+      onSubmit={sendEmail}
+      className="grid shadow-lg rounded-md sm:overflow-hidden m-4 bg-white mt-8"
+    >
       <h1 className="text-center lg:text-left text-lg font-medium pt-6 pl-6 leading-6 text-gray-900">
         Contact Form
       </h1>
@@ -51,11 +75,12 @@ const ContactForm = () => {
           <label className={labelClass}>Name</label>
           <input
             type="text"
-            id="name"
+            className={inputClass}
             placeholder="Your Name"
+            id="name"
+            name="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className={inputClass}
           />
         </div>
         <div className={labelAndInputClass}>
@@ -63,6 +88,7 @@ const ContactForm = () => {
           <input
             type="email"
             id="email"
+            name="email"
             placeholder="Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -74,6 +100,7 @@ const ContactForm = () => {
           <textarea
             type="text"
             id="message"
+            name="message"
             placeholder="Message"
             rows={3}
             value={message}
@@ -84,7 +111,7 @@ const ContactForm = () => {
       </div>
       <input
         type="submit"
-        onClick={handleSubmit}
+        value="Send"
         className={tw(
           'justify-center',
           'py-2 px-4',
@@ -99,7 +126,8 @@ const ContactForm = () => {
           'focus:outline-none',
           'focus:ring-2',
           'focus:ring-offset-2',
-          'focus:ring-pink'
+          'focus:ring-pink',
+          'cursor-pointer'
         )}
       />
     </form>
