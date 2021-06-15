@@ -1,6 +1,6 @@
 import { send } from 'emailjs-com';
+import { useForm } from 'react-hook-form';
 
-import { useState } from 'react';
 import tw from '../../../helpers/tailwind';
 
 const labelAndInputClass = tw('px-3 w-full md:w-1/2');
@@ -33,24 +33,25 @@ const inputClass = tw(
   'focus:border-gray-500'
 );
 
+const ErrorText = (props) => {
+  return (
+    <div className={tw('text-red-600', 'text-xs')}>⚠ {props.children}</div>
+  );
+};
+
 const ContactForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    const emailParams = {
-      name,
-      email,
-      message,
-    };
-
+  const onSubmit = (data) => {
+    // e.preventDefault();
     send(
       process.env.REACT_APP_SERVICE_ID,
       process.env.REACT_APP_TEMPLATE_ID,
-      emailParams,
+      data,
       process.env.REACT_APP_USER_ID
     )
       .then((response) => {
@@ -64,7 +65,7 @@ const ContactForm = () => {
 
   return (
     <form
-      onSubmit={sendEmail}
+      onSubmit={handleSubmit(onSubmit)}
       className="grid shadow-lg rounded-md sm:overflow-hidden m-4 bg-white mt-8"
     >
       <h1 className="text-center lg:text-left text-lg font-medium pt-6 pl-6 leading-6 text-gray-900">
@@ -76,42 +77,47 @@ const ContactForm = () => {
           <input
             type="text"
             className={inputClass}
-            placeholder="Your Name"
-            id="name"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            placeholder="Name"
+            {...register('Name', { required: true, maxLength: 80 })}
           />
+          {errors.Name?.type === 'required' && (
+            <ErrorText>Name is required</ErrorText>
+          )}
+          {errors.Name?.type === 'maxLength' && (
+            <ErrorText>Name is too long</ErrorText>
+          )}
         </div>
         <div className={labelAndInputClass}>
           <label className={labelClass}>Email</label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Your Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
             className={inputClass}
+            placeholder="Email"
+            {...register('Email', { required: true, pattern: /^\S+@\S+$/i })}
           />
+          {errors.Email?.type === 'required' && (
+            <ErrorText>Email is required</ErrorText>
+          )}
+          {errors.Email?.type === 'pattern' && (
+            <ErrorText>Email is not valid</ErrorText>
+          )}
         </div>
         <div className={labelAndInputClass + 'md:w-full lg:w-full'}>
           <label className={labelClass}>Message</label>
           <textarea
             type="text"
-            id="message"
-            name="message"
-            placeholder="Message"
             rows={3}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
             className={inputClass}
+            placeholder="Message"
+            {...register('Message', { required: true })}
           />
+          {errors.Message?.type === 'required' && (
+            <ErrorText>Message is required</ErrorText>
+          )}
         </div>
       </div>
       <input
         type="submit"
-        value="Send"
         className={tw(
           'justify-center',
           'py-2 px-4',
@@ -124,9 +130,6 @@ const ContactForm = () => {
           'bg-blue-dark',
           'hover:bg-blue',
           'focus:outline-none',
-          'focus:ring-2',
-          'focus:ring-offset-2',
-          'focus:ring-pink',
           'cursor-pointer'
         )}
       />
