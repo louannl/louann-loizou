@@ -1,5 +1,7 @@
 import { send } from 'emailjs-com';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import tw from '../../../helpers/tailwind';
 
@@ -56,10 +58,26 @@ const ContactForm = () => {
     )
       .then((response) => {
         //TODO: Handle response (clearform etc.)
-        console.log('SUCCESS!', response.status, response.text);
+        toast.success('Response received, thank you for your enquiry!', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       })
       .catch((err) => {
-        console.log('FAILED...', err);
+        toast.error(`An Error occurred: ${err}`, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 
