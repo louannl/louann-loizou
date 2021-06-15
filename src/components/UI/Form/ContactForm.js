@@ -57,7 +57,6 @@ const ContactForm = () => {
       process.env.REACT_APP_USER_ID
     )
       .then((response) => {
-        //TODO: Handle response (clearform etc.)
         toast.success('Response received, thank you for your enquiry!', {
           position: 'top-right',
           autoClose: 5000,
@@ -86,7 +85,7 @@ const ContactForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="grid shadow-lg rounded-md sm:overflow-hidden m-4 bg-white mt-8"
     >
-      <h1 className="text-center lg:text-left text-lg font-medium pt-6 pl-6 leading-6 text-gray-900">
+      <h1 className="text-center lg:text-left text-lg font-medium pt-6 lg:pl-6 leading-6 text-gray-900">
         Contact Form
       </h1>
       <div className="flex flex-wrap -mx-2 p-6">
