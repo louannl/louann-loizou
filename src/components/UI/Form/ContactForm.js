@@ -1,5 +1,6 @@
 import { send } from 'emailjs-com';
-import React from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -47,16 +48,23 @@ const ContactForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const reRef = useRef();
 
-  const onSubmit = (data) => {
-    // e.preventDefault();
+  const onSubmit = async (data) => {
+    const token = await reRef.current.executeAsync();
+
+    const params = {
+      ...data,
+      'g-recaptcha-response': token,
+    };
+
     send(
       process.env.REACT_APP_SERVICE_ID,
       process.env.REACT_APP_TEMPLATE_ID,
-      data,
+      params,
       process.env.REACT_APP_USER_ID
     )
-      .then((response) => {
+      .then((res) => {
         toast.success('Response received, thank you for your enquiry!', {
           position: 'top-right',
           autoClose: 5000,
@@ -149,6 +157,11 @@ const ContactForm = () => {
           'focus:outline-none',
           'cursor-pointer'
         )}
+      />
+      <ReCAPTCHA
+        ref={reRef}
+        size="invisible"
+        sitekey={process.env.REACT_APP_CAPTCHA_SITE_KEY}
       />
     </form>
   );
