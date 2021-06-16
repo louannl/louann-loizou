@@ -13,7 +13,7 @@ import {
 export const SkillIcons = () => {
   const iconSize = '100px';
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className="flex flex-wrap justify-center mt-8 mb-8">
       <LogoHtml5
         title="HTML"
         color={'#FF5733'}

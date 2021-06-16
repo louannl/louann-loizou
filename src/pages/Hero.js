@@ -11,8 +11,9 @@ const Hero = () => {
         <AttributeHeader className="text-pink">Louann Loizou</AttributeHeader>
         <AttributeHeader>Software Developer</AttributeHeader>
         <SubHeader>
-          Accountant turned software developer, with a passion for automation
-          and process improvement...
+          Hi, I'm Lou! I'm a self-taught software developer with a passion for
+          automation and process improvement. I'm originally from East-London
+          and I am now based in beautiful Cardiff!
         </SubHeader>
         <SocialLinks />
         <div className="pt-5 pb-5 sm:pt-8 sm:pb-8 sm:flex sm:justify-center lg:justify-start">

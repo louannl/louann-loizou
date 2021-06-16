@@ -153,6 +153,7 @@ const ContactForm = () => {
           'font-medium',
           'text-white',
           'bg-blue-dark',
+          'transform duration-300',
           'hover:bg-blue',
           'focus:outline-none',
           'cursor-pointer'

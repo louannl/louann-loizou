@@ -34,7 +34,7 @@ export const Card = (props) => {
         'shadow-lg',
         'transform duration-500',
         'hover:scale-110',
-        'hover: shadow-none'
+        'hover:shadow-none'
       )}
     >
       <img className="w-full" src={props.image} alt="Project" />

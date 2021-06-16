@@ -6,6 +6,7 @@ import ContactMe from '../../pages/ContactMe';
 import Cv from '../../pages/Cv';
 
 import MainNavigation from './MainNavigation';
+import Footer from './Footer';
 
 const Layout = () => {
   return (
@@ -18,6 +19,7 @@ const Layout = () => {
         <ContactMe />
         <Cv />
       </main>
+      <Footer />
     </Fragment>
   );
 };

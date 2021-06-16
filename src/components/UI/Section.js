@@ -3,7 +3,7 @@ import tw from '../../helpers/tailwind';
 
 export const Section = (props) => {
   return (
-    <section className={tw(props.className, 'static min-h-1/2')}>
+    <section className={tw(props.className, 'static')}>
       <Element name={props.name}>{props.children}</Element>
     </section>
   );

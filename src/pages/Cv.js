@@ -7,7 +7,7 @@ const Cv = () => {
     <Section className="bg-white" name="cv">
       <Content>
         <AttributeHeader>CV</AttributeHeader>
-        <MainLink>
+        <MainLink className="mt-8">
           <YellowLink website="https://drive.google.com/file/d/1M-EnD51FNK7EzW4Yxjm6byWN8bYO2b1H/view?usp=sharing">
             Google Drive Link
           </YellowLink>

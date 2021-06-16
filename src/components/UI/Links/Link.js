@@ -17,6 +17,7 @@ export const ButtonLink = (props) => {
             'border border-transparent',
             'text-base font-medium',
             'rounded-md',
+            'transform duration-500',
             'hover:bg-pink hover:text-white',
             'md:py-4 md:text-lg md:px-10',
             'filter drop-shadow-md md:drop-shadow-xl',
@@ -44,6 +45,7 @@ export const ButtonLink = (props) => {
           'border border-transparent',
           'text-base font-medium',
           'rounded-md',
+          'transform duration-500',
           'hover:bg-pink hover:text-white',
           'md:py-4 md:text-lg md:px-10',
           'filter drop-shadow-md md:drop-shadow-xl',
@@ -86,7 +88,7 @@ export const MainLink = (props) => {
 };
 
 const iconClasses =
-  'cursor-pointer hover:fill-current hover:text-pink mr-1 mt-2';
+  'cursor-pointer transform duration-500, hover:fill-current hover:text-pink mr-1 mt-2';
 
 export const CodeLink = (props) => {
   return (

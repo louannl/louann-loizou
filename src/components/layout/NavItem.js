@@ -13,6 +13,7 @@ const NavItem = (props) => {
         'sm:ml-2',
         'border-b-2',
         'border-transparent',
+        'transform duration-500',
         'hover:text-yellow',
         'hover:border-yellow'
       )}

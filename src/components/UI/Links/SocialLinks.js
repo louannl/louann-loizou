@@ -2,7 +2,7 @@ import { LogoGithub, LogoLinkedin } from 'react-ionicons';
 import tw from '../../../helpers/tailwind';
 
 const SocialLinks = () => {
-  const classes = 'cursor-pointer hover:fill-current hover:text-pink mr-1 mt-2';
+  const classes = 'cursor-pointer hover:fill-current hover:text-pink mr-1';
 
   return (
     <span
