@@ -15,7 +15,7 @@ export const Content = (props) => {
       className={tw(
         'max-w-screen-lg',
         'xl:max-w-screen-xl',
-        'mx-auto',
+        'mx-auto lg:mx-8 xl:mx-auto',
         'pt-16',
         'pb-8',
         props.className

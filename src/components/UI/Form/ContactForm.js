@@ -1,10 +1,11 @@
 import { send } from 'emailjs-com';
 import ReCAPTCHA from 'react-google-recaptcha';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import tw from '../../../helpers/tailwind';
+import LoadingIcon from '../icons/LoadingIcon';
 
 const labelAndInputClass = tw('px-3 w-full md:w-1/2');
 
@@ -43,21 +44,23 @@ const ErrorText = (props) => {
 };
 
 const ContactForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const reRef = useRef();
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     const token = await reRef.current.executeAsync();
-
     const params = {
       ...data,
       'g-recaptcha-response': token,
     };
-
     send(
       process.env.REACT_APP_SERVICE_ID,
       process.env.REACT_APP_TEMPLATE_ID,
@@ -74,9 +77,10 @@ const ContactForm = () => {
           draggable: true,
           progress: undefined,
         });
+        setIsLoading(false);
       })
       .catch((err) => {
-        toast.error(`An Error occurred: ${err}`, {
+        toast.error(`An Error occurred: ${err.message}`, {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -85,8 +89,50 @@ const ContactForm = () => {
           draggable: true,
           progress: undefined,
         });
+        setIsLoading(false);
       });
   };
+
+  let submitButton = (
+    <input
+      type="submit"
+      className={tw(
+        'justify-center',
+        'py-2 px-4',
+        'border',
+        'border-transparent',
+        'shadow-sm',
+        'text-sm',
+        'font-medium',
+        'text-white',
+        'bg-blue-dark',
+        'transform duration-300',
+        'hover:bg-blue',
+        'cursor-pointer'
+      )}
+    />
+  );
+
+  if (isLoading) {
+    submitButton = (
+      <button
+        className={tw(
+          'justify-center',
+          'py-2 px-4',
+          'border',
+          'border-transparent',
+          'shadow-sm',
+          'text-sm',
+          'font-medium',
+          'text-white',
+          'bg-gray-400',
+          'cursor-wait'
+        )}
+      >
+        <LoadingIcon />
+      </button>
+    );
+  }
 
   return (
     <form
@@ -141,24 +187,7 @@ const ContactForm = () => {
           )}
         </div>
       </div>
-      <input
-        type="submit"
-        className={tw(
-          'justify-center',
-          'py-2 px-4',
-          'border',
-          'border-transparent',
-          'shadow-sm',
-          'text-sm',
-          'font-medium',
-          'text-white',
-          'bg-blue-dark',
-          'transform duration-300',
-          'hover:bg-blue',
-          'focus:outline-none',
-          'cursor-pointer'
-        )}
-      />
+      {submitButton}
       <ReCAPTCHA
         ref={reRef}
         size="invisible"

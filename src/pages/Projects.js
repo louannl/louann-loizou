@@ -6,6 +6,7 @@ import tw from '../helpers/tailwind';
 
 import mealPlanner from '../assets/images/mealplanner.png';
 import dawghaus from '../assets/images/dawghaus.png';
+import portfolio from '../assets/images/louann-loizou.png';
 
 const Projects = () => {
   return (
@@ -39,8 +40,16 @@ const Projects = () => {
             name="DogHouseKustoms"
             text="A website I created for my brother's *cough* imaginery *cough* business, I originally coded this in vanilla JS and html to help solidify what I had learnt."
             image={dawghaus}
-            github="https://github.com/louannl/JobProjects"
+            github="https://github.com/louannl/dog-house-kustoms"
             tags={['HTML', 'Vanilla JS', 'CSS']}
+          />
+          <Card
+            name="Portfolio"
+            text="This website :)"
+            image={portfolio}
+            link="louannloizou.co.uk"
+            github="https://github.com/louannl/louann-loizou"
+            tags={['React', 'Tailwind']}
           />
         </div>
       </Content>

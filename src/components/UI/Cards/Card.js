@@ -27,7 +27,7 @@ export const Card = (props) => {
     <div
       className={tw(
         'bg-white',
-        'w-full sm:w-1/2 md:w-1/3 xl:w-1/4',
+        'w-full sm:w-1/2 md:w-2/5 lg:w-2/7 xl:w-2/7',
         'm-4',
         'rounded',
         'overflow-hidden',
@@ -37,17 +37,17 @@ export const Card = (props) => {
         'hover:shadow-none'
       )}
     >
-      <img className="w-full" src={props.image} alt="Project" />
+      <img
+        className="h-64 w-full object-cover"
+        src={props.image}
+        alt="Project"
+      />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{props.name}</div>
-        <p className="text-gray-700 text-base">{props.text}</p>
+        <p className="h-32 text-gray-700 text-base">{props.text}</p>
         <div className="text-sm flex items-center justify-around">
           <CodeLink link={props.github} />
-          {props.link ? (
-            <WebsiteLink link={props.websiteURL} />
-          ) : (
-            <WebsiteLink />
-          )}
+          {props.link ? <WebsiteLink link={props.link} /> : <WebsiteLink />}
         </div>
       </div>
       <div className="px-6 pt-4 pb-2">
