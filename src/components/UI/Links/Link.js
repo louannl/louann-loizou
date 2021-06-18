@@ -84,7 +84,7 @@ export const YellowLink = (props) => {
 };
 
 export const MainLink = (props) => {
-  return <div className="rounded-md m-4">{props.children}</div>;
+  return <div className="rounded-md m-4 lg:ml-0">{props.children}</div>;
 };
 
 const iconClasses =

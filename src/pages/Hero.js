@@ -16,7 +16,7 @@ const Hero = () => {
           and I am now based in beautiful Cardiff!
         </SubHeader>
         <SocialLinks />
-        <div className="pt-5 pb-5 sm:pt-8 sm:pb-8 sm:flex sm:justify-center lg:justify-start">
+        <div className="pt-4 pb-5 sm:pb-8 sm:pt-4 sm:flex sm:justify-center lg:justify-start">
           <MainLink>
             <BlueLink link="projects">Projects</BlueLink>
           </MainLink>

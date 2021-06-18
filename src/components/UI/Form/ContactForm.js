@@ -108,6 +108,7 @@ const ContactForm = () => {
         'bg-blue-dark',
         'transform duration-300',
         'hover:bg-blue',
+        'outline-none',
         'cursor-pointer'
       )}
     />
@@ -126,6 +127,7 @@ const ContactForm = () => {
           'font-medium',
           'text-white',
           'bg-gray-400',
+          'outline-none',
           'cursor-wait'
         )}
       >
