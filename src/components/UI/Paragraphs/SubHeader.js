@@ -4,7 +4,7 @@ export const SubHeader = (props) => {
   return (
     <p
       className={tw(
-        'm-4 lg:m-0',
+        'm-4 lg:mx-0',
         'mt-3 sm:mt-5 md:mt-5',
         'mb-3',
         'sm:text-lg, md:text-xl',

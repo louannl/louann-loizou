@@ -37,9 +37,19 @@ const MainNavigation = () => {
             onClick={toggleMenu}
           >
             {isOpen ? (
-              <CloseOutline color="white" height="1.5rem" width="1.5rem" />
+              <CloseOutline
+                title="Close"
+                color="white"
+                height="1.5rem"
+                width="1.5rem"
+              />
             ) : (
-              <MenuOutline color="white" height="1.5rem" width="1.5rem" />
+              <MenuOutline
+                title="Menu"
+                color="white"
+                height="1.5rem"
+                width="1.5rem"
+              />
             )}
           </button>
         </div>

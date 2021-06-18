@@ -3,6 +3,9 @@
 ## How it's built
 This website was created use creater-react-app and styled using Tailwind, additionally I used npm packages which are listed in the package.json file.
 
+# Site performance
+The site performs relatively well on desktop, on mobile however, the reCaptcha significantly slows the site, from looking online I could possibly change the reCaptcha to only initialise when the form is interacted with.
+
 ## Getting started
 
 ### Prerequisites
