@@ -12,7 +12,7 @@ const Skills = () => {
           I have learnt a lot of my coding skills using Udemy, books and general
           research online. Some skills not explicitly covered in my projects
           above, but have been covered in courses include MongoDB using an ODM
-          (Mongoose), SASS, basics of Golang.
+          library (Mongoose), SASS, basics of Golang.
         </SubHeader>
         <SkillIcons />
       </Content>

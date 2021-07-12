@@ -1,5 +1,5 @@
 import { Link } from 'react-scroll';
-import { LogoGithub, Link as WebLink } from 'react-ionicons';
+import { LogoGithub, CloudOfflineOutline, CloudOutline } from 'react-ionicons';
 import tw from '../../../helpers/tailwind';
 
 export const ButtonLink = (props) => {
@@ -96,6 +96,7 @@ export const CodeLink = (props) => {
       height="2rem"
       width="2rem"
       color={'#333'}
+      title="link to github repo"
       cssClasses={iconClasses}
       onClick={() => window.open(props.link)}
     />
@@ -105,9 +106,10 @@ export const CodeLink = (props) => {
 export const WebsiteLink = (props) => {
   if (props.link) {
     return (
-      <WebLink
+      <CloudOutline
         height="2rem"
         width="2rem"
+        title={`${props.title} link`}
         cssClasses={iconClasses}
         onClick={() => window.open(props.link)}
       />
@@ -115,10 +117,11 @@ export const WebsiteLink = (props) => {
   }
 
   return (
-    <WebLink
+    <CloudOfflineOutline
       color={'#5a5858'}
       height="2rem"
       width="2rem"
+      title="unused link"
       cssClasses="cursor-not-allowed mr-1 mt-2"
     />
   );

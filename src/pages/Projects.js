@@ -7,6 +7,7 @@ import tw from '../helpers/tailwind';
 import mealPlanner from '../assets/images/mealplanner.png';
 import dawghaus from '../assets/images/dawghaus.png';
 import portfolio from '../assets/images/louann-loizou.png';
+import unitakeaway from '../assets/images/uni-takeaway.png';
 
 const Projects = () => {
   return (
@@ -14,42 +15,58 @@ const Projects = () => {
       <Content>
         <AttributeHeader className="text-white">Projects</AttributeHeader>
         <SubHeader className="text-white">
-          I learnt a lot from the projects I created. I am still working on
-          adding more functionality and also refactoring my code too!
-          <br />
-          For a more detailed list of the problems I faced or the logic behind
-          some of my coding choices, please check out the projects ReadMe on
-          Github. Links to the repos are included in all listed projects.
+          For a more detailed summary and breakdown on my learning and issues I
+          overcame, please check out the project's respective GitHub repository
+          - linked below.
         </SubHeader>
         <div className="container mx-auto flex flex-wrap justify-around">
           <Card
             name="Meal Planner"
-            text="Designed to help organise the weekly shop, it not only renders the meals you input, but also a shopping list."
+            text={`Designed to help organise the weekly shop, it not only 
+            renders the meals you input, but also a handy shopping list using 
+            the Meal Planner API. Checkout a live sample with the link below.`}
             image={mealPlanner}
             github="https://github.com/louannl/meal-planner"
-            tags={['React', 'API', 'AntDesign']}
+            link="https://meal-planner.louannloizou.co.uk/"
+            tags={['React', 'API', 'AntDesign', 'AWS']}
           />
           <Card
             name="Meal Planner API"
-            text="An API created to be used with the Meal Planner site, it currently doesn't use an ORM, check out the readme on GitHub for more info on why."
+            text={`An API created to be used with the Meal Planner site, the 
+            live version doesn't currently use an ORM, check out the readme on 
+            GitHub for more info on why.`}
             image={mealPlanner}
             github="https://github.com/louannl/meal-planner"
-            tags={['NodeJs', 'PostgreSQL', 'Postman']}
+            link="https://meal-planner.louannloizou.co.uk/"
+            tags={['NodeJs', 'PostgreSQL', 'Postman', 'Sequelize', 'AWS']}
           />
           <Card
-            name="DogHouseKustoms"
-            text="A website I created for my brother's *cough* imaginery *cough* business, I originally coded this in vanilla JS and html to help solidify what I had learnt."
-            image={dawghaus}
-            github="https://github.com/louannl/dog-house-kustoms"
-            tags={['HTML', 'Vanilla JS', 'CSS']}
+            name="Uni Takeaway Redesign"
+            text={`A redesign of Uni Takeaway's site (keeping inline with the 
+              original), with better functionality and responsiveness.`}
+            image={unitakeaway}
+            github="https://github.com/louannl/unitakeaway"
+            tags={['React', 'Tailwind']}
           />
           <Card
             name="Portfolio"
-            text="This website :)"
+            text={`I hosted this site by myself, using AWS Amplify. The Meal 
+            Planner Demo is hosted on a subdomain utilising Route 53, 
+            CloudFront, S3, Aurora RDS (postgres) and EC2 - although I didn't 
+            set this part up myself.`}
             image={portfolio}
             link="louannloizou.co.uk"
             github="https://github.com/louannl/louann-loizou"
-            tags={['React', 'Tailwind']}
+            tags={['React', 'Tailwind', 'AWS Amplify']}
+          />
+          <Card
+            name="DogHouseKustoms"
+            text={`A website I created for my brother's business idea, 
+            I originally coded this in vanilla JS and HTML to help solidify 
+            what I had been learning.`}
+            image={dawghaus}
+            github="https://github.com/louannl/dog-house-kustoms"
+            tags={['HTML', 'Vanilla JS', 'CSS']}
           />
         </div>
       </Content>

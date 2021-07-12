@@ -17,6 +17,8 @@ const NavItem = (props) => {
         'hover:text-yellow',
         'hover:border-yellow'
       )}
+      activeClass="text-yellow border-yellow"
+      spy={true}
       to={props.link}
       smooth={true}
     >

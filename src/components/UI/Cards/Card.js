@@ -30,6 +30,7 @@ export const Card = (props) => {
         'w-full sm:w-1/2 md:w-2/5 lg:w-2/7 xl:w-2/7',
         'm-4',
         'rounded',
+        'flex flex-col',
         'overflow-hidden',
         'shadow-lg',
         'transform duration-500',
@@ -42,16 +43,40 @@ export const Card = (props) => {
         src={props.image}
         alt="Project"
       />
-      <div className="px-6 py-4">
+      <div
+        className={tw(
+          'flex flex-col',
+          'flex-grow',
+          'content-between',
+          'px-6 py-4'
+        )}
+      >
         <div className="font-bold text-xl mb-2">{props.name}</div>
-        <p className="h-32 text-gray-700 text-base">{props.text}</p>
-        <div className="text-sm flex items-center justify-around">
-          <CodeLink link={props.github} />
-          {props.link ? <WebsiteLink link={props.link} /> : <WebsiteLink />}
+        <p className={tw('h-auto', 'text-gray-700', 'text-base', 'flex-grow')}>
+          {props.text}
+        </p>
+        <div className="flex-grow">
+          <div
+            className={tw(
+              'text-sm',
+              'flex',
+              'items-center',
+              'justify-around',
+              'w-full',
+              'py-4'
+            )}
+          >
+            <CodeLink link={props.github} />
+            {props.link ? (
+              <WebsiteLink link={props.link} title={props.name} />
+            ) : (
+              <WebsiteLink />
+            )}
+          </div>
+          <div className="w-full">
+            <Tags tags={props.tags} />
+          </div>
         </div>
-      </div>
-      <div className="px-6 pt-4 pb-2">
-        <Tags tags={props.tags} />
       </div>
     </div>
   );

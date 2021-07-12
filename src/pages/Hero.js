@@ -3,6 +3,7 @@ import { BlueLink, MainLink, YellowLink } from '../components/UI/Links/Link';
 import SocialLinks from '../components/UI/Links/SocialLinks';
 import { SubHeader } from '../components/UI/Paragraphs/SubHeader';
 import { Content, Section } from '../components/UI/Section';
+import tw from '../helpers/tailwind';
 
 const Hero = () => {
   return (
@@ -11,12 +12,20 @@ const Hero = () => {
         <AttributeHeader className="text-pink">Louann Loizou</AttributeHeader>
         <AttributeHeader>Software Developer</AttributeHeader>
         <SubHeader>
-          Hi, I'm Lou! I'm a self-taught software developer with a passion for
-          automation and process improvement. I'm originally from East-London
-          and I am now based in beautiful Cardiff!
+          I am a self-taught software developer with a serious passion for
+          process improvement and automation. I have worked on both frontend and
+          backend projects, check out what I've been working on below!
         </SubHeader>
         <SocialLinks />
-        <div className="pt-4 pb-5 sm:pb-8 sm:pt-4 sm:flex sm:justify-center lg:justify-start">
+        <div
+          className={tw(
+            'pt-4 pb-5',
+            'sm:pb-8 sm:pt-4',
+            'sm:flex',
+            'sm:justify-center',
+            'lg:justify-start'
+          )}
+        >
           <MainLink>
             <BlueLink link="projects">Projects</BlueLink>
           </MainLink>

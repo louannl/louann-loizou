@@ -12,6 +12,7 @@ const SocialLinks = () => {
         color={'#211F1F'}
         height="2rem"
         width="2rem"
+        title="link to my github"
         onClick={() => window.open('https://github.com/louannl')}
         cssClasses={classes}
       />
@@ -19,6 +20,7 @@ const SocialLinks = () => {
         color={'#0077b5'}
         height="2rem"
         width="2rem"
+        title="link to my LinkedIn page"
         onClick={() => window.open('https://www.linkedin.com/in/louann-loizou')}
         cssClasses={classes}
       />
