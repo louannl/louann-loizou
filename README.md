@@ -1,31 +1,29 @@
 # My portfolio website
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#functionality">Functionality</a></li>
+        <li><a href="#site-performance">Site Performance</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
 
-## How it's built
-This website was created use creater-react-app and styled using Tailwind, additionally I used npm packages which are listed in the package.json file.
+## About The Project
+A site designed to show off all the projects I have worked on!
 
-# Site performance
+### Built With
+- React
+- Tailwind
+
+### Functionailty 
+- Google's ReCaptcha 
+- EmailJs on the form
+
+### Site Performance
 The site performs relatively well on desktop, on mobile however, the reCaptcha significantly slows the site, from looking online I could possibly change the reCaptcha to only initialise when the form is interacted with.
-
-## Getting started
-
-### Prerequisites
-
-You'll need NPM to start with
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/louannl/louannloizou.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-
-## Roadmap
-
-I'll be adding new projects as I go along!
