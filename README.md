@@ -21,7 +21,7 @@ A site designed to show off all the projects I have worked on!
 - React
 - Tailwind
 
-### Functionailty 
+### Functionality 
 - AWS Amplify
   - The site will automatically rebuild upon pushing to GitHub
 - Google's ReCaptcha 
