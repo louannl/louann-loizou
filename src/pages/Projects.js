@@ -36,7 +36,7 @@ const Projects = () => {
             live version doesn't currently use an ORM, check out the readme on 
             GitHub for more info on why.`}
             image={mealPlanner}
-            github="https://github.com/louannl/meal-planner"
+            github="https://github.com/louannl/meal-planner-api"
             link="https://meal-planner.louannloizou.co.uk/"
             tags={['NodeJs', 'PostgreSQL', 'Postman', 'Sequelize', 'AWS']}
           />
