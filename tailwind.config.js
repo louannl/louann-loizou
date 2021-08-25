@@ -42,6 +42,10 @@ module.exports = {
         '5/7': '71.4285714%',
         '6/7': '85.7142857%',
       },
+      backgroundImage: (theme) => ({
+        'white-waves': "url('/src/assets/svg/layered-waves-haikei.svg')",
+        'pink-waves': "url('/src/assets/svg/layered-pink-waves-haikei.svg')",
+      }),
     },
   },
   variants: {
@@ -49,5 +53,5 @@ module.exports = {
       fill: ['hover', 'focus'],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/aspect-ratio')],
 };

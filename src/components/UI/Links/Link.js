@@ -1,4 +1,4 @@
-import { Link } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
 import { LogoGithub, CloudOfflineOutline, CloudOutline } from 'react-ionicons';
 import tw from '../../../helpers/tailwind';
 
@@ -6,7 +6,7 @@ export const ButtonLink = (props) => {
   if (props.website) {
     return (
       <div className="rounded-md shadow">
-        <Link
+        <button
           onClick={() => window.open(props.website)}
           className={tw(
             'w-full',
@@ -26,14 +26,14 @@ export const ButtonLink = (props) => {
           )}
         >
           {props.children}
-        </Link>
+        </button>
       </div>
     );
   }
 
   return (
     <div className="rounded-md shadow">
-      <Link
+      <ScrollLink
         to={props.link}
         smooth={true}
         className={tw(
@@ -54,7 +54,7 @@ export const ButtonLink = (props) => {
         )}
       >
         {props.children}
-      </Link>
+      </ScrollLink>
     </div>
   );
 };

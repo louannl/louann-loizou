@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { MenuOutline, CloseOutline } from 'react-ionicons';
 
 import tw from '../../helpers/tailwind';
-import { Content } from '../UI/Section';
 import NavItem from './NavItem';
 
 const MainNavigation = () => {
@@ -23,11 +22,12 @@ const MainNavigation = () => {
           'sm:justify-between',
           'sm:px-4',
           'sm:py-3',
-          'sm:items-center'
+          'sm:items-center',
+          'text-2xl'
         )}
       >
         <div className="flex items-center justify-between px-4 py-3 sm:p-0">
-          <div className="h-8 text-white text-2xl font-Monoton font-thin">
+          <div className="h-8 text-white font-Monoton font-bold">
             Louann Loizou
           </div>
           <div className="sm:hidden">
@@ -62,7 +62,7 @@ const MainNavigation = () => {
           <NavItem link="home">Home</NavItem>
           <NavItem link="projects">Projects</NavItem>
           <NavItem link="skills">Skills</NavItem>
-          <NavItem link="contact-me">Contact me!</NavItem>
+          <NavItem link="contact-me">Contact Me!</NavItem>
           <NavItem link="cv">CV</NavItem>
         </div>
       </div>

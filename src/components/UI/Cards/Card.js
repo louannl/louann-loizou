@@ -15,6 +15,7 @@ export const Tags = (props) => {
         'text-gray-700',
         'mr-2 mb-2'
       )}
+      key={tag}
     >
       {tag}
     </span>

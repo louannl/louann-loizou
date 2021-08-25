@@ -1,15 +1,21 @@
 import { LogoGithub, LogoLinkedin } from 'react-ionicons';
 import tw from '../../../helpers/tailwind';
 
-const SocialLinks = () => {
-  const classes = 'cursor-pointer hover:fill-current hover:text-pink mr-1';
+const SocialLinks = (props) => {
+  let hoverColor = 'text-pink';
+
+  if (props.color === 'white') {
+    hoverColor = 'text-blue';
+  }
+
+  const classes = `cursor-pointer hover:fill-current hover:${hoverColor} mr-1`;
 
   return (
     <span
       className={tw('flex flex-wrap', 'justify-center', 'lg:justify-start')}
     >
       <LogoGithub
-        color={'#211F1F'}
+        color={props.color ? '#F9F9F9' : '#211F1F'}
         height="2rem"
         width="2rem"
         title="link to my github"
@@ -17,7 +23,7 @@ const SocialLinks = () => {
         cssClasses={classes}
       />
       <LogoLinkedin
-        color={'#0077b5'}
+        color={props.color ? '#F9F9F9' : '#0077b5'}
         height="2rem"
         width="2rem"
         title="link to my LinkedIn page"

@@ -6,13 +6,13 @@ const NavItem = (props) => {
     <Link
       className={tw(
         'block',
-        'text-white',
-        'font-semibold',
         'cursor-pointer',
         'px-2 py-1',
         'sm:ml-2',
         'border-b-2',
         'border-transparent',
+        'font-thin',
+        'text-white',
         'transform duration-500',
         'hover:text-yellow',
         'hover:border-yellow'
