@@ -11,7 +11,6 @@ const NavItem = (props) => {
         'sm:ml-2',
         'border-b-2',
         'border-transparent',
-        'font-thin',
         'text-white',
         'transform duration-500',
         'hover:text-yellow',

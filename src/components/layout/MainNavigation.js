@@ -25,7 +25,7 @@ const MainNavigation = () => {
           'sm:px-4',
           'sm:py-3',
           'sm:items-center',
-          'text-2xl'
+          'text-xl'
         )}
       >
         <div className="flex items-center justify-between px-4 py-3 sm:p-0">
