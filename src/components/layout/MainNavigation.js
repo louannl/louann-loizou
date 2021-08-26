@@ -39,9 +39,9 @@ const MainNavigation = () => {
               onClick={toggleMenu}
             >
               {isOpen ? (
-                <AiOutlineClose className={iconStyle} />
+                <AiOutlineClose className={iconStyle} title="close menu" />
               ) : (
-                <AiOutlineMenu className={iconStyle} />
+                <AiOutlineMenu className={iconStyle} title="open menu" />
               )}
             </button>
           </div>
