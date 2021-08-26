@@ -193,6 +193,7 @@ const ContactForm = () => {
       <ReCAPTCHA
         ref={reRef}
         size="invisible"
+        className="z-50"
         sitekey={process.env.REACT_APP_CAPTCHA_SITE_KEY}
       />
     </form>
