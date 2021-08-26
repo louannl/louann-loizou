@@ -1,5 +1,6 @@
 import { Link as ScrollLink } from 'react-scroll';
-import { LogoGithub, CloudOfflineOutline, CloudOutline } from 'react-ionicons';
+import { AiFillGithub } from 'react-icons/ai';
+import { MdPhonelink, MdPhonelinkOff } from 'react-icons/md';
 import tw from '../../../helpers/tailwind';
 
 export const ButtonLink = (props) => {
@@ -88,16 +89,13 @@ export const MainLink = (props) => {
 };
 
 const iconClasses =
-  'cursor-pointer transform duration-500, hover:fill-current hover:text-pink mr-1 mt-2';
+  'h-8 w-auto cursor-pointer transform duration-500, hover:fill-current hover:text-pink mr-1 mt-2';
 
 export const CodeLink = (props) => {
   return (
-    <LogoGithub
-      height="2rem"
-      width="2rem"
-      color={'#333'}
+    <AiFillGithub
+      className={iconClasses}
       title="link to github repo"
-      cssClasses={iconClasses}
       onClick={() => window.open(props.link)}
     />
   );
@@ -106,23 +104,19 @@ export const CodeLink = (props) => {
 export const WebsiteLink = (props) => {
   if (props.link) {
     return (
-      <CloudOutline
-        height="2rem"
-        width="2rem"
+      <MdPhonelink
         title={`${props.title} link`}
-        cssClasses={iconClasses}
+        className={iconClasses}
         onClick={() => window.open(props.link)}
       />
     );
   }
 
   return (
-    <CloudOfflineOutline
+    <MdPhonelinkOff
       color={'#5a5858'}
-      height="2rem"
-      width="2rem"
+      className={iconClasses}
       title="unused link"
-      cssClasses="cursor-not-allowed mr-1 mt-2"
     />
   );
 };

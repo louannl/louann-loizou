@@ -1,16 +1,11 @@
-import { ReloadCircleOutline } from 'react-ionicons';
+import { AiOutlineReload } from 'react-icons/ai';
 
 export const LoadingIcon = (props) => {
-  const iconSize = props.size;
-
   return (
-    <ReloadCircleOutline
-      title="loading icon"
-      rotate
+    <AiOutlineReload
+      title="Loading"
       color={'#ffffff'}
-      height={iconSize}
-      width={iconSize}
-      cssClasses="inline"
+      className={`inline ${props.size} animate-spin`}
     />
   );
 };

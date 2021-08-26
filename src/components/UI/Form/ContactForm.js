@@ -131,7 +131,7 @@ const ContactForm = () => {
           'cursor-wait'
         )}
       >
-        <LoadingIcon />
+        <LoadingIcon size="text-xl" />
       </button>
     );
   }

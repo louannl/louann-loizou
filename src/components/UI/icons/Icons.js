@@ -1,62 +1,40 @@
 import React from 'react';
 import {
-  LogoCss3,
-  LogoHtml5,
-  LogoJavascript,
-  LogoNodejs,
-  LogoNpm,
-  LogoReact,
-  LogoSass,
-  LogoTux,
-} from 'react-ionicons';
+  DiCss3,
+  DiHtml5,
+  DiSass,
+  DiJsBadge,
+  DiNodejs,
+  DiNpm,
+  DiReact,
+  DiLinux,
+  DiPostgresql,
+  DiVisualstudio,
+  DiGit,
+  DiPython,
+} from 'react-icons/di';
 
 export const SkillIcons = () => {
-  const iconSize = '100px';
+  const iconStyle = 'h-24 w-auto mx-1';
+
   return (
     <div className="flex flex-wrap justify-center mt-8 mb-8">
-      <LogoHtml5
-        title="HTML"
-        color={'#FF5733'}
-        height={iconSize}
-        width={iconSize}
+      <DiHtml5 title="HTML" color={'#FF5733'} className={iconStyle} />
+      <DiCss3 title="CSS" color={'#264de4'} className={iconStyle} />
+      <DiSass title="SASS" color={'#cc6699'} className={iconStyle} />
+      <DiJsBadge title="JavaScript" color={'#F0DB4F'} className={iconStyle} />
+      <DiReact title="React" color={'#61DBFB'} className={iconStyle} />
+      <DiNpm title="NPM" color={'#CC3534'} className={iconStyle} />
+      <DiNodejs title="NodeJs" color={'#3C873A'} className={iconStyle} />
+      <DiPython title="Python" color={'#306998'} className={iconStyle} />
+      <DiPostgresql
+        title="Postgresql"
+        color={'#0064a5'}
+        className={iconStyle}
       />
-      <LogoCss3
-        title="CSS"
-        color={'#264de4'}
-        height={iconSize}
-        width={iconSize}
-      />
-      <LogoSass
-        title="SASS"
-        color={'#cc6699'}
-        height={iconSize}
-        width={iconSize}
-      />
-      <LogoJavascript
-        title="JavaScript"
-        color={'#F0DB4F'}
-        height={iconSize}
-        width={iconSize}
-      />
-      <LogoNpm
-        title="NPM"
-        color={'#CC3534'}
-        height={iconSize}
-        width={iconSize}
-      />
-      <LogoNodejs
-        title="NodeJs"
-        color={'#3C873A'}
-        height={iconSize}
-        width={iconSize}
-      />
-      <LogoReact
-        title="React"
-        color={'#61DBFB'}
-        height={iconSize}
-        width={iconSize}
-      />
-      <LogoTux title="Linux" height={iconSize} width={iconSize} />
+      <DiVisualstudio title="VSCode" color={'#0065A9'} className={iconStyle} />
+      <DiGit title="Git" color={'#f34f29'} className={iconStyle} />
+      <DiLinux title="Linux" className={iconStyle} />
     </div>
   );
 };

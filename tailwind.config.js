@@ -29,6 +29,8 @@ module.exports = {
       pink: {
         DEFAULT: '#FF6392',
       },
+      githubGrey: '#211F1F',
+      linkedInBlue: '#0077b5',
     },
     extend: {
       fontFamily: {

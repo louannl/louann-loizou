@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MenuOutline, CloseOutline } from 'react-ionicons';
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
 import tw from '../../helpers/tailwind';
 import NavItem from './NavItem';
@@ -10,6 +10,8 @@ const MainNavigation = () => {
   const toggleMenu = () => {
     setIsOpen((prevState) => !prevState);
   };
+
+  const iconStyle = 'text-3xl text-white';
 
   return (
     <header className={tw('fixed', 'bg-blue', 'top-0', 'inset-x-0', 'z-50')}>
@@ -37,19 +39,9 @@ const MainNavigation = () => {
               onClick={toggleMenu}
             >
               {isOpen ? (
-                <CloseOutline
-                  title="Close"
-                  color="white"
-                  height="1.5rem"
-                  width="1.5rem"
-                />
+                <AiOutlineClose className={iconStyle} />
               ) : (
-                <MenuOutline
-                  title="Menu"
-                  color="white"
-                  height="1.5rem"
-                  width="1.5rem"
-                />
+                <AiOutlineMenu className={iconStyle} />
               )}
             </button>
           </div>
