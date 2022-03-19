@@ -23,22 +23,20 @@ const Projects = () => {
           <Card
             name="Meal Planner"
             text={`Designed to help organise the weekly shop, it not only 
-            renders the meals you input, but also a handy shopping list using 
-            the Meal Planner API. Checkout a live sample with the link below.`}
+            renders the meals you input, but also a handy shopping list - using 
+            the Meal Planner API.`}
             image={mealPlanner}
             github="https://github.com/louannl/meal-planner"
-            link="https://meal-planner.louannloizou.co.uk/"
-            tags={['React', 'API', 'AntDesign', 'AWS']}
+            tags={['React', 'API', 'AntDesign']}
           />
           <Card
             name="Meal Planner API"
-            text={`An API created to be used with the Meal Planner site, the 
-            live version doesn't currently use an ORM, check out the readme on 
-            GitHub for more info on why.`}
+            text={`An API created to be used with the Meal Planner site, the original 
+            version didn't use an ORM, this has now been refactored to use one check - 
+            out the readme on GitHub for more info on why.`}
             image={mealPlanner}
             github="https://github.com/louannl/meal-planner-api"
-            link="https://meal-planner.louannloizou.co.uk/"
-            tags={['NodeJs', 'PostgreSQL', 'Postman', 'Sequelize', 'AWS']}
+            tags={['API', 'NodeJs', 'PostgreSQL', 'Postman', 'Sequelize']}
           />
           <Card
             name="Uni Takeaway Redesign"
@@ -52,7 +50,7 @@ const Projects = () => {
           <Card
             name="Portfolio"
             text={`I hosted this site by myself, using AWS Amplify. The Meal 
-            Planner Demo is hosted on a subdomain utilising Route 53, 
+            Planner Demo was hosted on a subdomain utilising Route 53, 
             CloudFront, S3, Aurora RDS (postgres) and EC2 - although I didn't 
             set this part up myself.`}
             image={portfolio}
