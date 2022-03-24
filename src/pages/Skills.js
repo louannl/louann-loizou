@@ -8,7 +8,7 @@ const Skills = () => {
     <Section className="bg-white" name="skills">
       <Content className="pt-16">
         <AttributeHeader>Skills</AttributeHeader>
-        <SubHeader>
+        <SubHeader className="text-gray-600">
           I have learnt a lot of my coding skills using Udemy, books and general
           research online. Some skills not explicitly covered in my projects
           above, but have been covered in courses include MongoDB using an ODM

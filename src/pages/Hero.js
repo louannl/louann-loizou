@@ -11,7 +11,7 @@ const Hero = () => {
       <Content className="pt-24">
         <AttributeHeader className="text-pink">Louann Loizou</AttributeHeader>
         <AttributeHeader>Software Developer</AttributeHeader>
-        <SubHeader>
+        <SubHeader classname="text-gray-600">
           I am a self-taught software developer with a serious passion for
           process improvement and automation. I have worked on both frontend and
           backend projects, check out what I've been working on below!

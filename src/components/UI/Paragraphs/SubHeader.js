@@ -11,7 +11,6 @@ export const SubHeader = (props) => {
         'text-center',
         'lg:text-left',
         'text-base',
-        'text-gray-600',
         'font-medium',
         props.className
       )}
