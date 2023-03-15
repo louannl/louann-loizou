@@ -72,18 +72,6 @@ export const BlueLink = (props) => {
   );
 };
 
-export const YellowLink = (props) => {
-  return (
-    <ButtonLink
-      className={tw('bg-yellow', props.className)}
-      website={props.website}
-      link={props.link}
-    >
-      {props.children}
-    </ButtonLink>
-  );
-};
-
 export const MainLink = (props) => {
   return <div className="rounded-md m-4 lg:ml-0">{props.children}</div>;
 };

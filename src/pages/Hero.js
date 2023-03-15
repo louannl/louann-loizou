@@ -1,5 +1,5 @@
 import AttributeHeader from '../components/UI/Headers/AttributeHeader';
-import { BlueLink, MainLink, YellowLink } from '../components/UI/Links/Link';
+import { BlueLink, MainLink } from '../components/UI/Links/Link';
 import SocialLinks from '../components/UI/Links/SocialLinks';
 import { SubHeader } from '../components/UI/Paragraphs/SubHeader';
 import { Content, Section } from '../components/UI/Section';
@@ -28,9 +28,6 @@ const Hero = () => {
         >
           <MainLink>
             <BlueLink link="projects">Projects</BlueLink>
-          </MainLink>
-          <MainLink>
-            <YellowLink link="contact-me">Contact me!</YellowLink>
           </MainLink>
         </div>
       </Content>

@@ -54,8 +54,6 @@ const MainNavigation = () => {
           <NavItem link="home">Home</NavItem>
           <NavItem link="projects">Projects</NavItem>
           <NavItem link="skills">Skills</NavItem>
-          <NavItem link="contact-me">Contact Me!</NavItem>
-          <NavItem link="cv">CV</NavItem>
         </div>
       </div>
     </header>
