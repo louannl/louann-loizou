@@ -43,7 +43,7 @@ const Projects = () => {
             text={`A redesign of Uni Takeaway's site (keeping inline with the 
               original), with better functionality and responsiveness.`}
             image={unitakeaway}
-            link="https://unitakeaway.louannloizou.co.uk/"
+            link="http://www.unitakeaway.com"
             github="https://github.com/louannl/unitakeaway"
             tags={['React', 'Tailwind']}
           />
