@@ -24,8 +24,6 @@ A site designed to show off all the projects I have worked on!
 ### Functionality 
 - AWS Amplify
   - The site will automatically rebuild upon pushing to GitHub
-- Google's ReCaptcha 
-- EmailJs on the form
 
 ### Site Performance
 The site performs relatively well on desktop, on mobile however, the reCaptcha significantly slows the site, from looking online I could possibly change the reCaptcha to only initialise when the form is interacted with.
