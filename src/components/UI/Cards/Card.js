@@ -27,7 +27,10 @@ export const Card = (props) => {
   return (
     <div
       className={tw(
-        'bg-white',
+        'bg-themeLightGrey',
+        'dark:bg-themeGrey',
+        'text-black',
+        'dark:text-white',
         'w-full sm:w-1/2 md:w-2/5 lg:w-2/7 xl:w-2/7',
         'm-4',
         'rounded',
@@ -35,8 +38,6 @@ export const Card = (props) => {
         'overflow-hidden',
         'shadow-lg',
         'transform duration-500',
-        'hover:scale-110',
-        'hover:shadow-none'
       )}
     >
       <img
@@ -53,7 +54,7 @@ export const Card = (props) => {
         )}
       >
         <div className="font-bold text-xl mb-2">{props.name}</div>
-        <p className={tw('h-auto', 'text-gray-700', 'text-base', 'flex-grow')}>
+        <p className={tw('h-auto', 'text-gray-700', 'dark:text-white', 'text-base', 'flex-grow')}>
           {props.text}
         </p>
         <div className="flex-grow">

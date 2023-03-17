@@ -5,10 +5,10 @@ import { Content, Section } from '../components/UI/Section';
 
 const Skills = () => {
   return (
-    <Section className="bg-white" name="skills">
+    <Section className="bg-themeLightGrey dark:bg-themeDarkGrey" name="skills">
       <Content className="pt-16">
-        <AttributeHeader>Skills</AttributeHeader>
-        <SubHeader className="text-gray-600">
+        <AttributeHeader className="text-themeDarkGrey dark:text-white">Skills</AttributeHeader>
+        <SubHeader className="text-gray-600 dark:text-white">
           I have learnt a lot of my coding skills using Udemy, books and general
           research online. Some skills not explicitly covered in my projects
           above, but have been covered in courses include MongoDB using an ODM

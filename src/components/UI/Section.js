@@ -8,7 +8,7 @@ export const Section = (props) => {
       <section className={tw(props.className, 'static')}>
         <Element name={props.name}>{props.children}</Element>
       </section>
-      {props.className.includes('bg-white') ? (
+      {props.className.includes('bg-themeLightGrey') ? (
         <div
           className={tw(
             'aspect-w-10 aspect-h-1',
@@ -16,12 +16,13 @@ export const Section = (props) => {
             'bg-no-repeat',
             'bg-center',
             'bg-cover',
-            'bg-white-waves',
+            'bg-light-multi-waves',
+            'dark:bg-dark-multi-waves',
             '-my-2'
           )}
         ></div>
       ) : null}
-      {props.className.includes('bg-pink') ? (
+      {props.className.includes('bg-mint') ? (
         <div
           className={tw(
             'aspect-w-10 aspect-h-1',
@@ -29,7 +30,8 @@ export const Section = (props) => {
             'bg-no-repeat',
             'bg-center',
             'bg-cover',
-            'bg-pink-waves',
+            'bg-light-two-waves',
+            'dark:bg-dark-two-waves',
             '-my-2'
           )}
         ></div>

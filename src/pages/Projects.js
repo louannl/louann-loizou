@@ -11,7 +11,7 @@ import unitakeaway from '../assets/images/uni-takeaway.png';
 
 const Projects = () => {
   return (
-    <Section className={tw('bg-pink', 'h-100')} name="projects">
+    <Section className={tw('bg-mint', 'h-100')} name="projects">
       <Content>
         <AttributeHeader className="text-white">Projects</AttributeHeader>
         <SubHeader className="text-white">

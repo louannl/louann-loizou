@@ -14,7 +14,16 @@ const MainNavigation = () => {
   const iconStyle = 'text-3xl text-white';
 
   return (
-    <header className={tw('fixed', 'bg-blue', 'top-0', 'inset-x-0', 'z-50')}>
+    <header className={
+      tw(
+        'fixed',
+        'bg-mint',
+        'border-b-2',
+        'border-mint dark:border-themeDarkGrey',
+        'top-0',
+        'inset-x-0',
+        'z-50'
+      )}>
       <div
         className={tw(
           'max-w-screen-lg',
