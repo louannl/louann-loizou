@@ -2,10 +2,10 @@ import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
 import tw from '../../../helpers/tailwind';
 
 const SocialLinks = (props) => {
-  let hoverColor = 'text-pink';
+  let hoverColor = 'text-mint';
 
   if (props.color === 'white') {
-    hoverColor = 'text-blue';
+    hoverColor = 'text-themeDarkGrey';
   }
 
   const classes = ` fill-current h-10 w-auto cursor-pointer hover:fill-current hover:${hoverColor} mr-1`;
@@ -16,7 +16,7 @@ const SocialLinks = (props) => {
     >
       <AiFillGithub
         className={
-          props.color ? 'text-white' + classes : 'text-githubGrey' + classes
+          props.color ? 'text-white dark:text-white' + classes : 'text-githubGrey dark:text-white' + classes
         }
         title="link to my github"
         onClick={() => window.open('https://github.com/louannl')}

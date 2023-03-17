@@ -14,7 +14,16 @@ const MainNavigation = () => {
   const iconStyle = 'text-3xl text-white';
 
   return (
-    <header className={tw('fixed', 'bg-blue', 'top-0', 'inset-x-0', 'z-50')}>
+    <header className={
+      tw(
+        'fixed',
+        'bg-mint',
+        'border-b-2',
+        'border-mint dark:border-themeDarkGrey',
+        'top-0',
+        'inset-x-0',
+        'z-50'
+      )}>
       <div
         className={tw(
           'max-w-screen-lg',
@@ -54,8 +63,6 @@ const MainNavigation = () => {
           <NavItem link="home">Home</NavItem>
           <NavItem link="projects">Projects</NavItem>
           <NavItem link="skills">Skills</NavItem>
-          <NavItem link="contact-me">Contact Me!</NavItem>
-          <NavItem link="cv">CV</NavItem>
         </div>
       </div>
     </header>

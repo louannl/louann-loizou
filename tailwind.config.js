@@ -15,19 +15,18 @@ module.exports = {
       current: 'currentColor',
       gray: colors.neutral,
       red: colors.red,
-      blue: {
-        DEFAULT: '#7FC8F8',
-        dark: '#5AA9E6',
-      },
+      black: colors.black,
       white: {
         DEFAULT: '#F9F9F9',
       },
-      yellow: {
-        DEFAULT: '#FFE45E',
+      purple: {
+        DEFAULT: '#301E67',
+        dark: '#03001C'
       },
-      pink: {
-        DEFAULT: '#FF6392',
-      },
+      themeGrey: '#393E46',
+      themeDarkGrey: '#222831',
+      themeLightGrey: '#EEEEEE',
+      mint: '#00ADB5',
       githubGrey: '#211F1F',
       linkedInBlue: '#0077b5',
     },
@@ -44,8 +43,10 @@ module.exports = {
         '6/7': '85.7142857%',
       },
       backgroundImage: (theme) => ({
-        'white-waves': "url('/src/assets/svg/layered-waves-haikei.svg')",
-        'pink-waves': "url('/src/assets/svg/layered-pink-waves-haikei.svg')",
+        'light-multi-waves': "url('/src/assets/svg/light-multi-layered-waves-haikei.svg')",
+        'light-two-waves': "url('/src/assets/svg/light-two-layered-waves-haikei.svg')",
+        'dark-multi-waves': "url('/src/assets/svg/dark-multi-layered-waves-haikei.svg')",
+        'dark-two-waves': "url('/src/assets/svg/dark-two-layered-waves-haikei.svg')",
       }),
     },
   },

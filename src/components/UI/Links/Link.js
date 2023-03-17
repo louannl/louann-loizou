@@ -19,7 +19,7 @@ export const ButtonLink = (props) => {
             'text-base font-medium',
             'rounded-md',
             'transform duration-500',
-            'hover:bg-pink hover:text-white',
+            'hover:bg-themeGrey hover:text-white',
             'md:py-4 md:text-lg md:px-10',
             'filter drop-shadow-md md:drop-shadow-xl',
             'cursor-pointer',
@@ -47,7 +47,8 @@ export const ButtonLink = (props) => {
           'text-base font-medium',
           'rounded-md',
           'transform duration-500',
-          'hover:bg-pink hover:text-white',
+          'hover:bg-themeDarkGrey hover:text-white',
+          'dark:hover:bg-themeGrey dark:hover:text-white',
           'md:py-4 md:text-lg md:px-10',
           'filter drop-shadow-md md:drop-shadow-xl',
           'cursor-pointer',
@@ -63,21 +64,9 @@ export const ButtonLink = (props) => {
 export const BlueLink = (props) => {
   return (
     <ButtonLink
-      className={tw('bg-blue', 'text-white', props.className)}
+      className={tw('bg-mint', 'dark:bg-themeLightGrey', 'text-white', 'dark:text-black', props.className)}
       link={props.link}
       website={props.website}
-    >
-      {props.children}
-    </ButtonLink>
-  );
-};
-
-export const YellowLink = (props) => {
-  return (
-    <ButtonLink
-      className={tw('bg-yellow', props.className)}
-      website={props.website}
-      link={props.link}
     >
       {props.children}
     </ButtonLink>
@@ -89,7 +78,7 @@ export const MainLink = (props) => {
 };
 
 const iconClasses =
-  'h-8 w-auto cursor-pointer transform duration-500, hover:fill-current hover:text-pink mr-1 mt-2';
+  'h-8 w-auto cursor-pointer transform duration-500 hover:fill-current hover:text-mint mr-1 mt-2';
 
 export const CodeLink = (props) => {
   return (

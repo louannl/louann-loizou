@@ -13,10 +13,10 @@ const NavItem = (props) => {
         'border-transparent',
         'text-white',
         'transform duration-500',
-        'hover:text-yellow',
-        'hover:border-yellow'
+        'hover:text-themeDarkGrey',
+        'hover:border-themeDarkGrey'
       )}
-      activeClass="text-yellow border-yellow"
+      activeClass="text-themeDarkGrey, border-themeDarkGrey"
       spy={true}
       to={props.link}
       smooth={true}
