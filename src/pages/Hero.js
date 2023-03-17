@@ -8,7 +8,7 @@ const Hero = () => {
   return (
     <Section className="bg-themeLightGrey dark:bg-themeDarkGrey" name="home">
       <Content className="pt-24">
-        <AttributeHeader className="text-themeDarkGrey dark:text-white">Louann Loizou</AttributeHeader>
+        <AttributeHeader className="mt-8 text-themeDarkGrey dark:text-white">Louann Loizou</AttributeHeader>
         <AttributeHeader className="text-mint dark:text-themeLightGrey">Software Developer</AttributeHeader>
         <SocialLinks/>
         <div
