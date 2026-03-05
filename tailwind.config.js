@@ -10,27 +10,19 @@ module.exports = {
       '3/4': '75vh',
       full: '100vh',
     },
-    colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      gray: colors.neutral,
-      red: colors.red,
-      black: colors.black,
-      white: {
-        DEFAULT: '#F9F9F9',
-      },
-      purple: {
-        DEFAULT: '#301E67',
-        dark: '#03001C'
-      },
-      themeGrey: '#393E46',
-      themeDarkGrey: '#222831',
-      themeLightGrey: '#EEEEEE',
-      mint: '#00ADB5',
-      githubGrey: '#211F1F',
-      linkedInBlue: '#0077b5',
-    },
     extend: {
+      colors: {
+        themeGrey: '#393E46',
+        themeDarkGrey: '#222831',
+        themeLightGrey: '#EEEEEE',
+        mint: '#00ADB5',
+        githubGrey: '#211F1F',
+        linkedInBlue: '#0077b5',
+        purple: {
+          DEFAULT: '#301E67',
+          dark: '#03001C'
+        },
+      },
       fontFamily: {
         Monoton: ['Major Mono Display', 'cursive'],
       },

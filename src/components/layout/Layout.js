@@ -5,6 +5,7 @@ import Skills from '../../pages/Skills';
 
 import MainNavigation from './MainNavigation';
 import Footer from './Footer';
+import Career from "../../pages/Career";
 
 const Layout = () => {
   return (
@@ -12,6 +13,7 @@ const Layout = () => {
       <MainNavigation />
       <main>
         <Hero />
+        <Career />
         <Projects />
         <Skills />
       </main>
