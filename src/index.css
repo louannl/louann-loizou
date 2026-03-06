@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --color-themeGrey: 57 62 70;
+    --color-themeDarkGrey: 34 40 49;
+    --color-themeLightGrey: 238 238 238;
+    --color-mint: 0 173 181;
+    --color-githubGrey: 33 31 31;
+    --color-linkedInBlue: 0 119 181;
+    --color-purple: 48 30 103;
+    --color-purple-dark: 3 0 28;
+  }
+}

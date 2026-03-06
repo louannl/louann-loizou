@@ -1,6 +1,8 @@
 import { Fragment } from 'react';
 import { Element } from 'react-scroll';
 import tw from '../../helpers/tailwind';
+import MultiLayeredWaves from './Waves/MultiLayeredWaves';
+import TwoLayeredWaves from './Waves/TwoLayeredWaves';
 
 export const Section = (props) => {
   return (
@@ -9,32 +11,16 @@ export const Section = (props) => {
         <Element name={props.name}>{props.children}</Element>
       </section>
       {props.className.includes('bg-themeLightGrey') ? (
-        <div
-          className={tw(
-            'aspect-w-10 aspect-h-1',
-            'w-full',
-            'bg-no-repeat',
-            'bg-center',
-            'bg-cover',
-            'bg-light-multi-waves',
-            'dark:bg-dark-multi-waves',
-            '-my-2'
-          )}
-        ></div>
+        <div className={tw('aspect-w-10 aspect-h-1', 'w-full', '-my-2')}>
+          <MultiLayeredWaves className="block dark:hidden" isDark={false} />
+          <MultiLayeredWaves className="hidden dark:block" isDark={true} />
+        </div>
       ) : null}
       {props.className.includes('bg-mint') ? (
-        <div
-          className={tw(
-            'aspect-w-10 aspect-h-1',
-            'w-full',
-            'bg-no-repeat',
-            'bg-center',
-            'bg-cover',
-            'bg-light-two-waves',
-            'dark:bg-dark-two-waves',
-            '-my-2'
-          )}
-        ></div>
+        <div className={tw('aspect-w-10 aspect-h-1', 'w-full', '-my-2')}>
+          <TwoLayeredWaves className="block dark:hidden" isDark={false} />
+          <TwoLayeredWaves className="hidden dark:block" isDark={true} />
+        </div>
       ) : null}
     </Fragment>
   );
