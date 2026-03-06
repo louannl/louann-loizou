@@ -1,10 +1,9 @@
 import { Fragment } from 'react';
 import Hero from '../../pages/Hero';
-import Projects from '../../pages/Projects';
-import Skills from '../../pages/Skills';
-
 import MainNavigation from './MainNavigation';
 import Footer from './Footer';
+import Career from "../../pages/Career";
+import BackToTop from "../UI/Buttons/BackToTop";
 
 const Layout = () => {
   return (
@@ -12,10 +11,10 @@ const Layout = () => {
       <MainNavigation />
       <main>
         <Hero />
-        <Projects />
-        <Skills />
+        <Career />
       </main>
       <Footer />
+      <BackToTop />
     </Fragment>
   );
 };

@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* Darkened Arctic/Polar Theme */
+    --color-themeGrey: 67 76 94;       /* Nord 2: Polar Night (Medium-Dark) */
+    --color-themeDarkGrey: 46 52 64;   /* Nord 0: Polar Night (Darkest) */
+    --color-themeLightGrey: 216 222 233; /* Nord 4: Snow Storm (Darker Light) */
+    --color-mint: 94 129 172;          /* Nord 10: Frost (Darker Blue) */
+    --color-githubGrey: 33 31 31;
+    --color-linkedInBlue: 0 119 181;
+    --color-purple: 180 142 173;       /* Nord 15: Aurora (Pink/Purple) */
+    --color-purple-dark: 143 188 187;   /* Nord 7: Frost (Muted Cyan) */
+  }
+}

@@ -10,27 +10,19 @@ module.exports = {
       '3/4': '75vh',
       full: '100vh',
     },
-    colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      gray: colors.neutral,
-      red: colors.red,
-      black: colors.black,
-      white: {
-        DEFAULT: '#F9F9F9',
-      },
-      purple: {
-        DEFAULT: '#301E67',
-        dark: '#03001C'
-      },
-      themeGrey: '#393E46',
-      themeDarkGrey: '#222831',
-      themeLightGrey: '#EEEEEE',
-      mint: '#00ADB5',
-      githubGrey: '#211F1F',
-      linkedInBlue: '#0077b5',
-    },
     extend: {
+      colors: {
+        themeGrey: 'rgb(var(--color-themeGrey) / <alpha-value>)',
+        themeDarkGrey: 'rgb(var(--color-themeDarkGrey) / <alpha-value>)',
+        themeLightGrey: 'rgb(var(--color-themeLightGrey) / <alpha-value>)',
+        mint: 'rgb(var(--color-mint) / <alpha-value>)',
+        githubGrey: 'rgb(var(--color-githubGrey) / <alpha-value>)',
+        linkedInBlue: 'rgb(var(--color-linkedInBlue) / <alpha-value>)',
+        purple: {
+          DEFAULT: 'rgb(var(--color-purple) / <alpha-value>)',
+          dark: 'rgb(var(--color-purple-dark) / <alpha-value>)',
+        },
+      },
       fontFamily: {
         Monoton: ['Major Mono Display', 'cursive'],
       },
@@ -42,12 +34,6 @@ module.exports = {
         '5/7': '71.4285714%',
         '6/7': '85.7142857%',
       },
-      backgroundImage: (theme) => ({
-        'light-multi-waves': "url('/src/assets/svg/light-multi-layered-waves-haikei.svg')",
-        'light-two-waves': "url('/src/assets/svg/light-two-layered-waves-haikei.svg')",
-        'dark-multi-waves': "url('/src/assets/svg/dark-multi-layered-waves-haikei.svg')",
-        'dark-two-waves': "url('/src/assets/svg/dark-two-layered-waves-haikei.svg')",
-      }),
     },
   },
   variants: {
