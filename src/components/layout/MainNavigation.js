@@ -39,7 +39,7 @@ const MainNavigation = () => {
       >
         <div className="flex items-center justify-between px-4 py-3 sm:p-0">
           <div className="h-8 text-white font-Monoton font-bold">
-            Louann Loizou
+            Louann Robbins
           </div>
           <div className="sm:hidden">
             <button
@@ -61,8 +61,7 @@ const MainNavigation = () => {
           } sm:flex sm:p-0`}
         >
           <NavItem link="home">Home</NavItem>
-          <NavItem link="projects">Projects</NavItem>
-          <NavItem link="skills">Skills</NavItem>
+          <NavItem link="career">Career</NavItem>
         </div>
       </div>
     </header>

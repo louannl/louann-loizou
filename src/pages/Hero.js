@@ -8,8 +8,8 @@ const Hero = () => {
   return (
     <Section className="bg-themeLightGrey dark:bg-themeDarkGrey" name="home">
       <Content className="pt-24">
-        <AttributeHeader className="mt-8 text-themeDarkGrey dark:text-white">Louann Loizou</AttributeHeader>
-        <AttributeHeader className="text-mint dark:text-themeLightGrey">Software Developer</AttributeHeader>
+        <AttributeHeader className="mt-8 text-themeDarkGrey dark:text-white">Louann Robbins</AttributeHeader>
+        <AttributeHeader className="text-mint dark:text-themeLightGrey">Senior Platform Engineer</AttributeHeader>
         <SocialLinks/>
         <div
           className={tw(
@@ -21,7 +21,7 @@ const Hero = () => {
           )}
         >
           <MainLink>
-            <BlueLink link="projects">Projects</BlueLink>
+            <BlueLink link="career">Career</BlueLink>
           </MainLink>
         </div>
       </Content>
