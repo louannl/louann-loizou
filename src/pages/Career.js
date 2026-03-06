@@ -11,16 +11,24 @@ import rocketScienceLogo from '../assets/images/rslogo.svg';
 import veygologo from '../assets/images/veygologo.svg';
 
 
-// todo: mobile view for timeline is gonna be shite right now.
-
 const timeline = [
+    {
+        label: "Monitoring Platforms...",
+        date: "2026",
+        title: "Highlight",
+        text: "Setup Prometheus and Grafana with open-telemetry in order to monitor game systems",
+        side: "left",
+        logo: rocketScienceLogo,
+        skills: ["Prometheus", "OpenTelemetry", "Grafana", "Prometheus", "Terraform"]
+    },
     {
         label: "Bigggggg Pipelines...",
         date: "2025",
         title: "Highlight",
         text: "Setup CI/CD pipeline additions for a very complex game backend platform, with a complex test suite tailored to the clients wants",
         side: "left",
-        logo: rocketScienceLogo
+        logo: rocketScienceLogo,
+        skills: ["CI/CD", "AWS", "Redis Cluster", "AWS CDK", "CodePipeline", "CodeDeploy", "DevOps"]
     },
     {
         label: "Rocket Science Group",
@@ -28,7 +36,8 @@ const timeline = [
         title: "Senior Platform Engineer",
         text: "Promoted!",
         side: "right",
-        logo: rocketScienceLogo
+        logo: rocketScienceLogo,
+        skills: ["Leadership", "Architecture", "Strategy", "Mentoring", "Golang"]
     },
     {
         label: "Extensive Load testing suite...",
@@ -37,7 +46,8 @@ const timeline = [
         text: "Using locust, I set up an extensive load testing suite covering the entire existing backend service\n" +
         "And then I had to fix all the issues I found while doing that :')",
         side: "left",
-        logo: rocketScienceLogo
+        logo: rocketScienceLogo,
+        skills: ["Locust", "Python", "Redis", "C++", "Bug Triaging", "Redis", "Docker"]
     },
     {
         label: "Rocket Science Group",
@@ -45,7 +55,8 @@ const timeline = [
         title: "Platform Engineer",
         text: "Co-development company for Games. Working with Clients to build and maintain the platform behind their games.",
         side: "right",
-        logo: rocketScienceLogo
+        logo: rocketScienceLogo,
+        skills: ["AWS", "Python", "IaC", "Golang", "C++"]
     },
     {
         label: "Fraud Engine...",
@@ -53,7 +64,8 @@ const timeline = [
         title: "Highlight",
         text: "Small, focused team on introducing a dedicated fraud analytics service to the platform, to help block bad-actors by utilising data from multiple microservices, centralising it then processing it.",
         side: "left",
-        logo: veygologo
+        logo: veygologo,
+        skills: ["Data Analytics", "Microservices", "Security", "Golang", "Object Storage/S3"]
     },
     {
         label: "Mentoring and P1 incident management...",
@@ -62,7 +74,8 @@ const timeline = [
         text: "Mentored new engineers on the team, helping them understand the platform and how to contribute effectively.\n" +
         "First responded, managed and resolved P0 incidents throughout the year",
         side: "left",
-        logo: veygologo
+        logo: veygologo,
+        skills: ["Mentorship", "Incident Response", "Problem Solving", "Communication"]
     },
     {
         label: "Veygo UK",
@@ -70,16 +83,18 @@ const timeline = [
         title: "Software Engineer",
         text: "Promoted! Vroom vroom!",
         side: "right",
-        logo: veygologo
+        logo: veygologo,
+        skills: ["TypeScript", "Node.js", "Django", "Serverless"]
     },
     {
         label: "Introducing Dependency Kaizen..",
         date: "2022",
         title: "Highlight",
         text: "As a junior, started off a weekly meeting that worked towards getting Dependencies down\n" +
-            "Started at the beginning of the year with 400+ vulnerabilities, and ended with just shy of 70.",
+        "Started at the beginning of the year with 400+ vulnerabilities, and ended with just shy of 70.",
         side: "left",
-        logo: veygologo
+        logo: veygologo,
+        skills: ["Security Compliance", "Maintenance"]
     },
     {
         label: "Veygo UK",
@@ -87,7 +102,8 @@ const timeline = [
         title: "Junior Software Engineer",
         text: "Temporary Car insurance... Brooom broom",
         side: "right",
-        logo: veygologo
+        logo: veygologo,
+        skills: ["JavaScript", "Python", "PostgreSQL", "NewRelic"]
     },
     {
         label: "CodeFirstGirls",
@@ -95,6 +111,7 @@ const timeline = [
         title: "NanoDegree",
         text: "As part of CodeFirstGirls' NanoDegree program, I completed a in software development, covering topics such as programming fundamentals, data structures, algorithms, and web development; as a prerequisite for joining Veygo.",
         side: "left",
+        skills: ["Algorithms", "Data Structures", "Web Development"]
     },
     {
         label: "Career transition",
@@ -109,7 +126,8 @@ const timeline = [
         title: "Personal Project",
         text: "A redesign of Uni Takeaway's site (keeping inline with the original), with better functionality and responsiveness.",
         side: "left",
-        image: unitakeaway
+        image: unitakeaway,
+        skills: ["React", "Tailwind CSS", "Responsive Design"]
     },
     {
         label: "Meal Planner + API",
@@ -117,14 +135,16 @@ const timeline = [
         title: "Personal Project",
         text: "Designed to help organise the weekly shop, it not only renders the meals you input, but also a handy shopping list - using the Meal Planner API, An API created to be used with the Meal Planner site, the original version didn't use an ORM, this has now been refactored to use one check - out the readme on GitHub for more info on why.",
         side: "left",
-        image: mealPlanner
+        image: mealPlanner,
+        skills: ["React", "Node.js", "PostgreSQL", "Sequelize"]
     },
     {
         label: "Finance Controller, Auditor and so on...",
         date: "Apr 15",
         title: "Spreadsheets were my Database",
         text: "Before I was an engineer, I was in Finance, I'm still a qualified Chartered Accountant (ACCA) to this day.",
-        side: "right"
+        side: "right",
+        skills: ["Stakeholder Management", "Board Meetings", "Financial Reporting", "Analysis"]
     }
 ];
 
@@ -146,6 +166,7 @@ const Projects = () => {
                                 side={item.side}
                                 logo={item.logo}
                                 image={item.image}
+                                skills={item.skills}
                             >
                                 {item.text}
                             </TimelineItem>
