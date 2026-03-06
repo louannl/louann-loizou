@@ -5,33 +5,102 @@ import tw from '../helpers/tailwind';
 
 import {Timeline, TimelineItem} from "../components/UI/Timeline/Timeline";
 
+import mealPlanner from '../assets/images/mealplanner.png';
+import unitakeaway from '../assets/images/uni-takeaway.png';
+import rocketScienceLogo from '../assets/images/rslogo.svg';
+import veygologo from '../assets/images/veygologo.svg';
+
+
+// todo: mobile view for timeline is gonna be shite right now.
+
 const timeline = [
+    {
+        label: "Bigggggg Pipelines...",
+        date: "2025",
+        title: "Highlight",
+        text: "Setup CI/CD pipeline additions for a very complex game backend platform, with a complex test suite tailored to the clients wants",
+        side: "left",
+        logo: rocketScienceLogo
+    },
+    {
+        label: "Rocket Science Group",
+        date: "Jun 2025",
+        title: "Senior Platform Engineer",
+        text: "Promoted!",
+        side: "right",
+        logo: rocketScienceLogo
+    },
+    {
+        label: "Extensive Load testing suite...",
+        date: "2024",
+        title: "Highlight",
+        text: "Using locust, I set up an extensive load testing suite covering the entire existing backend service\n" +
+        "And then I had to fix all the issues I found while doing that :')",
+        side: "left",
+        logo: rocketScienceLogo
+    },
     {
         label: "Rocket Science Group",
         date: "Sep 2024",
-        title: "Senior Platform Engineer",
-        text: "Pretium lectus quam id leo...",
-        side: "right"
+        title: "Platform Engineer",
+        text: "Co-development company for Games. Working with Clients to build and maintain the platform behind their games.",
+        side: "right",
+        logo: rocketScienceLogo
     },
     {
-        label: "Meal Planner",
-        date: "Mar 2021",
-        title: "Personal Project",
-        text: "Designed to help organise the weekly shop, it not only renders the meals you input, but also a handy shopping list.",
-        side: "left"
+        label: "Fraud Engine...",
+        date: "2024",
+        title: "Highlight",
+        text: "Small, focused team on introducing a dedicated fraud analytics service to the platform, to help block bad-actors by utilising data from multiple microservices, centralising it then processing it.",
+        side: "left",
+        logo: veygologo
+    },
+    {
+        label: "Mentoring and P1 incident management...",
+        date: "2023",
+        title: "Highlight",
+        text: "Mentored new engineers on the team, helping them understand the platform and how to contribute effectively.\n" +
+        "First responded, managed and resolved P0 incidents throughout the year",
+        side: "left",
+        logo: veygologo
+    },
+    {
+        label: "Veygo UK",
+        date: "Jul 2023",
+        title: "Software Engineer",
+        text: "Promoted! Vroom vroom!",
+        side: "right",
+        logo: veygologo
+    },
+    {
+        label: "Introducing Dependency Kaizen..",
+        date: "2022",
+        title: "Highlight",
+        text: "As a junior, started off a weekly meeting that worked towards getting Dependencies down\n" +
+            "Started at the beginning of the year with 400+ vulnerabilities, and ended with just shy of 70.",
+        side: "left",
+        logo: veygologo
     },
     {
         label: "Veygo UK",
         date: "Jan 2022",
-        title: "Software Engineer",
-        text: "Pretium lectus quam id leo...",
-        side: "right"
+        title: "Junior Software Engineer",
+        text: "Temporary Car insurance... Brooom broom",
+        side: "right",
+        logo: veygologo
+    },
+    {
+        label: "CodeFirstGirls",
+        date: "Nov 2021",
+        title: "NanoDegree",
+        text: "As part of CodeFirstGirls' NanoDegree program, I completed a in software development, covering topics such as programming fundamentals, data structures, algorithms, and web development; as a prerequisite for joining Veygo.",
+        side: "left",
     },
     {
         label: "Career transition",
         date: "Aug 2021",
         title: "Career transition during Covid...",
-        text: "Pretium lectus quam id leo...",
+        text: "New skills loading...",
         side: "right"
     },
     {
@@ -39,25 +108,25 @@ const timeline = [
         date: "Jun 2021",
         title: "Personal Project",
         text: "A redesign of Uni Takeaway's site (keeping inline with the original), with better functionality and responsiveness.",
-        side: "left"
+        side: "left",
+        image: unitakeaway
+    },
+    {
+        label: "Meal Planner + API",
+        date: "Mar 2021",
+        title: "Personal Project",
+        text: "Designed to help organise the weekly shop, it not only renders the meals you input, but also a handy shopping list - using the Meal Planner API, An API created to be used with the Meal Planner site, the original version didn't use an ORM, this has now been refactored to use one check - out the readme on GitHub for more info on why.",
+        side: "left",
+        image: mealPlanner
     },
     {
         label: "Finance Controller, Auditor and so on...",
         date: "Apr 15",
         title: "Spreadsheets were my Database",
-        text: "Pretium lectus quam id leo...",
+        text: "Before I was an engineer, I was in Finance, I'm still a qualified Chartered Accountant (ACCA) to this day.",
         side: "right"
     }
 ];
-
-/*
-* Idea
-* Make a double-sided timeline instead
-* one side is my job roles
-* the other side is types of projects I built (providing not NDA)
-* also update tailwind and that
-* also had linter etc.
-* */
 
 const Projects = () => {
     return (
@@ -75,6 +144,8 @@ const Projects = () => {
                                 date={item.date}
                                 title={item.title}
                                 side={item.side}
+                                logo={item.logo}
+                                image={item.image}
                             >
                                 {item.text}
                             </TimelineItem>
