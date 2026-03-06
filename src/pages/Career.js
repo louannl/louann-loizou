@@ -152,7 +152,7 @@ const Projects = () => {
     return (
         <Section className={tw('bg-mint', 'h-100')} name="career">
             <Content>
-                <AttributeHeader className="text-white">My History...</AttributeHeader>
+                <AttributeHeader className="text-white">My Career so far...</AttributeHeader>
                 <SubHeader className="text-white">
                 </SubHeader>
                 <div className="-my-6 py-12">

@@ -120,8 +120,7 @@ export function TimelineItem({ label, date, title, side = 'right', logo, image, 
 
     return (
         <div className={tw(
-            "relative flex flex-col sm:flex-row items-center",
-            isRight ? "sm:justify-end" : "sm:justify-start",
+            "relative flex flex-col sm:flex-row items-center justify-center",
             "group py-8"
         )}>
             {/* The Dot on the timeline line */}
@@ -132,25 +131,32 @@ export function TimelineItem({ label, date, title, side = 'right', logo, image, 
             <div
                 onClick={() => setIsOpen(!isOpen)}
                 className={tw(
-                    "w-full sm:w-[45%] pl-14 pr-6 sm:px-0 z-20",
-                    isRight ? "sm:order-2 sm:text-left sm:pl-16" : "sm:order-1 sm:text-right sm:pr-16"
+                    "w-full sm:flex-1 pl-14 pr-6 sm:px-0 z-20 flex justify-center",
+                    isRight ? "sm:order-2" : "sm:order-1"
                 )}
             >
-                <TimelineCard
-                    isRight={isRight}
-                    label={label}
-                    logo={logo}
-                    date={date}
-                    title={title}
-                    image={image}
-                    skills={skills}
-                    isOpen={isOpen}
-                >
-                    {children}
-                </TimelineCard>
+                <div className="w-full sm:max-w-[90%]">
+                    <TimelineCard
+                        isRight={isRight}
+                        label={label}
+                        logo={logo}
+                        date={date}
+                        title={title}
+                        image={image}
+                        skills={skills}
+                        isOpen={isOpen}
+                    >
+                        {children}
+                    </TimelineCard>
+                </div>
             </div>
 
-            <TimelineSkills skills={skills} isRight={isRight} />
+            <div className={tw(
+                "w-full sm:flex-1 mt-4 sm:mt-0 pl-14 pr-6 sm:px-0 flex items-center",
+                isRight ? "sm:order-1 sm:pr-8 sm:justify-end" : "sm:order-2 sm:justify-start sm:pl-8"
+            )}>
+                <TimelineSkills skills={skills} isRight={isRight} />
+            </div>
         </div>
     );
 }
@@ -165,8 +171,7 @@ const TimelineSkills = ({ skills, isRight }) => {
 
     return (
         <div className={tw(
-            "w-full sm:w-[45%] flex flex-wrap gap-2 mt-4 sm:mt-0 pl-14 pr-6 sm:px-0",
-            isRight ? "sm:order-1 sm:justify-center sm:pr-8" : "sm:order-2 sm:justify-center sm:pl-8"
+            "flex flex-wrap gap-2 items-center"
         )}>
             {displayedSkills.map((skill, index) => (
                 <span
