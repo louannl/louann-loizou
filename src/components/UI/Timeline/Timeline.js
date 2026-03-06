@@ -5,15 +5,15 @@ const timelineColors = {
     label: "text-white/80",
 
     title: "text-white",
-    body: "text-slate-200",
+    body: "text-themeLightGrey/90",
 
     line: "before:bg-white/40",
 
-    dot: "after:bg-emerald-300",
+    dot: "after:bg-mint",
     dotBorder: "after:border-white",
 
-    dateText: "text-emerald-900",
-    dateBg: "bg-emerald-200",
+    dateText: "text-themeDarkGrey",
+    dateBg: "bg-mint",
 };
 
 const TimelineCard = ({ isRight, label, logo, date, title, image, skills, isOpen, children }) => {
@@ -125,7 +125,7 @@ export function TimelineItem({ label, date, title, side = 'right', logo, image, 
         )}>
             {/* The Dot on the timeline line */}
             <div className={tw(
-                "absolute left-6 sm:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white z-10 bg-emerald-300",
+                "absolute left-6 sm:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white z-10 bg-mint",
             )}></div>
 
             <div
@@ -187,7 +187,7 @@ const TimelineSkills = ({ skills, isRight }) => {
                         e.stopPropagation();
                         setIsExpanded(!isExpanded);
                     }}
-                    className="px-3 py-1 bg-emerald-400/20 border border-emerald-400/40 rounded-full text-xs text-emerald-200 hover:bg-emerald-400/30 transition-colors"
+                    className="px-3 py-1 bg-purple border border-purple/40 rounded-full text-xs text-white hover:bg-purple/80 transition-colors shadow-sm"
                 >
                     {isExpanded ? "Less" : `+${skills.length - limit} more`}
                 </button>

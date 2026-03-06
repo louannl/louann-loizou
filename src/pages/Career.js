@@ -84,7 +84,7 @@ const timeline = [
         text: "Promoted! Vroom vroom!",
         side: "right",
         logo: veygologo,
-        skills: ["TypeScript", "Node.js", "Django", "Serverless"]
+        skills: ["TypeScript", "Node.js", "Django", "Serverless", "RDS"]
     },
     {
         label: "Introducing Dependency Kaizen..",
@@ -136,7 +136,7 @@ const timeline = [
         text: "Designed to help organise the weekly shop, it not only renders the meals you input, but also a handy shopping list - using the Meal Planner API, An API created to be used with the Meal Planner site, the original version didn't use an ORM, this has now been refactored to use one check - out the readme on GitHub for more info on why.",
         side: "left",
         image: mealPlanner,
-        skills: ["React", "Node.js", "PostgreSQL", "Sequelize"]
+        skills: ["React", "Node.js", "PostgreSQL", "Sequelize", "EC2"]
     },
     {
         label: "Finance Controller, Auditor and so on...",
@@ -152,7 +152,7 @@ const Projects = () => {
     return (
         <Section className={tw('bg-mint', 'h-100')} name="career">
             <Content>
-                <AttributeHeader className="text-white">My Career so far...</AttributeHeader>
+                <AttributeHeader className="text-white">~My Path in Tech~</AttributeHeader>
                 <SubHeader className="text-white">
                 </SubHeader>
                 <div className="-my-6 py-12">
