@@ -16,64 +16,65 @@ const timelineColors = {
 };
 
 
-export function TimelineItem({ label, date, title, children }) {
-    return ( <div className="relative pl-8 sm:pl-32 py-6 group">
-            <div
-            className={tw(
-                "font-Monoton font-medium text-2xl mb-1 sm:mb-0",
-                timelineColors.label
-            )}
-        >
-            {label}
-        </div>
-
-        <div
-            className={tw(
-                "flex flex-col sm:flex-row items-start mb-1",
-
-                "group-last:before:hidden",
-
-                "before:absolute before:left-2 sm:before:left-0",
-                "before:h-full before:px-px",
-                timelineColors.line,
-                "sm:before:ml-[6.5rem]",
-                "before:self-start",
-                "before:-translate-x-1/2 before:translate-y-3",
-
-                "after:absolute after:left-2 sm:after:left-0",
-                "after:w-2 after:h-2",
-                timelineColors.dot,
-                "after:border-4 after:box-content",
-                timelineColors.dotBorder,
-                "after:rounded-full sm:after:ml-[6.5rem]",
-                "after:-translate-x-1/2 after:translate-y-1.5"
-            )}
-        >
-            <time
-                className={tw(
-                    "sm:absolute left-0 translate-y-0.5",
-                    "inline-flex items-center justify-center",
-                    "text-xs font-semibold uppercase",
-                    "w-20 h-6 mb-3 sm:mb-0",
-                    "rounded-full",
-                    timelineColors.dateText,
-                    timelineColors.dateBg
-                )}
-            >
-                {date}
-            </time>
-            <div
-                className={tw(
-                    "text-xl font-bold",
-                    timelineColors.title
-                )}
-            >
-                {title}
+export function Timeline({ children }) {
+    return (
+        <div className="relative">
+            {/* Centered line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-white/40 hidden sm:block"></div>
+            <div className="space-y-12 sm:space-y-0">
+                {children}
             </div>
         </div>
-        <div className={tw(timelineColors.body)}>
-            {children}
+    );
+}
+
+export function TimelineItem({ label, date, title, side = 'right', children }) {
+    const isRight = side === 'right';
+
+    return (
+        <div className={tw(
+            "relative flex flex-col sm:flex-row items-center",
+            isRight ? "sm:justify-end" : "sm:justify-start",
+            "group"
+        )}>
+            {/* The Dot on the center line */}
+            <div className={tw(
+                "absolute left-2 sm:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white z-10",
+                timelineColors.dot,
+                "after:content-['']"
+            )}></div>
+
+            <div className={tw(
+                "w-full sm:w-[45%] pl-8 sm:pl-0",
+                isRight ? "sm:order-2 sm:text-left sm:pl-8" : "sm:order-1 sm:text-right sm:pr-8"
+            )}>
+                <div className={tw(
+                    "font-Monoton font-medium text-2xl mb-1",
+                    timelineColors.label
+                )}>
+                    {label}
+                </div>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center mb-1 gap-2">
+                    <time className={tw(
+                        "inline-flex items-center justify-center text-xs font-semibold uppercase px-3 py-1 rounded-full",
+                        timelineColors.dateText,
+                        timelineColors.dateBg,
+                        !isRight && "sm:order-2"
+                    )}>
+                        {date}
+                    </time>
+                    <div className={tw(
+                        "text-xl font-bold",
+                        timelineColors.title,
+                        !isRight && "sm:order-1"
+                    )}>
+                        {title}
+                    </div>
+                </div>
+                <div className={tw(timelineColors.body)}>
+                    {children}
+                </div>
+            </div>
         </div>
-    </div>
-);
+    );
 }
