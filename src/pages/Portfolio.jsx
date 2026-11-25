@@ -1,0 +1,67 @@
+import { useLocation, useNavigate } from 'react-router-dom';
+import AttributeHeader from '../components/UI/Headers/AttributeHeader';
+import PortfolioCard from '../components/UI/Cards/PortfolioCard';
+import SkillList from '../components/UI/SkillList';
+import { Content, Section } from '../components/UI/Section';
+import { GlassTabs } from '../components/liquid-glass/glass-tabs';
+import { projects } from '../data/projects.mjs';
+import Career from './Career';
+import { CaseStudyLink } from './ProjectCaseStudy';
+
+const views = [
+  { value: 'projects', label: 'Projects' },
+  { value: 'career', label: 'Career' },
+];
+
+function Projects() {
+  return (
+    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      {projects.map(project => (
+        <article key={project.slug} className="min-w-0">
+          <PortfolioCard className="portfolio-project-card flex h-full flex-col gap-4 p-5 sm:p-6">
+            <div className="portfolio-project-meta flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+              <time className="portfolio-game-date">{project.year}</time>
+              <span>{project.context}</span>
+            </div>
+            <div className="flex-1">
+              <h3 className="font-scoreboard text-3xl leading-none font-bold text-white">{project.title}</h3>
+              <p className="mt-2 leading-relaxed text-themeLightGrey">{project.summary}</p>
+            </div>
+            <SkillList skills={project.skills} label={project.title} limit={3} />
+            <CaseStudyLink className="portfolio-case-link self-start" slug={project.slug} aria-label={`Read case study: ${project.title}`}>
+              Read case study
+            </CaseStudyLink>
+          </PortfolioCard>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+export default function Portfolio() {
+  const { hash } = useLocation();
+  const navigate = useNavigate();
+  const view = hash === '#projects' ? 'projects' : 'career';
+
+  return (
+    <Section name="portfolio">
+      <Content className="px-5 sm:px-8">
+        <div id={view} className="portfolio-view">
+          <div className="portfolio-view-header">
+            <AttributeHeader className="text-white">{view === 'career' ? 'Season History' : 'Projects'}</AttributeHeader>
+            <GlassTabs
+              aria-label="Portfolio view"
+              options={views}
+              value={view}
+              onValueChange={next => navigate({ hash: `#${next}` }, { replace: true, state: { scrollTop: window.scrollY } })}
+              className="portfolio-career-tabs"
+              highlightClassName="bg-ice"
+              size="lg"
+            />
+          </div>
+          {view === 'career' ? <Career /> : <Projects />}
+        </div>
+      </Content>
+    </Section>
+  );
+}

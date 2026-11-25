@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { GlassCard } from '../components/liquid-glass/glass-card';
 import { GlassLayer } from '../components/liquid-glass/glass-layer';
 import SocialLinks from '../components/UI/Links/SocialLinks';
@@ -33,10 +34,10 @@ const Hero = () => {
               {specialties.map(specialty => <li key={specialty}>{specialty}</li>)}
             </ul>
             <div className="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
-              <a href="#career" data-glass-host="" className="portfolio-glass-button portfolio-hero-action inline-flex items-center rounded-full px-6 py-3 font-semibold">
+              <Link to="/#projects" data-glass-host="" className="portfolio-glass-button portfolio-hero-action inline-flex items-center rounded-full px-6 py-3 font-semibold">
                 <GlassLayer material="tinted" />
-                Career
-              </a>
+                Explore projects
+              </Link>
               <SocialLinks grouped />
             </div>
           </div>

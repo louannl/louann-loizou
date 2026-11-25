@@ -1,28 +1,46 @@
-import { Fragment, useEffect } from 'react';
-import Hero from '../../pages/Hero';
+import { useLayoutEffect, useRef } from 'react';
+import { Outlet, useLocation, useNavigationType } from 'react-router-dom';
 import MainNavigation from './MainNavigation';
 import Footer from './Footer';
-import Career from "../../pages/Career";
 import BackToTop from "../UI/Buttons/BackToTop";
+import CaseStudyDialog from '../../pages/ProjectCaseStudy';
 
 const Layout = () => {
-  useEffect(() => {
-    // React renders the section after the browser's first attempt at fragment navigation.
-    if (window.location.hash === '#career') {
-      document.getElementById('career')?.scrollIntoView();
+  const location = useLocation();
+  const previousLocation = useRef(location);
+  const navigationType = useNavigationType();
+
+  useLayoutEffect(() => {
+    const { pathname, hash, search, state } = location;
+    const previous = previousLocation.current;
+    previousLocation.current = location;
+
+    // Opening and closing a case study changes only the query string.
+    if (previous.pathname === pathname && previous.hash === hash && previous.search !== search) return;
+
+    if (navigationType === 'REPLACE' && typeof state?.scrollTop === 'number') {
+      window.scrollTo(0, state.scrollTop);
+      return;
     }
-  }, []);
+
+    const target = hash && document.getElementById(hash.slice(1));
+    if (target) {
+      target.scrollIntoView();
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location, navigationType]);
 
   return (
-    <Fragment>
+    <>
       <MainNavigation />
       <main>
-        <Hero />
-        <Career />
+        <Outlet />
       </main>
       <Footer />
       <BackToTop />
-    </Fragment>
+      <CaseStudyDialog />
+    </>
   );
 };
 

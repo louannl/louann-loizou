@@ -39,6 +39,13 @@ Use Node.js 22.13 or later in the 22.x line, or Node.js 24 LTS.
 - `npm run build` checks TypeScript and creates the static production site in `build/`.
 - `npm run preview` serves the production build locally.
 
+### Portfolio content
+
+Add or edit project summaries, stacks, and case-study sections in `src/data/projects.mjs`.
+A link such as `/?project=meal-planner` opens a case study over the portfolio.
+Update `src/data/career.js` to
+add a season, change a career milestone, or link it to a case study by slug.
+
 ### Update Liquid Glass
 
 Preview updates to the five registry entries used by the site. Review the output before replacing

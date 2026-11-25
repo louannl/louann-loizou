@@ -1,4 +1,5 @@
 import { AiOutlineMenu } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 import tw from '../../helpers/tailwind';
 import { GlassCard } from '../liquid-glass/glass-card';
@@ -12,16 +13,14 @@ import NavItem from './NavItem';
 
 const navigationGlass = { tintColor: '#182d46', borderColor: '#a5e7ff' };
 const sections = [
-  { id: 'home', label: 'Home' },
-  { id: 'career', label: 'Career' },
+  { href: '/#home', label: 'Home' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#career', label: 'Career' },
 ];
 
-const scrollToSection = (id) => {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
-};
-
 const MainNavigation = () => {
+  const navigate = useNavigate();
+
   return (
     <header className="fixed inset-x-0 top-3 z-50 px-3 sm:top-5 sm:px-6">
       <GlassCard
@@ -52,8 +51,8 @@ const MainNavigation = () => {
                 <AiOutlineMenu aria-hidden="true" />
               </GlassDropdownMenuTrigger>
               <GlassDropdownMenuContent align="end" className="portfolio-glass-popup portfolio-mobile-menu">
-                {sections.map(({ id, label }) => (
-                  <GlassDropdownMenuItem key={id} className="portfolio-mobile-menu-item" onSelect={() => scrollToSection(id)}>
+                {sections.map(({ href, label }) => (
+                  <GlassDropdownMenuItem key={href} className="portfolio-mobile-menu-item" onSelect={() => navigate(href)}>
                     {label}
                   </GlassDropdownMenuItem>
                 ))}
@@ -65,7 +64,7 @@ const MainNavigation = () => {
           aria-label="Main navigation"
           className="hidden sm:flex"
         >
-          {sections.map(({ id, label }) => <NavItem key={id} link={id}>{label}</NavItem>)}
+          {sections.map(({ href, label }) => <NavItem key={href} href={href}>{label}</NavItem>)}
         </nav>
       </GlassCard>
     </header>

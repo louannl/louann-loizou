@@ -1,7 +1,10 @@
-import { Link } from 'react-scroll';
+import { Link, useLocation } from 'react-router-dom';
 import tw from '../../helpers/tailwind';
 
-const NavItem = (props) => {
+const NavItem = ({ href, children }) => {
+  const { pathname, hash } = useLocation();
+  const current = pathname === '/' && href === `/${hash || '#home'}`;
+
   return (
     <Link
       className={tw(
@@ -10,16 +13,13 @@ const NavItem = (props) => {
         'rounded-full px-4 py-2',
         'text-base font-semibold',
         'transition-colors',
-        'hover:bg-white/10'
+        'hover:bg-white/10',
+        current && 'portfolio-nav-active'
       )}
-      activeClass="portfolio-nav-active"
-      href={`#${props.link}`}
-      spy={true}
-      to={props.link}
-      offset={props.link === 'career' ? -96 : 0}
-      smooth={true}
+      to={href}
+      aria-current={current ? 'location' : undefined}
     >
-      {props.children}
+      {children}
     </Link>
   );
 };
