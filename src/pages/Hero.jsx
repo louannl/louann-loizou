@@ -5,7 +5,7 @@ import { Content, Section } from '../components/UI/Section';
 
 const Hero = () => {
   return (
-    <Section className="portfolio-hero bg-themeLightGrey dark:bg-themeDarkGrey" name="home">
+    <Section name="home">
       <Content className="portfolio-hero-content px-5 sm:px-8">
         <GlassCard className="portfolio-glass portfolio-hero-card rounded-[2rem]">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl">

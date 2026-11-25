@@ -176,7 +176,7 @@ const Career = () => {
     const visibleTimeline = filter === "all" ? timeline : timeline.filter(item => item.category === filter);
 
     return (
-        <Section className="bg-mint" name="career">
+        <Section name="career">
             <Content>
                 <AttributeHeader className="px-4 text-white sm:px-8">My Path in Tech</AttributeHeader>
                 <div className="portfolio-career-filter-row mt-5 flex justify-center px-4 sm:px-8 lg:justify-start">

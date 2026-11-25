@@ -13,10 +13,10 @@
   --font-Monoton: "Major Mono Display", cursive;
 }
 
-.portfolio-hero {
-  background-image:
-    radial-gradient(ellipse at 78% 30%, rgb(115 158 215 / 60%), transparent 48%),
-    radial-gradient(ellipse at 24% 65%, rgb(180 142 173 / 52%), transparent 48%);
+@layer base {
+  body {
+    background-color: var(--color-themeDarkGrey);
+  }
 }
 
 .portfolio-hero-content {
@@ -140,21 +140,10 @@
 
 #career {
   scroll-margin-top: 6rem;
-  background-image:
-    radial-gradient(ellipse at center, rgb(90 126 173 / 70%), transparent 70%),
-    linear-gradient(var(--color-mint), #243b58 12% 88%, var(--color-mint));
 }
 
 @media (min-width: 1024px) {
   .portfolio-hero-card {
     text-align: left;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .portfolio-hero {
-    background-image:
-      radial-gradient(ellipse at 78% 30%, rgb(94 129 172 / 66%), transparent 48%),
-      radial-gradient(ellipse at 24% 65%, rgb(180 142 173 / 34%), transparent 48%);
   }
 }
