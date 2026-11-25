@@ -7,18 +7,17 @@ const NavItem = (props) => {
       className={tw(
         'block',
         'cursor-pointer',
-        'px-2 py-1',
-        'sm:ml-2',
-        'border-b-2',
-        'border-transparent',
-        'text-white',
-        'transform duration-500',
-        'hover:text-themeDarkGrey',
-        'hover:border-themeDarkGrey'
+        'rounded-full px-4 py-2',
+        'text-base font-semibold',
+        'transition-colors',
+        'hover:bg-white/10'
       )}
-      activeClass="text-themeDarkGrey, border-themeDarkGrey"
+      activeClass="portfolio-nav-active"
+      href={`#${props.link}`}
+      onClick={props.onClick}
       spy={true}
       to={props.link}
+      offset={props.link === 'career' ? -96 : 0}
       smooth={true}
     >
       {props.children}

@@ -1,34 +1,17 @@
 import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
-import tw from '../../../helpers/tailwind';
 
-const SocialLinks = (props) => {
-  let hoverColor = 'text-mint';
-
-  if (props.color === 'white') {
-    hoverColor = 'text-themeDarkGrey';
-  }
-
-  const classes = ` fill-current h-10 w-auto cursor-pointer hover:fill-current hover:${hoverColor} mr-1`;
+const SocialLinks = ({ color }) => {
+  const linkClasses = 'grid h-11 w-11 place-items-center rounded-full text-3xl hover:bg-white/15';
 
   return (
-    <span
-      className={tw('flex flex-wrap', 'justify-center', 'lg:justify-start')}
-    >
-      <AiFillGithub
-        className={
-          props.color ? 'text-white dark:text-white' + classes : 'text-githubGrey dark:text-white' + classes
-        }
-        title="link to my github"
-        onClick={() => window.open('https://github.com/louannl')}
-      />
-      <AiFillLinkedin
-        className={
-          props.color ? 'text-white' + classes : 'text-linkedInBlue' + classes
-        }
-        title="link to my LinkedIn page"
-        onClick={() => window.open('https://www.linkedin.com/in/louann-loizou')}
-      />
-    </span>
+    <div className={`flex flex-wrap justify-center gap-1 lg:justify-start ${color === 'white' ? 'text-white' : ''}`}>
+      <a className={linkClasses} href="https://github.com/louannl" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <AiFillGithub aria-hidden="true" />
+      </a>
+      <a className={linkClasses} href="https://www.linkedin.com/in/louann-loizou" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+        <AiFillLinkedin aria-hidden="true" />
+      </a>
+    </div>
   );
 };
 

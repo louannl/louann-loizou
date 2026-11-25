@@ -15,3 +15,78 @@
     --color-purple-dark: 143 188 187;   /* Nord 7: Frost (Muted Cyan) */
   }
 }
+
+.portfolio-hero {
+  background-image:
+    radial-gradient(ellipse at 78% 30%, rgb(115 158 215 / 60%), transparent 48%),
+    radial-gradient(ellipse at 24% 65%, rgb(180 142 173 / 52%), transparent 48%);
+}
+
+.portfolio-hero-content {
+  padding-top: clamp(7rem, 15vw, 11rem);
+  padding-bottom: clamp(4rem, 9vw, 8rem);
+}
+
+.portfolio-hero-card {
+  width: min(100%, 48rem);
+  padding: clamp(1.5rem, 6vw, 4rem);
+  text-align: center;
+}
+
+.portfolio-glass {
+  background-color: rgb(255 255 255 / var(--glass-card-tint));
+  backdrop-filter: blur(var(--glass-card-blur));
+}
+
+.portfolio-glass.portfolio-nav {
+  background-color: rgb(35 51 74 / var(--glass-card-tint));
+  border-color: rgb(255 255 255 / 30%);
+  color: white;
+}
+
+.portfolio-glass.portfolio-timeline-card {
+  background-color: rgb(24 38 61 / var(--glass-card-tint));
+  border-color: rgb(255 255 255 / 25%);
+  color: white;
+}
+
+.portfolio-glass-button {
+  background-color: #314d72;
+  color: white;
+}
+
+.portfolio-nav-active {
+  background-color: rgb(94 129 172 / 18%);
+}
+
+.portfolio-glass-button:focus-visible,
+.portfolio-glass a:focus-visible,
+.portfolio-glass button:focus-visible {
+  outline: 2px solid #659adc;
+  outline-offset: 3px;
+}
+
+#career {
+  scroll-margin-top: 6rem;
+  background-image:
+    radial-gradient(ellipse at center, rgb(90 126 173 / 70%), transparent 70%),
+    linear-gradient(rgb(var(--color-mint)), #243b58 12% 88%, rgb(var(--color-mint)));
+}
+
+@media (min-width: 1024px) {
+  .portfolio-hero-card {
+    text-align: left;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .portfolio-hero {
+    background-image:
+      radial-gradient(ellipse at 78% 30%, rgb(94 129 172 / 66%), transparent 48%),
+      radial-gradient(ellipse at 24% 65%, rgb(180 142 173 / 34%), transparent 48%);
+  }
+
+  .portfolio-glass {
+    background-color: rgb(0 0 0 / var(--glass-card-tint));
+  }
+}

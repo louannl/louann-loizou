@@ -8,7 +8,7 @@ export const Section = (props) => {
   return (
     <Fragment>
       <section className={tw(props.className, 'static')}>
-        <Element name={props.name}>{props.children}</Element>
+        <Element id={props.name} name={props.name}>{props.children}</Element>
       </section>
       {props.className.includes('bg-themeLightGrey') ? (
         <div className={tw('aspect-w-10 aspect-h-1', 'w-full', '-my-2')}>

@@ -1,6 +1,6 @@
-import { Content, Section } from '../components/UI/Section';
+import {Content, Section} from '../components/UI/Section';
 import AttributeHeader from '../components/UI/Headers/AttributeHeader';
-import { SubHeader } from '../components/UI/Paragraphs/SubHeader';
+import {SubHeader} from '../components/UI/Paragraphs/SubHeader';
 import tw from '../helpers/tailwind';
 
 import {Timeline, TimelineItem} from "../components/UI/Timeline/Timeline";
@@ -9,6 +9,8 @@ import mealPlanner from '../assets/images/mealplanner.png';
 import unitakeaway from '../assets/images/uni-takeaway.png';
 import rocketScienceLogo from '../assets/images/rslogo.svg';
 import veygologo from '../assets/images/veygologo.svg';
+
+import {GiEngagementRing, GiHockey, GiNotebook, GiNuclearBomb} from 'react-icons/gi';
 
 
 const timeline = [
@@ -28,6 +30,7 @@ const timeline = [
         text: "Setup CI/CD pipeline additions for a very complex game backend platform, with a complex test suite tailored to the clients wants",
         side: "left",
         logo: rocketScienceLogo,
+        icon: <GiEngagementRing/>,
         skills: ["CI/CD", "AWS", "Redis Cluster", "AWS CDK", "CodePipeline", "CodeDeploy", "DevOps"]
     },
     {
@@ -84,6 +87,7 @@ const timeline = [
         text: "Promoted! Vroom vroom!",
         side: "right",
         logo: veygologo,
+        icon: <GiHockey/>,
         skills: ["TypeScript", "Node.js", "Django", "Serverless", "RDS"]
     },
     {
@@ -93,7 +97,6 @@ const timeline = [
         text: "As a junior, started off a weekly meeting that worked towards getting Dependencies down\n" +
         "Started at the beginning of the year with 400+ vulnerabilities, and ended with just shy of 70.",
         side: "left",
-        logo: veygologo,
         skills: ["Security Compliance", "Maintenance"]
     },
     {
@@ -118,7 +121,8 @@ const timeline = [
         date: "Aug 2021",
         title: "Career transition during Covid...",
         text: "New skills loading...",
-        side: "right"
+        side: "right",
+        icon: <GiNuclearBomb/>
     },
     {
         label: "Uni Takeaway",
@@ -144,7 +148,8 @@ const timeline = [
         title: "Spreadsheets were my Database",
         text: "Before I was an engineer, I was in Finance, I'm still a qualified Chartered Accountant (ACCA) to this day.",
         side: "right",
-        skills: ["Stakeholder Management", "Board Meetings", "Financial Reporting", "Analysis"]
+        skills: ["Stakeholder Management", "Board Meetings", "Financial Reporting", "Analysis"],
+        icon: <GiNotebook/>
     }
 ];
 
@@ -167,6 +172,7 @@ const Projects = () => {
                                 logo={item.logo}
                                 image={item.image}
                                 skills={item.skills}
+                                icon={item.icon}
                             >
                                 {item.text}
                             </TimelineItem>

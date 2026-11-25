@@ -20,6 +20,11 @@ A site designed to show off all the projects I have worked on!
 ### Built With
 - React
 - Tailwind
+- [Liquid Glass UI](https://github.com/bilalgursen/liquid-glass) for the navigation, intro, timeline cards, and primary controls
+
+The MIT-licensed Liquid Glass source in `src/components/liquid-glass` is copied from upstream revision
+[`1201f4d`](https://github.com/bilalgursen/liquid-glass/tree/1201f4db5ac081de46bbeb9a9c6b3c9671e866af).
+Portfolio styles, including the Tailwind 3 equivalents for the card's CSS fallback, live in `src/index.css`.
 
 ### Functionality 
 - AWS Amplify

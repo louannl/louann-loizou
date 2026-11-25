@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaArrowUp } from 'react-icons/fa';
-import tw from '../../../helpers/tailwind';
+import { GlassLayer } from '../../liquid-glass/glass-layer';
 
 const BackToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,7 +16,7 @@ const BackToTop = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
     });
   };
 
@@ -28,24 +28,17 @@ const BackToTop = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-10 right-10 z-50">
+    <div className="fixed bottom-5 right-5 z-50 sm:bottom-8 sm:right-8">
       {isVisible && (
         <button
           type="button"
           onClick={scrollToTop}
-          className={tw(
-            'p-3',
-            'rounded-full',
-            'bg-mint',
-            'text-white',
-            'shadow-lg',
-            'hover:bg-mint/80',
-            'transition-all',
-            'duration-300',
-            'animate-bounce'
-          )}
+          aria-label="Back to top"
+          data-glass-host=""
+          className="portfolio-glass-button grid h-12 w-12 place-items-center rounded-full"
         >
-          <FaArrowUp className="text-xl" />
+          <GlassLayer material="tinted" />
+          <FaArrowUp className="text-lg" aria-hidden="true" />
         </button>
       )}
     </div>
