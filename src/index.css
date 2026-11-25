@@ -1,17 +1,595 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Darkened Arctic/Polar Theme */
+  --color-themeGrey: rgb(67 76 94);
+  --color-themeDarkGrey: rgb(46 52 64);
+  --color-themeLightGrey: rgb(216 222 233);
+  --color-mint: rgb(94 129 172);
+  --color-githubGrey: rgb(33 31 31);
+  --color-linkedInBlue: rgb(0 119 181);
+  --color-purple: rgb(180 142 173);
+  --color-purple-dark: rgb(143 188 187);
+  --color-ice: #a5e7ff;
+  --color-rink-blue: #5195cb;
+  --color-goal-red: #ff9eaa;
+  --font-scoreboard: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+}
 
 @layer base {
-  :root {
-    /* Darkened Arctic/Polar Theme */
-    --color-themeGrey: 67 76 94;       /* Nord 2: Polar Night (Medium-Dark) */
-    --color-themeDarkGrey: 46 52 64;   /* Nord 0: Polar Night (Darkest) */
-    --color-themeLightGrey: 216 222 233; /* Nord 4: Snow Storm (Darker Light) */
-    --color-mint: 94 129 172;          /* Nord 10: Frost (Darker Blue) */
-    --color-githubGrey: 33 31 31;
-    --color-linkedInBlue: 0 119 181;
-    --color-purple: 180 142 173;       /* Nord 15: Aurora (Pink/Purple) */
-    --color-purple-dark: 143 188 187;   /* Nord 7: Frost (Muted Cyan) */
+  body {
+    min-height: 100vh;
+    background-color: #101b2b;
+    background-image:
+      radial-gradient(ellipse 60rem 38rem at 100% 5rem, #214662 0%, transparent 75%),
+      radial-gradient(ellipse 55rem 70rem at 0% 48rem, #1b354e 0%, transparent 72%),
+      linear-gradient(155deg, #0c1624, #14273e 56%, #101b2b);
+    background-repeat: no-repeat;
   }
+}
+
+.portfolio-hero-content {
+  padding-top: clamp(7rem, 12vw, 10rem);
+  padding-bottom: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.portfolio-hero-stage {
+  position: relative;
+  container-type: inline-size;
+  --stack-gap: clamp(1.75rem, 5cqi, 3.5rem);
+  border-radius: 2rem;
+}
+
+.portfolio-hero-backdrop {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  gap: clamp(0.875rem, 3vw, 2.5rem);
+  padding-block-start: 6%;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.portfolio-stack-row {
+  display: flex;
+  width: max-content;
+  animation: portfolio-stack-slide 90s linear -9s infinite;
+}
+
+.portfolio-stack-row:nth-child(even) {
+  animation-duration: 105s;
+  animation-delay: -19s;
+  animation-direction: reverse;
+}
+
+.portfolio-stack-row:nth-child(3) {
+  animation-delay: -39s;
+}
+
+.portfolio-stack-row:nth-child(4) {
+  animation-delay: -52s;
+}
+
+.portfolio-hero-backdrop[data-paused="true"] .portfolio-stack-row {
+  animation-play-state: paused;
+}
+
+.portfolio-stack-group {
+  display: flex;
+  flex: none;
+  min-inline-size: 100cqi;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--stack-gap);
+  padding-inline-end: var(--stack-gap);
+}
+
+.portfolio-stack-chip {
+  --stack-accent: #a5e7ff;
+  padding: 0.6rem 1.05rem;
+  border: 1px solid color-mix(in srgb, var(--stack-accent) 58%, #213a54);
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--stack-accent) 24%, #1a3048);
+  color: var(--stack-accent);
+  font: 600 clamp(1rem, 2.3vw, 1.6rem)/1.15 var(--font-scoreboard);
+  letter-spacing: 0.055em;
+}
+
+.portfolio-stack-chip:nth-child(3n + 2) {
+  --stack-accent: #a8c9ff;
+}
+
+.portfolio-stack-chip:nth-child(3n) {
+  --stack-accent: #ff9eaa;
+}
+
+@keyframes portfolio-stack-slide {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-hero-stage .portfolio-stack-row {
+    animation-play-state: paused;
+  }
+}
+
+.portfolio-glass.portfolio-hero-card {
+  display: grid;
+  align-items: center;
+  gap: clamp(1.25rem, 4vw, 3rem);
+  padding: clamp(1.25rem, 4vw, 3.5rem);
+  background-color: rgb(18 40 64 / var(--glass-card-tint));
+  border-color: rgb(165 231 255 / 40%);
+  color: #f3faff;
+}
+
+.portfolio-hero-copy {
+  position: relative;
+}
+
+.portfolio-hero-copy::before {
+  position: absolute;
+  z-index: -1;
+  inset: -1rem -1.5rem;
+  border-radius: 1.5rem;
+  background: radial-gradient(ellipse, #132941 25%, rgb(19 41 65 / 78%) 50%, transparent 75%);
+  content: '';
+  pointer-events: none;
+}
+
+.portfolio-hero-name {
+  max-width: 8.5ch;
+  font-size: clamp(2.85rem, 9.5vw, 7rem);
+  line-height: 0.88;
+  letter-spacing: 0.015em;
+}
+
+.portfolio-specialties {
+  color: #dae9f5;
+  font-size: 0.875rem;
+}
+
+.portfolio-specialties li {
+  padding-inline-start: 0.65rem;
+  border-inline-start: 2px solid var(--color-rink-blue);
+}
+
+.portfolio-hero-graphic {
+  display: grid;
+  place-items: center;
+  gap: 1.25rem;
+  padding: 0.75rem 0 0;
+}
+
+.portfolio-stack-motion {
+  justify-self: end;
+  min-height: 2rem;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid rgb(165 231 255 / 38%);
+  border-radius: 999px;
+  background-color: #172f49;
+  color: #d5ecfa;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.portfolio-stack-motion:hover {
+  background-color: #244766;
+  color: white;
+}
+
+.portfolio-stack-motion:focus-visible {
+  outline: 2px solid var(--color-ice);
+  outline-offset: 3px;
+}
+
+.portfolio-rink {
+  position: relative;
+  width: min(100%, 29rem);
+  aspect-ratio: 1.95;
+  border: 1px solid rgb(165 231 255 / 62%);
+  border-radius: clamp(1.25rem, 5vw, 3.25rem);
+  background:
+    radial-gradient(circle at 22% 25%, #ff9eaa 1px, transparent 2px),
+    radial-gradient(circle at 22% 75%, #ff9eaa 1px, transparent 2px),
+    radial-gradient(circle at 78% 25%, #ff9eaa 1px, transparent 2px),
+    radial-gradient(circle at 78% 75%, #ff9eaa 1px, transparent 2px),
+    linear-gradient(90deg, transparent 29.5%, rgb(114 193 251 / 55%) 30% 31%, transparent 31.5% 49.5%, rgb(255 158 170 / 60%) 50% 50.5%, transparent 51% 68.5%, rgb(114 193 251 / 55%) 69% 70%, transparent 70.5%),
+    linear-gradient(135deg, rgb(165 231 255 / 15%), rgb(81 149 203 / 8%));
+  box-shadow: 0 0 1.25rem rgb(81 149 203 / 18%), inset 0 0 1rem rgb(165 231 255 / 14%);
+  transform: rotate(-8deg);
+}
+
+.portfolio-rink::before,
+.portfolio-rink::after {
+  position: absolute;
+  inset-block: 37%;
+  width: 8%;
+  border: 1px solid rgb(255 158 170 / 60%);
+  content: '';
+}
+
+.portfolio-rink::before {
+  left: 7%;
+  border-radius: 0 100% 100% 0;
+}
+
+.portfolio-rink::after {
+  right: 7%;
+  border-radius: 100% 0 0 100%;
+}
+
+.portfolio-rink-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 23%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border: 1px solid rgb(165 231 255 / 62%);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-ice) 0 2px, transparent 3px);
+}
+
+@media (max-width: 55.999rem) {
+  .portfolio-hero-backdrop {
+    align-content: end;
+    gap: clamp(0.625rem, 2vw, 1.25rem);
+    padding-block: 0 clamp(4rem, 13vw, 9rem);
+  }
+}
+
+@media (min-width: 56rem) {
+  .portfolio-hero-card {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+}
+
+.portfolio-glass.portfolio-nav {
+  background-color: rgb(24 45 70 / var(--glass-card-tint));
+  border-color: rgb(165 231 255 / 30%);
+  color: white;
+}
+
+.portfolio-glass.portfolio-work-card {
+  background-color: rgb(19 40 62 / var(--glass-card-tint));
+  border-color: rgb(165 231 255 / 25%);
+  color: white;
+}
+
+.portfolio-view {
+  min-block-size: calc(100svh - 6rem);
+  overflow-anchor: none;
+  scroll-margin-top: 6rem;
+}
+
+.portfolio-view-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1rem;
+  margin-block-end: 1.25rem;
+  padding: 0.25rem;
+  overflow-x: clip;
+}
+
+@media (min-width: 64rem) {
+  .portfolio-view-header {
+    justify-content: space-between;
+  }
+}
+
+.portfolio-project-card::before {
+  position: absolute;
+  inset: 0 1.2rem auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(165 231 255 / 62%), transparent);
+  content: '';
+}
+
+.portfolio-project-meta {
+  color: #c4d9eb;
+}
+
+.portfolio-case-link {
+  border: 1px solid rgb(165 231 255 / 42%);
+  border-radius: 999px;
+  background: rgb(81 149 203 / 18%);
+  padding: 0.5rem 0.875rem;
+  color: var(--color-ice);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.portfolio-case-link:hover {
+  background: rgb(81 149 203 / 32%);
+}
+
+.portfolio-inline-link {
+  color: var(--color-ice);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.portfolio-inline-link:hover {
+  color: white;
+}
+
+.portfolio-season-header {
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+  border-bottom: 1px solid rgb(165 231 255 / 22%);
+  background: linear-gradient(100deg, rgb(81 149 203 / 18%), transparent);
+}
+
+.portfolio-season-line {
+  margin-inline-start: 1.5rem;
+  background: linear-gradient(transparent, var(--color-rink-blue) 1.25rem, rgb(165 231 255 / 32%) 85%, transparent) left / 1px 100% no-repeat;
+}
+
+.portfolio-season-row + .portfolio-season-row {
+  border-top: 1px solid rgb(165 231 255 / 14%);
+}
+
+.portfolio-case-scoreboard {
+  border-top: 1px solid rgb(165 231 255 / 22%);
+}
+
+.portfolio-case-dialog {
+  --case-inset: clamp(1rem, 3vw, 1.5rem);
+  width: min(56rem, calc(100% - 1.5rem));
+  max-height: calc(100dvh - 1.5rem);
+  margin: auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #6286a5 #172f49;
+  scrollbar-width: thin;
+  border: 1px solid rgb(165 231 255 / 38%);
+  border-radius: 1.25rem;
+  background: linear-gradient(160deg, #172f49, #0e1d30 72%);
+  color: white;
+}
+
+.portfolio-case-dialog::backdrop {
+  background: rgb(6 13 23 / 72%);
+  backdrop-filter: blur(6px);
+}
+
+.portfolio-case-dialog-top {
+  padding: 0.75rem var(--case-inset);
+  background: #172f49;
+  border-bottom: 1px solid rgb(165 231 255 / 14%);
+}
+
+.portfolio-case-dialog-content {
+  padding: var(--case-inset);
+}
+
+.portfolio-case-dialog-content > .portfolio-project-card {
+  overflow: clip;
+  overflow-wrap: anywhere;
+}
+
+.portfolio-case-rink {
+  display: grid;
+  margin-top: var(--case-inset);
+  overflow: hidden;
+  border: 2px solid #90cde6;
+  border-radius: 2.25rem;
+  background: linear-gradient(145deg, #f0fbff, #d9edf8);
+  box-shadow: inset 0 0 0 4px rgb(255 255 255 / 55%);
+  color: #142b43;
+}
+
+.portfolio-case-zone {
+  position: relative;
+  min-width: 0;
+  padding: 1.25rem;
+  overflow-wrap: anywhere;
+}
+
+.portfolio-case-zone + .portfolio-case-zone {
+  border-top: 2px solid #72aed4;
+}
+
+.portfolio-case-zone:nth-child(2) {
+  background-color: rgb(255 255 255 / 35%);
+}
+
+.portfolio-case-zone-label {
+  padding-inline-end: 2.75rem;
+  color: #2b567a;
+  font: 600 0.75rem/1.5 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.portfolio-case-zone::after {
+  position: absolute;
+  top: 0.9rem;
+  right: 1.25rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #be5664 0 2px, transparent 3px);
+  border: 1px solid #c87985;
+  content: '';
+  pointer-events: none;
+}
+
+.portfolio-case-zone:nth-child(2)::after {
+  border-color: #72aed4;
+  background:
+    radial-gradient(circle, #407eab 0 2px, transparent 3px),
+    linear-gradient(90deg, transparent calc(50% - 0.5px), #c87985 0 calc(50% + 0.5px), transparent 0);
+}
+
+@media (min-width: 48rem) {
+  .portfolio-case-rink {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-radius: 3rem;
+  }
+
+  .portfolio-case-zone {
+    padding: 1.75rem 1.25rem 4.25rem;
+  }
+
+  .portfolio-case-zone:first-child {
+    padding-inline-start: 1.75rem;
+  }
+
+  .portfolio-case-zone:last-child {
+    padding-inline-end: 1.75rem;
+  }
+
+  .portfolio-case-zone + .portfolio-case-zone {
+    border-top: 0;
+    border-inline-start: 2px solid #72aed4;
+  }
+
+  .portfolio-case-zone-label {
+    padding-inline-end: 0;
+  }
+
+  .portfolio-case-zone::after {
+    top: auto;
+    right: calc(50% - 1.125rem);
+    bottom: 1rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+html:has(.portfolio-case-dialog[open]) {
+  overflow: hidden;
+}
+
+.portfolio-puck {
+  width: 1rem;
+  height: 0.8rem;
+  border: 2px solid var(--color-ice);
+  border-radius: 50%;
+  background: #0b1522;
+  box-shadow: 0 2px 0 #0b1522, 0 0 0 4px rgb(81 149 203 / 24%);
+}
+
+.portfolio-puck[data-promotion] {
+  border-color: var(--color-goal-red);
+  box-shadow: 0 2px 0 #0b1522, 0 0 0 4px rgb(255 158 170 / 20%);
+}
+
+.portfolio-game-date {
+  color: var(--color-ice);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.portfolio-promotion-label {
+  color: var(--color-goal-red);
+}
+
+.portfolio-glass-button {
+  background-color: #314d72;
+  color: white;
+}
+
+.portfolio-glass-button.portfolio-hero-action {
+  background-color: var(--color-ice);
+  color: #10263a;
+}
+
+.portfolio-nav-active {
+  background-color: rgb(94 129 172 / 18%);
+}
+
+.portfolio-profile-links a {
+  width: 2.75rem;
+  padding-inline: 0;
+}
+
+.portfolio-profile-links a svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.portfolio-profile-links .portfolio-profile-divider {
+  height: 1.25rem;
+}
+
+.portfolio-career-tabs[data-glass-host] {
+  max-width: 100%;
+  border: 1px solid rgb(165 231 255 / 32%);
+  background-color: rgb(14 34 54 / 82%);
+}
+
+.portfolio-career-tabs [role='radio'] {
+  color: #e6eefb;
+  padding-inline: clamp(0.5rem, 2.8vw, 1rem);
+}
+
+.portfolio-career-tabs [role='radio'][aria-checked='true'] {
+  color: #10263a;
+}
+
+.portfolio-career-tabs[data-glass-traveling] [role='radio'][aria-checked='true'] {
+  color: #e6eefb;
+}
+
+.portfolio-mobile-menu-trigger[data-glass-host] {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border-color: rgb(220 233 255 / 35%);
+  background-color: rgb(220 233 255 / 16%);
+  color: #fff;
+}
+
+.portfolio-mobile-menu-trigger svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.portfolio-mobile-menu {
+  min-width: 10rem;
+}
+
+.portfolio-skill-trigger[data-glass-host] {
+  min-height: 2.25rem;
+  height: auto;
+  padding: 0.25rem 0.75rem;
+  border-color: rgb(220 233 255 / 38%);
+  background-color: rgb(188 212 251 / 18%);
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+[data-glass-popup].portfolio-glass-popup[data-glass-off] {
+  background-color: rgb(24 38 61 / 96%);
+  border-color: rgb(220 233 255 / 30%);
+  color: #fff;
+}
+
+.portfolio-mobile-menu-item[data-highlighted],
+.portfolio-skill-close:hover {
+  background-color: rgb(126 154 197 / 30%);
+}
+
+.portfolio-skill-tag,
+.portfolio-skill-close {
+  background-color: rgb(126 154 197 / 18%);
+}
+
+.portfolio-glass-button:focus-visible,
+.portfolio-case-link:focus-visible,
+.portfolio-inline-link:focus-visible,
+.portfolio-glass a:focus-visible,
+.portfolio-glass button:focus-visible {
+  outline: 2px solid var(--color-ice);
+  outline-offset: 3px;
 }

@@ -2,11 +2,12 @@ import tw from '../../../helpers/tailwind';
 
 const AttributeHeader = (props) => {
   return (
-    <h1
+    <h2
       className={tw(
+        'font-scoreboard uppercase',
         'text-4xl',
-        'tracking-tight',
-        'font-extrabold',
+        'tracking-[0.025em]',
+        'font-bold',
         'sm:text-5xl',
         'md:text-6xl',
         'text-center',
@@ -15,7 +16,7 @@ const AttributeHeader = (props) => {
       )}
     >
       {props.children}
-    </h1>
+    </h2>
   );
 };
 
