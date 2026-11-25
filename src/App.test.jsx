@@ -2,9 +2,10 @@ import { fireEvent, render, screen, waitFor, within } from '@testing-library/rea
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, beforeAll, beforeEach, expect, test, vi } from 'vitest';
 import App from './App';
+import { projects } from './data/projects.mjs';
 
 beforeAll(() => {
-  window.matchMedia = () => ({ matches: false });
+  window.matchMedia = () => ({ matches: false, addEventListener: () => {}, removeEventListener: () => {} });
   Element.prototype.scrollIntoView = () => {};
   Element.prototype.getAnimations = () => [];
   HTMLDialogElement.prototype.showModal = function () {
@@ -41,6 +42,41 @@ test('keeps the portfolio links usable without WebGL', () => {
   const profiles = within(screen.getByRole('group', { name: 'Social profiles' }));
   expect(profiles.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://github.com/louannl');
   expect(profiles.getByRole('link', { name: 'LinkedIn' })).toHaveAttribute('href', 'https://www.linkedin.com/in/louann-loizou');
+});
+
+test('uses every unique project tag in the hero backdrop', () => {
+  const { container } = renderPortfolio();
+  const rows = [...container.querySelectorAll('.portfolio-stack-row')];
+  const labels = rows.flatMap(row => [...row.firstElementChild.children].map(chip => chip.textContent));
+  const projectTags = new Set(projects.flatMap(project => project.skills));
+
+  expect(rows).toHaveLength(4);
+  expect(labels).toHaveLength(projectTags.size);
+  expect(new Set(labels)).toEqual(projectTags);
+});
+
+test('lets visitors pause and resume the hero backdrop', () => {
+  const { container } = renderPortfolio();
+  const backdrop = container.querySelector('.portfolio-hero-backdrop');
+  expect(backdrop).toHaveAttribute('data-paused', 'false');
+
+  fireEvent.click(screen.getByRole('button', { name: 'Pause motion' }));
+  expect(backdrop).toHaveAttribute('data-paused', 'true');
+
+  fireEvent.click(screen.getByRole('button', { name: 'Resume motion' }));
+  expect(backdrop).toHaveAttribute('data-paused', 'false');
+});
+
+test('keeps the hero backdrop still when reduced motion is requested', () => {
+  vi.spyOn(window, 'matchMedia').mockImplementation(query => ({
+    matches: query === '(prefers-reduced-motion: reduce)',
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  }));
+
+  const { container } = renderPortfolio();
+  expect(container.querySelector('.portfolio-hero-backdrop')).toHaveAttribute('data-paused', 'true');
+  expect(screen.queryByRole('button', { name: 'Pause motion' })).not.toBeInTheDocument();
 });
 
 test('opens the mobile navigation and closes it after a section is selected', async () => {
