@@ -10,7 +10,7 @@ import {
 } from '../liquid-glass/glass-dropdown-menu';
 import NavItem from './NavItem';
 
-const navigationGlass = { tintColor: '#23334a' };
+const navigationGlass = { tintColor: '#182d46', borderColor: '#a5e7ff' };
 const sections = [
   { id: 'home', label: 'Home' },
   { id: 'career', label: 'Career' },
@@ -43,7 +43,7 @@ const MainNavigation = () => {
         )}
       >
         <div className="flex items-center justify-between px-4 py-3 sm:p-0">
-          <div className="font-Monoton text-base font-bold sm:text-lg">
+          <div className="font-scoreboard text-xl font-bold tracking-[0.08em] uppercase sm:text-2xl">
             Louann Robbins
           </div>
           <div className="sm:hidden">

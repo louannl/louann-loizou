@@ -9,32 +9,19 @@ import {
     GlassPopoverTrigger,
 } from "../../liquid-glass/glass-popover";
 
-const timelineGlass = { tintColor: "#18263d", borderAlpha: 0.4 };
+const timelineGlass = { tintColor: "#13283e", borderColor: "#a5e7ff", borderAlpha: 0.32 };
+const promotionGlass = { ...timelineGlass, borderColor: "#ffacb4", borderAlpha: 0.55 };
 
-const timelineColors = {
-    label: "text-white/80",
-
-    title: "text-white",
-    body: "text-themeLightGrey/90",
-
-    line: "before:bg-white/40",
-
-    dot: "after:bg-mint",
-    dotBorder: "after:border-white",
-
-    dateText: "text-themeDarkGrey",
-    dateBg: "bg-mint",
-};
-
-const TimelineCard = ({ isRight, label, logo, date, title, image, skills, isOpen, children }) => {
+const TimelineCard = ({ isRight, label, logo, date, title, image, promotion, isOpen, children }) => {
     return (
         <GlassCard
             className="portfolio-glass portfolio-timeline-card rounded-2xl p-4 sm:p-6"
-            tint={0.8}
-            optics={timelineGlass}
+            data-promotion={promotion ? '' : undefined}
+            tint={0.7}
+            optics={promotion ? promotionGlass : timelineGlass}
         >
             <TimelineCardHeader isRight={isRight} label={label} logo={logo} />
-            <TimelineCardSubHeader isRight={isRight} date={date} title={title} />
+            <TimelineCardSubHeader isRight={isRight} date={date} title={title} promotion={promotion} />
 
             <div className={tw(
                 "grid transition-all duration-500 ease-in-out",
@@ -60,38 +47,34 @@ const TimelineCardHeader = ({ isRight, label, logo }) => (
                 <img src={logo} alt={label} className="max-w-full max-h-full object-contain" />
             </div>
         )}
-        <div className={tw(
-            "min-w-0 font-Monoton text-lg font-medium text-white [overflow-wrap:anywhere] sm:text-2xl",
+        <h3 className={tw(
+            "min-w-0 font-scoreboard text-2xl leading-none font-bold tracking-wide text-white uppercase [overflow-wrap:anywhere] sm:text-3xl",
             !isRight && "sm:text-right"
         )}>
             {label}
-        </div>
+        </h3>
     </div>
 );
 
-const TimelineCardSubHeader = ({ isRight, date, title }) => (
+const TimelineCardSubHeader = ({ isRight, date, title, promotion }) => (
     <div className={tw(
-        "flex flex-col sm:flex-row items-start sm:items-center mb-4 gap-2",
-        !isRight && "sm:flex-row-reverse"
+        "flex flex-col items-start gap-2",
+        !isRight && "sm:items-end sm:text-right"
     )}>
-        <time className={tw(
-            "inline-flex items-center justify-center text-xs font-semibold uppercase px-3 py-1 rounded-full",
-            timelineColors.dateText,
-            timelineColors.dateBg
-        )}>
-            {date}
-        </time>
-        <div className="text-xl font-bold text-white">
+        <div className={tw("flex flex-wrap items-center gap-2", !isRight && "sm:flex-row-reverse")}>
+            <time className="portfolio-timeline-date rounded-sm px-2 py-1 font-mono text-sm font-semibold tracking-wide uppercase">
+                {date}
+            </time>
+            {promotion && <span className="portfolio-promotion-label text-sm font-semibold">Promotion</span>}
+        </div>
+        <div className="text-base font-semibold text-white sm:text-lg">
             {title}
         </div>
     </div>
 );
 
 const TimelineCardContent = ({ image, title, children }) => (
-    <div className={tw(
-        "pt-4 border-t border-white/10",
-        timelineColors.body
-    )}>
+    <div className="mt-4 border-t border-ice/15 pt-4 text-themeLightGrey leading-relaxed">
         {children}
 
         {image && (
@@ -105,18 +88,7 @@ const TimelineCardContent = ({ image, title, children }) => (
 export function Timeline({ children }) {
     return (
         <div className="relative overflow-x-clip px-4 sm:px-12">
-            {/* Centered line (Desktop) / Left line (Mobile) */}
-            <div className={tw(
-                "absolute h-full w-0.5 transform -translate-x-1/2",
-                "left-6 sm:left-1/2"
-            )}>
-                {/* Dashed top */}
-                <div className="h-24 w-full border-l-2 border-dashed border-white/40"></div>
-                {/* Solid middle */}
-                <div className="h-[calc(100%-12rem)] w-full bg-white/40"></div>
-                {/* Dashed bottom */}
-                <div className="h-24 w-full border-l-2 border-dashed border-white/40"></div>
-            </div>
+            <div className="portfolio-rink-spine absolute inset-y-0 left-6 -translate-x-1/2 sm:left-1/2" aria-hidden="true" />
             <div className="space-y-5 sm:space-y-0">
                 {children}
             </div>
@@ -124,7 +96,7 @@ export function Timeline({ children }) {
     );
 }
 
-export function TimelineItem({ label, date, title, side = 'right', logo, image, skills = [], icon, children }) {
+export function TimelineItem({ label, date, title, side = 'right', logo, image, skills = [], icon, promotion = false, children }) {
     const [isOpen, setIsOpen] = useState(false);
     const isRight = side === 'right';
 
@@ -133,10 +105,11 @@ export function TimelineItem({ label, date, title, side = 'right', logo, image, 
             "relative flex flex-col sm:flex-row items-center justify-center",
             "group py-4 sm:py-8"
         )}>
-            {/* The Dot on the timeline line */}
-            <div className={tw(
-                "absolute left-2 sm:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white z-10 bg-mint",
-            )}></div>
+            <div
+                className="portfolio-puck absolute left-2 top-10 z-10 -translate-x-1/2 -translate-y-1/2 sm:left-1/2 sm:top-1/2"
+                data-promotion={promotion ? '' : undefined}
+                aria-hidden="true"
+            />
 
             <div
                 onClick={() => setIsOpen(!isOpen)}
@@ -153,7 +126,7 @@ export function TimelineItem({ label, date, title, side = 'right', logo, image, 
                         date={date}
                         title={title}
                         image={image}
-                        skills={skills}
+                        promotion={promotion}
                         isOpen={isOpen}
                     >
                         {children}
@@ -171,17 +144,17 @@ export function TimelineItem({ label, date, title, side = 'right', logo, image, 
             {/* Floating Icon */}
             {icon && (
                 <div className={tw(
-                    "absolute top-1/4 -translate-y-1/2 items-center justify-center text-5xl text-white/40 transition-all duration-500 group-hover:text-white/70 group-hover:scale-110 pointer-events-none",
-                    "sm:flex hidden z-0", // Still hide on small mobile screens to avoid overlap, but will rethink if requested
+                    "absolute top-1/4 -translate-y-1/2 items-center justify-center text-5xl text-ice/25 transition-colors duration-300 group-hover:text-ice/55 pointer-events-none",
+                    "sm:flex hidden z-0",
                     isRight ? "left-1/4 -translate-x-1/2" : "left-3/4 -translate-x-1/2"
-                )}>
+                )} aria-hidden="true">
                     {icon}
                 </div>
             )}
 
             {/* Mobile Icon */}
             {icon && (
-                <div className="sm:hidden absolute top-6 right-6 opacity-40 pointer-events-none z-0">
+                <div className="sm:hidden absolute top-6 right-6 text-ice/20 pointer-events-none z-0" aria-hidden="true">
                     <div className="text-4xl">{icon}</div>
                 </div>
             )}

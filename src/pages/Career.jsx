@@ -45,6 +45,7 @@ const timeline = [
         label: "Rocket Science Group",
         date: "Jun 2025",
         title: "Senior Platform Engineer",
+        promotion: true,
         text: "Promoted!",
         side: "right",
         logo: rocketScienceLogo,
@@ -97,6 +98,7 @@ const timeline = [
         label: "Veygo UK",
         date: "Jul 2023",
         title: "Software Engineer",
+        promotion: true,
         text: "Promoted! Vroom vroom!",
         side: "right",
         logo: veygologo,
@@ -179,14 +181,14 @@ const Career = () => {
         <Section name="career">
             <Content>
                 <AttributeHeader className="px-4 text-white sm:px-8">My Path in Tech</AttributeHeader>
-                <div className="portfolio-career-filter-row mt-5 flex justify-center px-4 sm:px-8 lg:justify-start">
+                <div className="portfolio-career-filter-row mt-4 flex justify-center px-4 sm:px-8 lg:justify-start">
                     <GlassTabs
                         aria-label="Filter career timeline"
                         options={careerFilters}
                         value={filter}
                         onValueChange={setFilter}
                         className="portfolio-career-tabs"
-                        highlightClassName="bg-[#dce9ff]"
+                        highlightClassName="bg-ice"
                         size="lg"
                     />
                 </div>
@@ -203,6 +205,7 @@ const Career = () => {
                                 image={item.image}
                                 skills={item.skills}
                                 icon={item.icon}
+                                promotion={item.promotion}
                             >
                                 {item.text}
                             </TimelineItem>
