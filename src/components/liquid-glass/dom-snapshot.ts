@@ -1,18 +1,3 @@
-// dom-snapshot — paints a DOM subtree into a Canvas2D context at its on-screen position.
-//
-// A WebGL lens cannot read the page's pixels, so glass that bends the page needs the
-// page as a texture. This paints a good-enough picture of it: backgrounds (colours,
-// gradients and images, with their size, position and repeat), rounded borders, text,
-// inline SVG icons, canvases, images and video (with object-fit) and backdrop blur.
-// Siblings are painted in CSS order: negative z-index, content, positioned, positive z-index.
-// It is not a browser renderer: no shadows, conic gradients, masks, rotation or
-// ::before/::after. An image from another origin is requested again with CORS; if its
-// server does not allow that it is left out, because a canvas such an image has touched
-// can never become a WebGL texture. Used by `material="clear"` glass, by GlassBadge and,
-// through `drawAround`, for what every rim mirrors of the page around it.
-//
-// COPY THIS FILE VERBATIM. MIT — https://github.com/bilalgursen/liquid-glass
-
 type Box = { x: number; y: number; w: number; h: number }
 type Drawable = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement
 
@@ -531,10 +516,12 @@ let scratch: HTMLCanvasElement | undefined
 function blurBackdrop(ctx: CanvasRenderingContext2D, box: Box, radius: number, blurPx: number) {
   const matrix = ctx.getTransform()
   const scale = matrix.a
+  // (A context may be scaled a hair differently each way: the engine fits a small picture to its canvas.)
+  const scaleY = matrix.d
   const left = Math.max(0, Math.floor(box.x * scale + matrix.e))
-  const top = Math.max(0, Math.floor(box.y * scale + matrix.f))
+  const top = Math.max(0, Math.floor(box.y * scaleY + matrix.f))
   const w = Math.min(ctx.canvas.width, Math.ceil((box.x + box.w) * scale + matrix.e)) - left
-  const h = Math.min(ctx.canvas.height, Math.ceil((box.y + box.h) * scale + matrix.f)) - top
+  const h = Math.min(ctx.canvas.height, Math.ceil((box.y + box.h) * scaleY + matrix.f)) - top
   if (w < 1 || h < 1) return
   const pad = Math.ceil(blurPx * scale * 3)
   scratch ??= document.createElement('canvas')

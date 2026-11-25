@@ -14,7 +14,6 @@ const NavItem = (props) => {
       )}
       activeClass="portfolio-nav-active"
       href={`#${props.link}`}
-      onClick={props.onClick}
       spy={true}
       to={props.link}
       offset={props.link === 'career' ? -96 : 0}

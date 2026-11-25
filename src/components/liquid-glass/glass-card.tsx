@@ -1,18 +1,3 @@
-'use client'
-
-// GlassCard — a card made of liquid glass. Your content sits on it; its face frosts and
-// tints whatever lies behind the card, so the text stays readable, and its rim pulls it
-// towards the centre.
-//
-//   <GlassCard className="w-64 p-5">…</GlassCard>                              // frosted glass
-//   <GlassCard live className="size-44 p-4">…</GlassCard>                      // something moves behind it
-//   <GlassCard blur={0} tint={0.3} className="w-64 p-5">…</GlassCard>          // clearer glass
-//   <GlassCard material="tinted" className="bg-sky-500 p-5 text-white">…</GlassCard>
-//
-// The glass takes the card's corners (rounded-[28px] unless you bring a `rounded-*` class)
-// and stays still under the pointer: a card holds content, it is not a button. Size and
-// padding are yours, with classes. COPY VERBATIM. MIT — https://github.com/bilalgursen/liquid-glass
-
 import { useMemo, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react'
 
 import { GlassLayer, type GlassMaterial, type GlassOptics } from './glass-layer'

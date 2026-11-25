@@ -19,7 +19,7 @@ const Hero = () => {
               <GlassLayer material="tinted" />
               Career
             </a>
-            <SocialLinks />
+            <SocialLinks grouped />
           </div>
         </GlassCard>
       </Content>

@@ -1,21 +1,3 @@
-// Liquid Glass engine — one shared WebGL2 context that draws every glass surface on the
-// page and copies each result into the surface's own 2D <canvas>, so a page full of
-// glass never hits the browser's WebGL context limit.
-//
-// Zero dependencies. A GLSL lens with tinted glass, a 1 px border, a frosted resting
-// state, an opt-in gooey droplet and an opt-in frosted blur (cards). The rim mirrors what
-// surrounds the glass: a colourful neighbour shows on the side that faces it.
-//
-// Cost model: the loop runs only while a spring moves, a surface is dirty or the
-// cursor light changes; at rest it stops completely. Off-screen surfaces are not
-// drawn, and neither is a frame that would come out exactly as the one on the canvas:
-// nothing is asked of the GPU for it, and a frame that is drawn sends only what changed.
-// `prefers-reduced-motion` freezes every spring at its target.
-// If WebGL2 is missing or the context is lost, every surface falls back to plain CSS.
-//
-// COPY THIS FILE VERBATIM. Do not rewrite or "simplify" the shader: the look comes
-// from the exact constants below. MIT — https://github.com/bilalgursen/liquid-glass
-
 export type Rgb = [number, number, number]
 export type Rgba = [number, number, number, number]
 
@@ -759,6 +741,9 @@ uniform vec3 uBlobLine;
 // way, and 1 / (that x the picture's size), to find a pixel in it.
 uniform sampler2D uFrostPic;
 uniform vec4 uFrostPass;
+// How many halvings smaller the picture of the page was painted (BACK_SKIP in the engine): its
+// mip levels are read that many lower.
+uniform float uBackSkip;
 uniform float uCssPx;
 uniform sampler2D uAround;
 uniform vec4 uAroundBox;
@@ -789,7 +774,7 @@ vec2 toUv(vec2 d) {
   return clamp(vec2(q.x / uSize.x, 1.0 - q.y / uSize.y), vec2(0.0005), vec2(0.9995));
 }
 vec3 backdrop(vec2 st, float lod) {
-  vec4 c = textureLod(uBack, st, lod);
+  vec4 c = textureLod(uBack, st, max(lod - uBackSkip, 0.0));
   return c.rgb + (1.0 - c.a) * uSurface;
 }
 // What surrounds the glass (GlassLens.reflection), at a point of the canvas in design units and
@@ -1416,8 +1401,8 @@ function createEngine(): GlassEngine | null {
     l.canvas.height = h
     return l
   }
-  const layersFor = (w: number, h: number, fronted: boolean) => {
-    const key = `${w}x${h}`
+  const layersFor = (w: number, h: number, fw: number, fh: number) => {
+    const key = `${w}x${h}|${fw}x${fh}`
     let l = layersOf.get(key)
     if (!l) {
       if (layersOf.size >= LAYER_SIZES) {
@@ -1431,11 +1416,27 @@ function createEngine(): GlassEngine | null {
       }
       layersOf.set(key, (l = { back: sized(w, h), front: null, used: 0 }))
     }
-    if (fronted && !l.front) l.front = sized(w, h)
+    if (fw && !l.front) l.front = sized(fw, fh)
     l.used = ++layerUse
     return l
   }
-  type Painted = { back: Picture; front: Picture; w: number; h: number; at: number }
+  /**
+   * Glass frosted all over shows nothing of the page sharper than its frost: every reading of the
+   * page is at mip level log2(0.8 × the frost's softness in device px) − 0.5 or above (frosted in
+   * FRAGMENT). The levels beneath that are never read. So the page is painted that many halvings
+   * smaller to begin with, `most` at most, and the shader reads it that many levels lower
+   * (uBackSkip): a quarter or a sixteenth of the pixels to paint, upload and build mipmaps from,
+   * on every frame of live glass. Glass that shows the page sharp anywhere (no frost, a frost
+   * mixed with the sharp bend, a blob with a glass of its own) keeps the full picture.
+   */
+  const BACK_SKIP = { most: 2 }
+  const backSkipOf = (m: GlassLens, dpr: number) => {
+    const r = m.refraction
+    if (!r || m.blob?.material || clamp(r.blurMix ?? 1) < 1) return 0
+    const soft = Math.max(0, r.blur ?? 0) * Math.min(1, Math.max(0.05, m.tune?.frostEdge ?? 1)) * dpr
+    return soft > 0 ? clamp(Math.floor(Math.log2(soft * 0.8) - 0.5), 0, BACK_SKIP.most) : 0
+  }
+  type Painted = { back: Picture; front: Picture; w: number; h: number; skip: number; at: number }
   const painted = new Map<GlassView, Painted>()
   // A third, small one for what surrounds a lens (its reflection), and each view's own texture of it:
   // where the picture was taken (the canvas's box then, CSS px) and how far past it it reaches.
@@ -1474,7 +1475,7 @@ function createEngine(): GlassEngine | null {
   gl.uniform1i(gl.getUniformLocation(program, 'uAround'), 2)
   /**
    * The frost's own pass. Frost is 32 readings of the page for every pixel of the glass, most of
-   * what the GPU does for a frosted card. From `area` device px of canvas up, and where the frost
+   * what the GPU does for a frosted card. From `area` device px of glass up, and where the frost
    * is at least `sigma` device px soft, it is first worked out into a picture a fraction of the
    * size: one texel for every (its softness ÷ `texel`) px each way, `most` at most, since a frost
    * that soft has nothing finer to show. The glass then reads that picture, except along its rim
@@ -1483,7 +1484,7 @@ function createEngine(): GlassEngine | null {
    * most, and by more than 1 on fewer than one pixel in a thousand. A blob with a glass of its own (a surface that opens)
    * frosts by a different amount at every point, and keeps the one pass too.
    */
-  const FROST_PASS = { area: 300_000, sigma: 5, texel: 2.5, most: 3 }
+  const FROST_PASS = { area: 150_000, sigma: 5, texel: 2.5, most: 3 }
   gl.uniform1i(gl.getUniformLocation(program, 'uFrostPic'), 3)
   const frostPassAt = gl.getUniformLocation(program, 'uFrostPass')
   /** What uFrostPass.x holds now. */
@@ -2039,18 +2040,27 @@ function createEngine(): GlassEngine | null {
     let layers: Layers | undefined
     // A painter that takes only `back` has no front layer: none is cleared or uploaded.
     const fronted = !!r && r.paint.length > 1
+    const skip = backSkipOf(m, dpr)
     if (r) {
       p = painted.get(v)
-      if (!p) painted.set(v, (p = { back: { tex: null, w: 0, h: 0 }, front: { tex: null, w: 0, h: 0 }, w: 0, h: 0, at: 0 }))
+      if (!p) painted.set(v, (p = { back: { tex: null, w: 0, h: 0 }, front: { tex: null, w: 0, h: 0 }, w: 0, h: 0, skip: 0, at: 0 }))
       const now = performance.now()
-      const sized = p.w === devW && p.h === devH
+      const sized = p.w === devW && p.h === devH && p.skip === skip
       fresh = !repaint && sized && now - p.at < REPAINT_EVERY
       if (!fresh) {
-        const l = layersFor(devW, devH, fronted)
-        for (const one of fronted && l.front ? [l.back, l.front] : [l.back]) {
-          one.ctx!.setTransform(1, 0, 0, 1, 0, 0)
-          one.ctx!.clearRect(0, 0, devW, devH)
-          one.ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
+        // The page's picture, smaller where the frost never reads it at full size (BACK_SKIP),
+        // and fitted to its canvas, so that it covers the glass's canvas exactly as before.
+        const bw = skip ? Math.max(2, Math.ceil(devW / 2 ** skip)) : devW
+        const bh = skip ? Math.max(2, Math.ceil(devH / 2 ** skip)) : devH
+        const l = layersFor(bw, bh, fronted ? devW : 0, fronted ? devH : 0)
+        l.back.ctx!.setTransform(1, 0, 0, 1, 0, 0)
+        l.back.ctx!.clearRect(0, 0, bw, bh)
+        if (skip) l.back.ctx!.setTransform(bw / m.width, 0, 0, bh / m.height, 0, 0)
+        else l.back.ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
+        if (fronted && l.front) {
+          l.front.ctx!.setTransform(1, 0, 0, 1, 0, 0)
+          l.front.ctx!.clearRect(0, 0, devW, devH)
+          l.front.ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
         }
         // A painter that says nothing changed keeps the textures it already has.
         fresh = r.paint(l.back.ctx!, (l.front ?? front).ctx!) === false && sized
@@ -2058,6 +2068,7 @@ function createEngine(): GlassEngine | null {
           layers = l
           p.w = devW
           p.h = devH
+          p.skip = skip
           p.at = now
         }
       }
@@ -2142,6 +2153,7 @@ function createEngine(): GlassEngine | null {
     // Blur level follows screen density (reference: 2.27 device px per design unit).
     set('uBlurShift', Math.log2(Math.max((unit * dpr) / 2.27, 1e-3)))
     set('uFrost', r?.frost ?? 0)
+    set('uBackSkip', skip)
     set('uFrostBlur', Math.max(0, r?.blur ?? 0) / unit)
     set('uFrostMix', clamp(r?.blurMix ?? 1))
     // Radial bend: a share of the viewport per axis, as the SVG card's map was.
@@ -2279,7 +2291,7 @@ function createEngine(): GlassEngine | null {
     // The frost's own pass (FROST_PASS): on large, softly frosted glass the frost is drawn first,
     // into a smaller picture that the glass then reads.
     const sigma = r && !blob?.material ? Math.max(0, r.blur ?? 0) * Math.min(1, Math.max(0.05, k.frostEdge ?? 1)) * dpr : 0
-    const texel = sigma >= FROST_PASS.sigma && devW * devH >= FROST_PASS.area ? Math.min(FROST_PASS.most, Math.floor(sigma / FROST_PASS.texel)) : 0
+    const texel = sigma >= FROST_PASS.sigma && 4 * m.hx * m.hy * dpr * dpr >= FROST_PASS.area ? Math.min(FROST_PASS.most, Math.floor(sigma / FROST_PASS.texel)) : 0
     const fw = texel >= 2 ? Math.ceil(devW / texel) + 1 : 0
     const fh = texel >= 2 ? Math.ceil(devH / texel) + 1 : 0
     if (texel >= 2 && frostRoom(fw, fh)) {

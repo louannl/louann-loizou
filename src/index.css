@@ -1,19 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    /* Darkened Arctic/Polar Theme */
-    --color-themeGrey: 67 76 94;       /* Nord 2: Polar Night (Medium-Dark) */
-    --color-themeDarkGrey: 46 52 64;   /* Nord 0: Polar Night (Darkest) */
-    --color-themeLightGrey: 216 222 233; /* Nord 4: Snow Storm (Darker Light) */
-    --color-mint: 94 129 172;          /* Nord 10: Frost (Darker Blue) */
-    --color-githubGrey: 33 31 31;
-    --color-linkedInBlue: 0 119 181;
-    --color-purple: 180 142 173;       /* Nord 15: Aurora (Pink/Purple) */
-    --color-purple-dark: 143 188 187;   /* Nord 7: Frost (Muted Cyan) */
-  }
+@theme {
+  /* Darkened Arctic/Polar Theme */
+  --color-themeGrey: rgb(67 76 94);
+  --color-themeDarkGrey: rgb(46 52 64);
+  --color-themeLightGrey: rgb(216 222 233);
+  --color-mint: rgb(94 129 172);
+  --color-githubGrey: rgb(33 31 31);
+  --color-linkedInBlue: rgb(0 119 181);
+  --color-purple: rgb(180 142 173);
+  --color-purple-dark: rgb(143 188 187);
+  --font-Monoton: "Major Mono Display", cursive;
 }
 
 .portfolio-hero {
@@ -31,11 +28,6 @@
   width: min(100%, 48rem);
   padding: clamp(1.5rem, 6vw, 4rem);
   text-align: center;
-}
-
-.portfolio-glass {
-  background-color: rgb(255 255 255 / var(--glass-card-tint));
-  backdrop-filter: blur(var(--glass-card-blur));
 }
 
 .portfolio-glass.portfolio-nav {
@@ -59,6 +51,86 @@
   background-color: rgb(94 129 172 / 18%);
 }
 
+.portfolio-profile-links a {
+  width: 2.75rem;
+  padding-inline: 0;
+}
+
+.portfolio-profile-links a svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.portfolio-profile-links .portfolio-profile-divider {
+  height: 1.25rem;
+}
+
+.portfolio-career-filter-row {
+  overflow-x: clip;
+}
+
+.portfolio-career-tabs[data-glass-host] {
+  max-width: 100%;
+  background-color: rgb(19 34 56 / 65%);
+}
+
+.portfolio-career-tabs [role='radio'] {
+  color: #e6eefb;
+  padding-inline: clamp(0.5rem, 2.8vw, 1rem);
+}
+
+.portfolio-career-tabs [role='radio'][aria-checked='true'] {
+  color: #18263d;
+}
+
+.portfolio-career-tabs[data-glass-traveling] [role='radio'][aria-checked='true'] {
+  color: #e6eefb;
+}
+
+.portfolio-mobile-menu-trigger[data-glass-host] {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border-color: rgb(220 233 255 / 35%);
+  background-color: rgb(220 233 255 / 16%);
+  color: #fff;
+}
+
+.portfolio-mobile-menu-trigger svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.portfolio-mobile-menu {
+  min-width: 10rem;
+}
+
+.portfolio-skill-trigger[data-glass-host] {
+  min-height: 2.25rem;
+  height: auto;
+  padding: 0.25rem 0.75rem;
+  border-color: rgb(220 233 255 / 38%);
+  background-color: rgb(188 212 251 / 18%);
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+[data-glass-popup].portfolio-glass-popup[data-glass-off] {
+  background-color: rgb(24 38 61 / 96%);
+  border-color: rgb(220 233 255 / 30%);
+  color: #fff;
+}
+
+.portfolio-mobile-menu-item[data-highlighted],
+.portfolio-skill-close:hover {
+  background-color: rgb(126 154 197 / 30%);
+}
+
+.portfolio-skill-tag,
+.portfolio-skill-close {
+  background-color: rgb(126 154 197 / 18%);
+}
+
 .portfolio-glass-button:focus-visible,
 .portfolio-glass a:focus-visible,
 .portfolio-glass button:focus-visible {
@@ -70,7 +142,7 @@
   scroll-margin-top: 6rem;
   background-image:
     radial-gradient(ellipse at center, rgb(90 126 173 / 70%), transparent 70%),
-    linear-gradient(rgb(var(--color-mint)), #243b58 12% 88%, rgb(var(--color-mint)));
+    linear-gradient(var(--color-mint), #243b58 12% 88%, var(--color-mint));
 }
 
 @media (min-width: 1024px) {
@@ -84,9 +156,5 @@
     background-image:
       radial-gradient(ellipse at 78% 30%, rgb(94 129 172 / 66%), transparent 48%),
       radial-gradient(ellipse at 24% 65%, rgb(180 142 173 / 34%), transparent 48%);
-  }
-
-  .portfolio-glass {
-    background-color: rgb(0 0 0 / var(--glass-card-tint));
   }
 }

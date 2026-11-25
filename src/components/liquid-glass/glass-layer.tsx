@@ -491,7 +491,10 @@ export function GlassLayer({
         const melt = swell ? Math.ceil(cohesionSoftness(h) / 4) + 3 : 0
         const padX = Math.max(8, Math.ceil(reach * (1 + most) - w / 2 + 2), melt)
         const padTop = Math.max(10, Math.ceil(hy * (1 + most) - h / 2 + 2), melt)
-        const padBottom = Math.round(h * 0.8 + 4)
+        // Below the glass the canvas keeps room for its drop shadow. Glass that casts none (a card:
+        // its shadow is CSS) needs no more there than above it, and a canvas that much smaller is
+        // that much less to paint, upload, shade and copy on every frame.
+        const padBottom = (tuneRef.current.optics?.shadow ?? 1) <= 0 ? padTop : Math.round(h * 0.8 + 4)
         const origin = `${padX + w / 2}px ${padTop + h / 2}px`
         const undo = px === 1 && py === 1 ? '' : `${(1 / px).toFixed(6)} ${(1 / py).toFixed(6)}`
         if (undo !== unstretched || (undo && origin !== unstretchedAt)) {

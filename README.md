@@ -7,7 +7,8 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
-        <li><a href="#functionality">Functionality</a></li>
+        <li><a href="#development">Development</a></li>
+        <li><a href="#hosting">Hosting</a></li>
         <li><a href="#site-performance">Site Performance</a></li>
       </ul>
     </li>
@@ -19,16 +20,43 @@ A site designed to show off all the projects I have worked on!
 
 ### Built With
 - React
-- Tailwind
-- [Liquid Glass UI](https://github.com/bilalgursen/liquid-glass) for the navigation, intro, timeline cards, and primary controls
+- Vite and TypeScript
+- Tailwind CSS 4
+- [Liquid Glass UI](https://github.com/bilalgursen/liquid-glass) for the glass surfaces, career filters, grouped profile links, skills popovers, and mobile menu
 
-The MIT-licensed Liquid Glass source in `src/components/liquid-glass` is copied from upstream revision
-[`1201f4d`](https://github.com/bilalgursen/liquid-glass/tree/1201f4db5ac081de46bbeb9a9c6b3c9671e866af).
-Portfolio styles, including the Tailwind 3 equivalents for the card's CSS fallback, live in `src/index.css`.
+The MIT-licensed Liquid Glass sources in `src/components/liquid-glass` are installed with shadcn.
+Portfolio styles and Tailwind theme tokens live in `src/index.css`.
+The tabs, popovers, and menu use UI SDK. The production build includes both third-party notices at
+`/liquid-glass-license.txt` and `/ui-sdk-license.txt`.
 
-### Functionality 
-- AWS Amplify
-  - The site will automatically rebuild upon pushing to GitHub
+### Development
+
+Use Node.js 22.13 or later in the 22.x line, or Node.js 24 LTS.
+
+- `npm ci` installs dependencies from the lockfile.
+- `npm start` runs the development server on port 3000.
+- `npm test` runs the interaction tests.
+- `npm run build` checks TypeScript and creates the static production site in `build/`.
+- `npm run preview` serves the production build locally.
+
+### Update Liquid Glass
+
+Preview updates to the five registry entries used by the site. Review the output before replacing
+the checked-in component files.
+
+```sh
+npx shadcn@4.23.0 add --dry-run --path src/components/liquid-glass \
+  https://onemorethink.dev/r/card.json \
+  https://onemorethink.dev/r/tabs.json \
+  https://onemorethink.dev/r/button-group.json \
+  https://onemorethink.dev/r/popover.json \
+  https://onemorethink.dev/r/dropdown-menu.json
+```
+
+### Hosting
+
+AWS Amplify rebuilds the site when changes are pushed to GitHub. Its build environment needs
+a supported Node.js version and should publish `build/` after running `npm run build`.
 
 ### Site Performance
 The site performs relatively well on desktop, on mobile however, the reCaptcha significantly slows the site, from looking online I could possibly change the reCaptcha to only initialise when the form is interacted with.
