@@ -1,5 +1,5 @@
 import { AiOutlineMenu } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import tw from '../../helpers/tailwind';
 import { GlassCard } from '../liquid-glass/glass-card';

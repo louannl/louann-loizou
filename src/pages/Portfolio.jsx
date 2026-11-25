@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 import AttributeHeader from '../components/UI/Headers/AttributeHeader';
 import PortfolioCard from '../components/UI/Cards/PortfolioCard';
 import SkillList from '../components/UI/SkillList';

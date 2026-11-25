@@ -1,5 +1,5 @@
 import { useState, useSyncExternalStore } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { GlassCard } from '@/components/liquid-glass/glass-card';
 import { GlassLayer } from '@/components/liquid-glass/glass-layer';
 import SocialLinks from '../components/UI/Links/SocialLinks';

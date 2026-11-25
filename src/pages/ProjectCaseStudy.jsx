@@ -1,5 +1,5 @@
 import { useId, useLayoutEffect, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router';
 import PortfolioCard from '../components/UI/Cards/PortfolioCard';
 import SkillList from '../components/UI/SkillList';
 import { Content } from '../components/UI/Section';

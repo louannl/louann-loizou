@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
-import { Outlet, useLocation, useNavigationType } from 'react-router-dom';
+import { Outlet, useLocation, useNavigationType } from 'react-router';
 import MainNavigation from './MainNavigation';
 import Footer from './Footer';
 import BackToTop from "../UI/Buttons/BackToTop";

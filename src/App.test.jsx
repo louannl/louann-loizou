@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import { afterEach, beforeAll, beforeEach, expect, test, vi } from 'vitest';
 import App from './App';
 import { projects } from './data/projects.mjs';
