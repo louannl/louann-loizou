@@ -1,4 +1,4 @@
-import { useState, useSyncExternalStore } from 'react';
+import { useSyncExternalStore } from 'react';
 import { Link } from 'react-router';
 import { GlassCard } from '@/components/liquid-glass/glass-card';
 import { GlassLayer } from '@/components/liquid-glass/glass-layer';
@@ -21,17 +21,17 @@ const stackRows = Array.from({ length: Math.min(rowCount, stackTags.length) }, (
   stackTags.filter((_, index) => index % rowCount === row),
 );
 
-const motionPreference = '(prefers-reduced-motion: reduce)';
+const staticBackdropQuery = '(prefers-reduced-motion: reduce), (hover: none)';
 
-function subscribeToMotionPreference(onChange) {
-  const preference = window.matchMedia(motionPreference);
+function subscribeToBackdropPreference(onChange) {
+  const preference = window.matchMedia(staticBackdropQuery);
   preference.addEventListener('change', onChange);
   return () => preference.removeEventListener('change', onChange);
 }
 
-function StackBackdrop({ moving }) {
+function StackBackdrop() {
   return (
-    <div className="portfolio-hero-backdrop" aria-hidden="true" data-paused={!moving}>
+    <div className="portfolio-hero-backdrop" aria-hidden="true">
       {stackRows.map(row => (
         <div className="portfolio-stack-row" key={row[0]}>
           {[0, 1].map(copy => (
@@ -46,24 +46,22 @@ function StackBackdrop({ moving }) {
 }
 
 const Hero = () => {
-  const [paused, setPaused] = useState(false);
-  const reducedMotion = useSyncExternalStore(
-    subscribeToMotionPreference,
-    () => window.matchMedia(motionPreference).matches,
+  const staticBackdrop = useSyncExternalStore(
+    subscribeToBackdropPreference,
+    () => window.matchMedia(staticBackdropQuery).matches,
     () => true,
   );
-  const moving = stackRows.length > 0 && !paused && !reducedMotion;
 
   return (
     <Section name="home">
       <Content className="portfolio-hero-content px-5 sm:px-8">
         <div className="portfolio-hero-stage">
-          {stackRows.length > 0 && <StackBackdrop moving={moving} />}
+          {stackRows.length > 0 && <StackBackdrop />}
           <GlassCard
             className="portfolio-glass portfolio-hero-card rounded-[2rem]"
             tint={0.48}
             blur={0.85}
-            live={moving}
+            live={stackRows.length > 0 && !staticBackdrop}
             optics={heroGlass}
           >
             <div className="portfolio-hero-copy min-w-0">
@@ -88,15 +86,6 @@ const Hero = () => {
               <div className="portfolio-rink" aria-hidden="true">
                 <div className="portfolio-rink-center" />
               </div>
-              {stackRows.length > 0 && !reducedMotion && (
-                <button
-                  type="button"
-                  className="portfolio-stack-motion"
-                  onClick={() => setPaused(value => !value)}
-                >
-                  {paused ? 'Resume motion' : 'Pause motion'}
-                </button>
-              )}
             </div>
           </GlassCard>
         </div>

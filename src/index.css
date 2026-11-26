@@ -72,7 +72,8 @@
   animation-delay: -52s;
 }
 
-.portfolio-hero-backdrop[data-paused="true"] .portfolio-stack-row {
+.portfolio-hero-stage:hover .portfolio-stack-row,
+.portfolio-hero-stage:focus-within .portfolio-stack-row {
   animation-play-state: paused;
 }
 
@@ -109,7 +110,7 @@
   to { transform: translateX(-50%); }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce), (hover: none) {
   .portfolio-hero-stage .portfolio-stack-row {
     animation-play-state: paused;
   }
@@ -159,30 +160,7 @@
 .portfolio-hero-graphic {
   display: grid;
   place-items: center;
-  gap: 1.25rem;
   padding: 0.75rem 0 0;
-}
-
-.portfolio-stack-motion {
-  justify-self: end;
-  min-height: 2rem;
-  padding: 0.25rem 0.7rem;
-  border: 1px solid rgb(165 231 255 / 38%);
-  border-radius: 999px;
-  background-color: #172f49;
-  color: #d5ecfa;
-  font-size: 0.75rem;
-  cursor: pointer;
-}
-
-.portfolio-stack-motion:hover {
-  background-color: #244766;
-  color: white;
-}
-
-.portfolio-stack-motion:focus-visible {
-  outline: 2px solid var(--color-ice);
-  outline-offset: 3px;
 }
 
 .portfolio-rink {
@@ -237,7 +215,7 @@
   .portfolio-hero-backdrop {
     align-content: end;
     gap: clamp(0.625rem, 2vw, 1.25rem);
-    padding-block: 0 clamp(4rem, 13vw, 9rem);
+    padding-block: 0 clamp(1.5rem, 8vw, 6rem);
   }
 }
 

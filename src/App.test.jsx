@@ -53,29 +53,6 @@ test('uses every unique project tag in the hero backdrop', () => {
   expect(rows).toHaveLength(4);
   expect(labels).toHaveLength(projectTags.size);
   expect(new Set(labels)).toEqual(projectTags);
-});
-
-test('lets visitors pause and resume the hero backdrop', () => {
-  const { container } = renderPortfolio();
-  const backdrop = container.querySelector('.portfolio-hero-backdrop');
-  expect(backdrop).toHaveAttribute('data-paused', 'false');
-
-  fireEvent.click(screen.getByRole('button', { name: 'Pause motion' }));
-  expect(backdrop).toHaveAttribute('data-paused', 'true');
-
-  fireEvent.click(screen.getByRole('button', { name: 'Resume motion' }));
-  expect(backdrop).toHaveAttribute('data-paused', 'false');
-});
-
-test('keeps the hero backdrop still when reduced motion is requested', () => {
-  vi.spyOn(window, 'matchMedia').mockImplementation(query => ({
-    matches: query === '(prefers-reduced-motion: reduce)',
-    addEventListener: () => {},
-    removeEventListener: () => {},
-  }));
-
-  const { container } = renderPortfolio();
-  expect(container.querySelector('.portfolio-hero-backdrop')).toHaveAttribute('data-paused', 'true');
   expect(screen.queryByRole('button', { name: 'Pause motion' })).not.toBeInTheDocument();
 });
 
