@@ -1,5 +1,19 @@
 export const projects = [
   {
+    slug: 'game-data-warehouse-ingestion',
+    title: 'Billing and game data ingestion',
+    year: '2026',
+    context: 'Rocket Science Group',
+    role: 'Senior Platform Engineer',
+    summary: 'Integrated a new billing system and adapted online sales and game analytics feeds for a shared Snowflake warehouse.',
+    skills: ['Kubernetes', 'Airflow', 'Snowflake', 'SQL'],
+    sections: [
+      { title: 'The challenge', paragraphs: ['A new billing system needed to feed the same warehouse as two existing sources: online sales and game analytics. The events arrived asynchronously, and the incoming data could be unreliable.'] },
+      { title: 'What I worked on', paragraphs: ['I worked on ingesting data from the new billing system and adapting the existing sales and game analytics feeds so they could be used together in Snowflake. The setup used Kubernetes and Airflow, and the ingestion workflows had to account for asynchronous events and inconsistent source data.'] },
+      { title: 'Outcome', paragraphs: ['Billing, online sales and game analytics data could be analysed together in Snowflake.'] },
+    ],
+  },
+  {
     slug: 'game-platform-observability',
     title: 'Game platform observability',
     year: '2026',
@@ -74,7 +88,7 @@ export const projects = [
     title: 'Uni Takeaway',
     year: '2021',
     context: 'Personal project',
-    role: 'Frontend developer',
+    role: 'Accountant, who is bored of spreadsheets',
     summary: 'Redesigned a takeaway website with a more responsive layout and improved functionality.',
     skills: ['React', 'Tailwind CSS', 'Responsive design'],
     image: 'uni-takeaway',
@@ -90,7 +104,7 @@ export const projects = [
     title: 'Meal Planner + API',
     year: '2021',
     context: 'Personal project',
-    role: 'Full-stack developer',
+    role: 'Accountant, who is bored of spreadsheets',
     summary: 'Built a meal planning app and API that turn a weekly plan into a shopping list.',
     skills: ['React', 'Node.js', 'PostgreSQL', 'Sequelize', 'EC2'],
     image: 'meal-planner',

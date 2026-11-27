@@ -20,7 +20,7 @@ function Projects() {
         <article key={project.slug} className="min-w-0">
           <PortfolioCard className="portfolio-project-card portfolio-clickable-project flex h-full flex-col gap-4 p-5 sm:p-6">
             <div className="portfolio-project-meta flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-              <time className="portfolio-game-date">{project.year}</time>
+              <time className="portfolio-game-date" dateTime={project.year}>{project.year}</time>
               <span>{project.context}</span>
             </div>
             <div className="flex-1">

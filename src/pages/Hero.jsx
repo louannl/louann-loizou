@@ -13,7 +13,7 @@ const heroGlass = {
   saturation: 1.25,
 };
 
-const specialties = ['Cloud infrastructure', 'CI/CD', 'Observability'];
+const specialties = ['Team Lead', 'Cloud infrastructure', '*Yes, it is hockey themed', 'Slack Emoji Creator'];
 
 const stackTags = [...new Set(projects.flatMap(project => project.skills))];
 const rowCount = 4;
@@ -69,7 +69,7 @@ const Hero = () => {
                 Louann Robbins
               </h1>
               <p className="mt-4 text-lg font-semibold text-ice sm:text-2xl">
-                Senior Platform Engineer
+                Senior Software Engineer
               </p>
               <ul className="portfolio-specialties mt-5 flex flex-wrap items-center gap-x-4 gap-y-2" aria-label="Specialties">
                 {specialties.map(specialty => <li key={specialty}>{specialty}</li>)}
