@@ -41,7 +41,7 @@ Use Node.js 22.13 or later in the 22.x line, or Node.js 24 LTS.
 
 ### Portfolio content
 
-Add or edit project summaries, stacks, and case-study sections in `src/data/projects.mjs`.
+Add or edit project summaries and stacks in `src/data/projects.mjs`. Add case-study sections and images by project slug in `src/data/caseStudies.mjs`.
 A link such as `/?project=meal-planner` opens a case study over the portfolio.
 Update `src/data/career.js` to
 add a season, change a career milestone, or link it to a case study by slug.

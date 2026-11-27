@@ -3,7 +3,7 @@ import { Outlet, useLocation, useNavigationType } from 'react-router';
 import MainNavigation from './MainNavigation';
 import Footer from './Footer';
 import BackToTop from "../UI/Buttons/BackToTop";
-import CaseStudyDialog from '../../pages/ProjectCaseStudy';
+import CaseStudyDialog from '../../pages/CaseStudyDialog';
 
 const Layout = () => {
   const location = useLocation();

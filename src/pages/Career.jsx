@@ -1,7 +1,7 @@
 import PortfolioCard from '../components/UI/Cards/PortfolioCard';
 import { seasons } from '../data/career';
 import { projects } from '../data/projects.mjs';
-import { CaseStudyLink } from './ProjectCaseStudy';
+import { CaseStudyLink } from './CaseStudyDialog';
 
 const projectsBySlug = new Map(projects.map(project => [project.slug, project]));
 

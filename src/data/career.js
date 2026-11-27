@@ -11,8 +11,8 @@ export const seasons = [
         date: 'Jun 2025',
         title: 'Senior Platform Engineer',
         promotion: true,
-        summary: 'Promoted within the platform team. My work includes game systems observability and delivery pipelines.',
-        projects: ['game-platform-observability', 'game-backend-delivery'],
+        summary: 'Promoted within the platform team. My work includes game systems observability, delivery pipelines and data ingestion.',
+        projects: ['game-data-warehouse-ingestion', 'game-platform-observability', 'game-backend-delivery'],
       },
       {
         date: 'Sep 2024',

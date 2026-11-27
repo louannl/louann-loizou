@@ -1,42 +1,16 @@
+import { lazy, Suspense } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import AttributeHeader from '../components/UI/Headers/AttributeHeader';
-import PortfolioCard from '../components/UI/Cards/PortfolioCard';
-import SkillList from '../components/UI/SkillList';
 import { Content, Section } from '../components/UI/Section';
 import { GlassTabs } from '../components/liquid-glass/glass-tabs';
-import { projects } from '../data/projects.mjs';
 import Career from './Career';
-import { CaseStudyLink } from './ProjectCaseStudy';
+
+const Projects = lazy(() => import('./Projects'));
 
 const views = [
   { value: 'projects', label: 'Projects' },
   { value: 'career', label: 'Career' },
 ];
-
-function Projects() {
-  return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-      {projects.map(project => (
-        <article key={project.slug} className="min-w-0">
-          <PortfolioCard className="portfolio-project-card flex h-full flex-col gap-4 p-5 sm:p-6">
-            <div className="portfolio-project-meta flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-              <time className="portfolio-game-date">{project.year}</time>
-              <span>{project.context}</span>
-            </div>
-            <div className="flex-1">
-              <h3 className="font-scoreboard text-3xl leading-none font-bold text-white">{project.title}</h3>
-              <p className="mt-2 leading-relaxed text-themeLightGrey">{project.summary}</p>
-            </div>
-            <SkillList skills={project.skills} label={project.title} limit={3} />
-            <CaseStudyLink className="portfolio-case-link self-start" slug={project.slug} aria-label={`Read case study: ${project.title}`}>
-              Read case study
-            </CaseStudyLink>
-          </PortfolioCard>
-        </article>
-      ))}
-    </div>
-  );
-}
 
 export default function Portfolio() {
   const { hash } = useLocation();
@@ -59,7 +33,11 @@ export default function Portfolio() {
               size="lg"
             />
           </div>
-          {view === 'career' ? <Career /> : <Projects />}
+          {view === 'career' ? <Career /> : (
+            <Suspense fallback={<p className="py-5 text-themeLightGrey" role="status">Loading projects…</p>}>
+              <Projects />
+            </Suspense>
+          )}
         </div>
       </Content>
     </Section>

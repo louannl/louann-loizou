@@ -62,6 +62,7 @@ import { Children, createContext, useEffect, useMemo, useRef, type CSSProperties
 import { drawAround, drawDom } from './dom-snapshot'
 import { GLOW, GLOW_SMALL, GOOEY, HANDED_ON, MENU, MORPH, MORPH_GLOW, MORPH_GLOW_SMALL, SPRINGS, clamp, getGlassEngine, lerp, rgbCss, smooth, stepSpring, surfaceColorOf, type GlassEngine, type GlassLens, type GlassView, type Rgb, type Spring } from './engine'
 import { GlassStyles } from './glass-layer'
+import { useVisibleGlassEngine } from './use-visible-glass-engine'
 
 const DESIGN_HEIGHT = 120
 /** The control is GlassButton's glass: its tint, no frost, its light and shadow. */
@@ -1349,11 +1350,11 @@ function createMorph(matchWidth: boolean, opening: GlassPopupOpening, from: Glas
   const setPanel = (canvas: HTMLCanvasElement | null, hold: HTMLElement | null, cardShadow: HTMLElement | null) => {
     const el = canvas?.parentElement
     const ctx = canvas?.getContext('2d')
-    if (!canvas || !el || !ctx) return () => {}
+    if (!canvas || !el) return () => {}
     const e = getGlassEngine()
-    if (!e) {
+    if (!ctx || !e || !host) {
       el.dataset.glassOff = ''
-      return () => {}
+      return () => { delete el.dataset.glassOff }
     }
     engine = e
     content = el
@@ -1562,7 +1563,10 @@ export function GlassPopupSurface({ popup: morph }: { popup: GlassPopup }) {
 /** The anchor's share of the glass: the first child of the control that opens the popup. */
 export function GlassPopupAnchor({ popup }: { popup: GlassPopup }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  useEffect(() => popup.setTrigger(canvasRef.current), [popup])
+  const engine = useVisibleGlassEngine(canvasRef)
+  useEffect(() => {
+    if (engine) return popup.setTrigger(canvasRef.current)
+  }, [popup, engine])
   return (
     <>
       <GlassStyles />

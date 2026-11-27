@@ -39,7 +39,6 @@ import {
   SPRINGS,
   clamp,
   cohesionSoftness,
-  getGlassEngine,
   lerp,
   mixRgb,
   rgbCss,
@@ -50,6 +49,7 @@ import {
   type Rgb,
   type Spring,
 } from './engine'
+import { useVisibleGlassEngine } from './use-visible-glass-engine'
 
 export type GlassMaterial = 'clear' | 'tinted'
 export type GlassDroplet = 'none' | 'apart' | 'merged'
@@ -226,6 +226,7 @@ export function GlassLayer({
   optics,
 }: GlassLayerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const engine = useVisibleGlassEngine(canvasRef, disabled)
   // The droplet mode changes without rebuilding the glass, so the change itself animates.
   const dropletRef = useRef(droplet)
   dropletRef.current = droplet
@@ -254,11 +255,11 @@ export function GlassLayer({
   }, [pulse])
 
   useEffect(() => {
+    if (!engine) return
     const canvas = canvasRef.current
     const host = canvas?.parentElement
     const ctx = canvas?.getContext('2d')
-    const engine = disabled ? null : getGlassEngine()
-    if (!canvas || !host || !ctx || !engine) return
+    if (!canvas || !host || !ctx) return
 
     const clear = material === 'clear'
     let w = 0
@@ -778,7 +779,7 @@ export function GlassLayer({
       pulseRef.current = null
       nodRef.current = null
     }
-  }, [material, backdrop, live, trigger, disabled, swell, pull])
+  }, [material, backdrop, live, trigger, engine, swell, pull])
 
   return (
     <>

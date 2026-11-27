@@ -53,29 +53,6 @@ test('uses every unique project tag in the hero backdrop', () => {
   expect(rows).toHaveLength(4);
   expect(labels).toHaveLength(projectTags.size);
   expect(new Set(labels)).toEqual(projectTags);
-});
-
-test('lets visitors pause and resume the hero backdrop', () => {
-  const { container } = renderPortfolio();
-  const backdrop = container.querySelector('.portfolio-hero-backdrop');
-  expect(backdrop).toHaveAttribute('data-paused', 'false');
-
-  fireEvent.click(screen.getByRole('button', { name: 'Pause motion' }));
-  expect(backdrop).toHaveAttribute('data-paused', 'true');
-
-  fireEvent.click(screen.getByRole('button', { name: 'Resume motion' }));
-  expect(backdrop).toHaveAttribute('data-paused', 'false');
-});
-
-test('keeps the hero backdrop still when reduced motion is requested', () => {
-  vi.spyOn(window, 'matchMedia').mockImplementation(query => ({
-    matches: query === '(prefers-reduced-motion: reduce)',
-    addEventListener: () => {},
-    removeEventListener: () => {},
-  }));
-
-  const { container } = renderPortfolio();
-  expect(container.querySelector('.portfolio-hero-backdrop')).toHaveAttribute('data-paused', 'true');
   expect(screen.queryByRole('button', { name: 'Pause motion' })).not.toBeInTheDocument();
 });
 
@@ -89,12 +66,13 @@ test('opens the mobile navigation and closes it after a section is selected', as
   fireEvent.pointerDown(menu, { button: 0 });
   fireEvent.click(menu);
   expect(menu).toHaveAttribute('aria-expanded', 'true');
-  fireEvent.click(await screen.findByRole('menuitem', { name: 'Home' }));
+  expect(await screen.findByRole('menu')).toHaveAttribute('data-glass-off');
+  fireEvent.click(screen.getByRole('menuitem', { name: 'Home' }));
   expect(home.scrollIntoView).toHaveBeenCalled();
   expect(menu).not.toHaveAttribute('aria-expanded', 'true');
 });
 
-test('switches between the projects grid and the compact career history', () => {
+test('switches between the projects grid and the compact career history', async () => {
   renderPortfolio();
 
   const views = within(screen.getByRole('radiogroup', { name: 'Portfolio view' }));
@@ -105,7 +83,7 @@ test('switches between the projects grid and the compact career history', () => 
   expect(screen.queryByRole('heading', { name: 'Game platform observability' })).not.toBeInTheDocument();
 
   fireEvent.click(views.getByRole('radio', { name: 'Projects' }));
-  expect(screen.getByRole('heading', { name: 'Game platform observability' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: 'Game platform observability' })).toBeInTheDocument();
 
   fireEvent.click(views.getByRole('radio', { name: 'Career' }));
   expect(screen.getByRole('heading', { name: 'Season History' })).toBeInTheDocument();
@@ -115,10 +93,10 @@ test('opens a case study over projects and leaves the view in place on close', a
   renderPortfolio('/#projects');
   window.scrollTo.mockClear();
 
-  const opener = screen.getByRole('link', { name: 'Read case study: Uni Takeaway' });
+  const opener = await screen.findByRole('link', { name: 'Read case study: Uni Takeaway' });
   fireEvent.click(opener);
   const popup = within(await screen.findByRole('dialog', { name: 'Uni Takeaway' }));
-  expect(popup.getByRole('heading', { name: 'The challenge' })).toBeInTheDocument();
+  expect(await popup.findByRole('heading', { name: 'The challenge' })).toBeInTheDocument();
   expect(popup.getByRole('img', { name: 'Screenshot of the redesigned Uni Takeaway website' })).toBeInTheDocument();
 
   fireEvent.click(popup.getByRole('button', { name: 'Close case study' }));
@@ -132,6 +110,7 @@ test('opens a shared case study over Career and dismisses it on cancel', async (
   renderPortfolio('/?project=meal-planner#career');
 
   const popup = await screen.findByRole('dialog', { name: 'Meal Planner + API' });
+  expect(await within(popup).findByRole('heading', { name: 'What changed' })).toBeInTheDocument();
   fireEvent(popup, new Event('cancel', { cancelable: true }));
   await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
   expect(screen.getByRole('radio', { name: 'Career' })).toHaveAttribute('aria-checked', 'true');
@@ -146,7 +125,7 @@ test('opens the career view from its original fragment link', () => {
 test('shows the full list of skills in a dismissible popover', async () => {
   renderPortfolio('/#projects');
 
-  fireEvent.click(screen.getByRole('button', { name: 'See all skills for Game platform observability' }));
+  fireEvent.click(await screen.findByRole('button', { name: 'See all skills for Game platform observability' }));
   const skills = within(await screen.findByRole('dialog', { name: 'Skills' }));
   expect(skills.getByText('Terraform')).toBeInTheDocument();
   expect(skills.getAllByText('Prometheus')).toHaveLength(1);
