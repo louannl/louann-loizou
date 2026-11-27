@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react'
 
 import { drawAround } from './dom-snapshot'
 import { GlassStyles } from './glass-layer'
-import { SPRINGS, clamp, getGlassEngine, lerp, stepSpring, surfaceColorOf, type GlassView, type Rgb, type Spring } from './engine'
+import { SPRINGS, clamp, lerp, stepSpring, surfaceColorOf, type GlassView, type Rgb, type Spring } from './engine'
+import { useVisibleGlassEngine } from './use-visible-glass-engine'
 
 /** One option is designed 80 units tall; the optics are scaled to the slider's 120-unit lens. */
 const OPTION_UNITS = 80
@@ -118,14 +119,15 @@ export type GlassLensProps = {
 
 export function GlassLens({ value, disabled = false }: GlassLensProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const engine = useVisibleGlassEngine(canvasRef, disabled)
   const syncRef = useRef<((slide: boolean) => void) | null>(null)
 
   useEffect(() => {
+    if (!engine) return
     const canvas = canvasRef.current
     const root = canvas?.parentElement
     const ctx = canvas?.getContext('2d')
-    const engine = disabled ? null : getGlassEngine()
-    if (!canvas || !root || !ctx || !engine) return
+    if (!canvas || !root || !ctx) return
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
 
     let target: Box | null = null
@@ -424,7 +426,7 @@ export function GlassLens({ value, disabled = false }: GlassLensProps) {
       delete root.dataset.glassMoving
       delete root.dataset.glassTraveling
     }
-  }, [disabled])
+  }, [engine])
 
   useEffect(() => {
     syncRef.current?.(true)

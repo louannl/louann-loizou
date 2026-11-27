@@ -1310,10 +1310,17 @@ void main() {
 }
 `
 
-function createEngine(): GlassEngine | null {
+const nextGlassFrame = () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
+
+async function createEngine(): Promise<GlassEngine | null> {
+  performance.mark('liquid-glass:startup')
+  performance.mark('liquid-glass:context-start')
   const glCanvas = document.createElement('canvas')
   const gl = glCanvas.getContext('webgl2', { alpha: true, premultipliedAlpha: true, antialias: false })
+  performance.measure('liquid-glass:context', 'liquid-glass:context-start')
   if (!gl) return null
+  const parallel = gl.getExtension('KHR_parallel_shader_compile')
+  performance.mark('liquid-glass:shader-start')
   const compile = (type: number, src: string) => {
     const s = gl.createShader(type)
     if (!s) return null
@@ -1328,12 +1335,28 @@ function createEngine(): GlassEngine | null {
   gl.attachShader(program, vs)
   gl.attachShader(program, fs)
   gl.linkProgram(program)
+  await nextGlassFrame()
+  if (parallel) {
+    while (!gl.isContextLost() && !gl.getProgramParameter(program, parallel.COMPLETION_STATUS_KHR)) {
+      await nextGlassFrame()
+    }
+  }
+  if (gl.isContextLost()) return null
   // A shader's own status is asked for only when linking fails: every such question waits for
   // the GPU, and a program that linked has answered it.
-  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+  performance.mark('liquid-glass:link-check-start')
+  const linked = gl.getProgramParameter(program, gl.LINK_STATUS)
+  performance.measure('liquid-glass:link-check', 'liquid-glass:link-check-start')
+  if (!linked) {
     for (const s of [vs, fs]) if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.warn('[liquid-glass] shader failed to compile', gl.getShaderInfoLog(s))
+    gl.deleteShader(vs)
+    gl.deleteShader(fs)
+    gl.deleteProgram(program)
     return null
   }
+  performance.measure('liquid-glass:shader-ready', 'liquid-glass:shader-start')
+  gl.deleteShader(vs)
+  gl.deleteShader(fs)
   gl.useProgram(program)
   gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
@@ -2001,6 +2024,7 @@ function createEngine(): GlassEngine | null {
     return { changed, regrouped }
   }
 
+  let firstFrameDrawn = false
   const draw = (v: GlassView, refresh: boolean, repaint: boolean, read?: GlassLens | null) => {
     const m = read !== undefined ? read : v.lens(refresh)
     let on = shown.get(v)
@@ -2319,10 +2343,15 @@ function createEngine(): GlassEngine | null {
     v.ctx.clearRect(0, 0, devW, devH)
     v.ctx.drawImage(glCanvas, 0, glCanvas.height - devH, devW, devH, 0, 0, devW, devH)
     v.drawn?.()
+    if (!firstFrameDrawn) {
+      firstFrameDrawn = true
+      performance.measure('liquid-glass:first-frame', 'liquid-glass:startup')
+    }
   }
 
   let raf = 0
   let last = 0
+  const startedViews = new WeakSet<GlassView>()
   const frame = (now: number) => {
     raf = 0
     if (dead) return
@@ -2347,6 +2376,7 @@ function createEngine(): GlassEngine | null {
       }
       nears.clear()
     }
+    let newSurfaces = 0
     const due: { v: GlassView; refresh: boolean; repaint: boolean }[] = []
     let regroup = meltsChanged
     meltsChanged = false
@@ -2365,6 +2395,15 @@ function createEngine(): GlassEngine | null {
       if (!v.visible) continue
       const again = v.repaint === true
       if (moving || glowing || v.dirty || again || relight) {
+        // Spread first draws of large surfaces over several frames. Controls stay responsive.
+        if (!startedViews.has(v)) {
+          if (!melts && !v.choices && newSurfaces >= 2) {
+            running = true
+            continue
+          }
+          startedViews.add(v)
+          if (!melts && !v.choices) newSurfaces++
+        }
         const refresh = v.dirty
         v.dirty = false
         v.repaint = false
@@ -2652,7 +2691,8 @@ function createEngine(): GlassEngine | null {
       if (host && p.scaled) host.style.scale = ''
     }
     pulls.clear()
-    engine = undefined
+    engine = null
+    startup = undefined
   })
 
   return {
@@ -2698,11 +2738,25 @@ function createEngine(): GlassEngine | null {
   }
 }
 
-let engine: GlassEngine | null | undefined
+let engine: GlassEngine | null = null
+let startup: Promise<GlassEngine | null> | undefined
 
-/** The shared engine (created on first use, client only). `null` = no WebGL2: use the CSS look. */
+/** Read an already initialized engine. Interactive controls can use their CSS fallback while it loads. */
 export function getGlassEngine(): GlassEngine | null {
-  if (typeof window === 'undefined') return null
-  if (engine === undefined) engine = createEngine()
   return engine
+}
+
+/** Initialize the shared renderer after the CSS fallback has had a chance to paint. */
+export function prepareGlassEngine(): Promise<GlassEngine | null> {
+  if (typeof window === 'undefined') return Promise.resolve(null)
+  startup ??= new Promise<void>((resolve) => {
+    requestAnimationFrame(() => setTimeout(resolve, 0))
+  }).then(createEngine).then((result) => {
+    engine = result
+    return result
+  }).catch((error: unknown) => {
+    console.warn('[liquid-glass] could not initialize the renderer', error)
+    return null
+  })
+  return startup
 }
